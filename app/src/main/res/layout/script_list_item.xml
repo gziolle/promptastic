@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="?android:attr/listPreferredItemHeight"
+    android:layout_marginStart="4dp"
+    android:layout_marginEnd="4dp">
+
+    <TextView
+        android:id="@+id/script_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="Script Title"
+        android:layout_marginBottom="@dimen/list_item_title_margin_top"
+        android:textColor="@color/list_item_title_color"
+        android:textSize="@dimen/list_item_title_text_size"/>
+
+    <TextView
+        android:id="@+id/script_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:textColor="@color/list_item_content_color"
+        android:textSize="@dimen/list_item_content_text_size"
+        tools:text="Script content content content content end end end end enddasduhaudhasudhe" />
+</LinearLayout>
