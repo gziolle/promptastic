@@ -16,7 +16,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.ScriptEditActivity"></activity>
+        <activity
+            android:name=".ui.ScriptEditActivity"
+            android:windowSoftInputMode="adjustPan" />
+        <activity android:name=".ui.LoginActivity"></activity>
     </application>
 
 </manifest>

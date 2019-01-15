@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">Promptastic</string>
 
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="empty_view_text">Hey, you have not created a script yet!</string>
+    <string name="edit_text_script_title_hint">Type the script\'\s title here</string>
+    <string name="edit_text_script_content_hint">Type the script\'\s content here</string>
+
 </resources>

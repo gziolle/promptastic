@@ -1,5 +1,6 @@
 package com.gziolle.promptastic.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,6 +27,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class ScriptListFragment extends Fragment {
 
@@ -120,5 +122,11 @@ public class ScriptListFragment extends Fragment {
     public void onStop() {
         super.onStop();
         mAdapter.stopListening();
+    }
+
+    @OnClick(R.id.add_script_fab)
+    public void addScript(View view) {
+        Intent intent = new Intent(getActivity(), ScriptEditActivity.class);
+        startActivity(intent);
     }
 }
