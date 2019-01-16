@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "821866043780",
+    "firebase_url": "https://promptastic-88819.firebaseio.com",
+    "project_id": "promptastic-88819",
+    "storage_bucket": "promptastic-88819.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:821866043780:android:848f2a475db2dbfd",
+        "android_client_info": {
+          "package_name": "com.gziolle.promptastic"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "821866043780-qpos9uudg8f486p6cm4s0ejaebeusltj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.gziolle.promptastic",
+            "certificate_hash": "772f174ae503428c2b14a5f2680acb640daaeac3"
+          }
+        },
+        {
+          "client_id": "821866043780-pen07i3nc6lbbrekegqb6tgd8b9j6f7t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBqrIRqFCGMeSj3kCfbHV9oI3KPnvUJPZ4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "821866043780-pen07i3nc6lbbrekegqb6tgd8b9j6f7t.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
