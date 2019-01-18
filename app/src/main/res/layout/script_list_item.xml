@@ -4,8 +4,8 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="?android:attr/listPreferredItemHeight"
-    android:layout_marginStart="4dp"
-    android:layout_marginEnd="4dp">
+    android:layout_marginStart="@dimen/list_item_margin_start"
+    android:layout_marginEnd="@dimen/list_item_margin_end">
 
     <TextView
         android:id="@+id/script_title"

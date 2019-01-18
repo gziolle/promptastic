@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -14,10 +13,12 @@ import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.firebase.ui.database.SnapshotParser;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.gziolle.promptastic.R;
 import com.gziolle.promptastic.data.model.Script;
+import com.gziolle.promptastic.firebase.FirebaseAuthManager;
 import com.gziolle.promptastic.util.Utils;
 
 import androidx.annotation.NonNull;
@@ -58,21 +59,9 @@ public class ScriptListFragment extends Fragment {
         return rootView;
     }
 
-    static class ScriptViewHolder extends RecyclerView.ViewHolder{
-        @BindView(R.id.script_title)
-        TextView mTitle;
-        @BindView(R.id.script_content)
-        TextView mContent;
-
-        public ScriptViewHolder(View view){
-            super(view);
-            ButterKnife.bind(this, view);
-        }
-    }
-
     private void fetchDataFromFirebase(){
         FirebaseDatabase database = Utils.getFirebaseDatabase();
-        Query query = database.getReference().child("scripts");
+        Query query = database.getReference().child("users/" + FirebaseAuthManager.getInstance().getFirebaseUserId() + "/scripts");
 
         FirebaseRecyclerOptions<Script> options = new FirebaseRecyclerOptions.Builder<Script>()
                 .setQuery(query, new SnapshotParser<Script>() {
@@ -86,16 +75,26 @@ public class ScriptListFragment extends Fragment {
 
         mAdapter = new FirebaseRecyclerAdapter<Script, ScriptViewHolder>(options) {
             @Override
-            protected void onBindViewHolder(@NonNull ScriptViewHolder scriptViewHolder, int i, @NonNull Script script) {
+            protected void onBindViewHolder(@NonNull ScriptViewHolder scriptViewHolder, int position, @NonNull Script script) {
                 scriptViewHolder.mTitle.setText(script.getTitle());
                 scriptViewHolder.mContent.setText(script.getContent());
+                scriptViewHolder.mDatabaseReference = getRef(position);
             }
 
             @NonNull
             @Override
             public ScriptViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
                 View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.script_list_item, parent, false);
-                return new ScriptViewHolder(view);
+
+                ScriptViewHolder viewHolder =  new ScriptViewHolder(view);
+                viewHolder.setOnClickListener(new ScriptViewHolder.ClickListener() {
+                    @Override
+                    public void onItemClicked(View view, int position) {
+                        //TODO: lead the user to Script Details Activity
+                    }
+                });
+
+                return viewHolder;
             }
 
             @Override
@@ -128,5 +127,33 @@ public class ScriptListFragment extends Fragment {
     public void addScript(View view) {
         Intent intent = new Intent(getActivity(), ScriptEditActivity.class);
         startActivity(intent);
+    }
+
+    static class ScriptViewHolder extends RecyclerView.ViewHolder{
+        @BindView(R.id.script_title)
+        TextView mTitle;
+        @BindView(R.id.script_content)
+        TextView mContent;
+
+        DatabaseReference mDatabaseReference;
+
+        private ScriptViewHolder.ClickListener mListener;
+
+        public ScriptViewHolder(View view){
+            super(view);
+            ButterKnife.bind(this, view);
+
+            view.setOnClickListener(v -> {
+
+            });
+        }
+
+        public interface ClickListener{
+            void onItemClicked(View view, int position);
+        }
+
+        public void setOnClickListener(ScriptViewHolder.ClickListener clickListener){
+            mListener = clickListener;
+        }
     }
 }
