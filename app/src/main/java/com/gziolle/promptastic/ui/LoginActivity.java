@@ -6,12 +6,10 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 import android.os.Bundle;
-import android.widget.Button;
 import android.widget.EditText;
 
-import com.google.firebase.auth.FirebaseAuth;
 import com.gziolle.promptastic.R;
-import com.gziolle.promptastic.firebase.FirebaseManager;
+import com.gziolle.promptastic.firebase.FirebaseAuthManager;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -32,6 +30,6 @@ public class LoginActivity extends AppCompatActivity {
     public void loginUser() {
         String username = mUserEditText.getText().toString();
         String password = mPasswordEditText.getText().toString();
-        FirebaseManager.getInstance().loginUser(this, username, password);
+        FirebaseAuthManager.getInstance().loginUser(this, username, password);
     }
 }

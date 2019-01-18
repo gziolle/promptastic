@@ -8,7 +8,7 @@ import android.os.SystemClock;
 import android.util.Log;
 
 import com.gziolle.promptastic.R;
-import com.gziolle.promptastic.firebase.FirebaseManager;
+import com.gziolle.promptastic.firebase.FirebaseAuthManager;
 
 public class SplashActivity extends AppCompatActivity {
 
@@ -22,7 +22,7 @@ public class SplashActivity extends AppCompatActivity {
 
     private void routeToActivity(){
         Intent intent;
-        if (FirebaseManager.getInstance().isUserLoggedIn()){
+        if (FirebaseAuthManager.getInstance().isUserLoggedIn()){
             intent = new Intent(this, MainActivity.class);
         } else{
             intent = new Intent(this, LoginActivity.class);

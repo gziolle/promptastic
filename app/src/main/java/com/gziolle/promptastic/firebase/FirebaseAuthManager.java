@@ -3,8 +3,6 @@ package com.gziolle.promptastic.firebase;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -12,19 +10,18 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.gziolle.promptastic.ui.LoginActivity;
 import com.gziolle.promptastic.ui.MainActivity;
 
 import androidx.annotation.NonNull;
 
-public class FirebaseManager {
+public class FirebaseAuthManager {
 
-    private volatile static FirebaseManager sFirebaseManager;
+    private volatile static FirebaseAuthManager sFirebaseManager;
     private static FirebaseAuth mFirebaseAuth;
 
-    public static FirebaseManager getInstance(){
+    public static FirebaseAuthManager getInstance(){
         if(sFirebaseManager == null){
-            sFirebaseManager = new FirebaseManager();
+            sFirebaseManager = new FirebaseAuthManager();
             mFirebaseAuth = FirebaseAuth.getInstance();
         }
 
@@ -62,6 +59,6 @@ public class FirebaseManager {
     }
 
     public void signOut(){
-
+        mFirebaseAuth.signOut();
     }
 }
