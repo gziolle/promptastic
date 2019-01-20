@@ -62,15 +62,18 @@ public class ScriptEditFragment extends Fragment {
 
         if(intent != null){
             Bundle bundle = intent.getExtras();
-            String title = bundle.getString(KEY_TITLE);
-            if(!TextUtils.isEmpty(title)){
-                mScriptTitle.setText(title);
+            if(bundle != null){
+                String title = bundle.getString(KEY_TITLE);
+                if(!TextUtils.isEmpty(title)){
+                    mScriptTitle.setText(title);
+                }
+                String content = bundle.getString(KEY_CONTENT);
+                if(!TextUtils.isEmpty(content)){
+                    mScriptContent.setText(content);
+                }
+                mScriptKey = bundle.getString(KEY_DATABASE_REF);
             }
-            String content = bundle.getString(KEY_CONTENT);
-            if(!TextUtils.isEmpty(content)){
-                mScriptContent.setText(content);
-            }
-            mScriptKey = bundle.getString(KEY_DATABASE_REF);
+
         }
         return rootView;
     }
