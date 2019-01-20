@@ -15,6 +15,7 @@
             android:name=".ui.ScriptEditActivity"
             android:windowSoftInputMode="adjustPan" />
         <activity android:name=".ui.LoginActivity" />
+        <activity android:name=".ui.ScriptDetailsActivity"/>
         <activity android:name=".ui.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

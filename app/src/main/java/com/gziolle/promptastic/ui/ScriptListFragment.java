@@ -30,6 +30,10 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+import static com.gziolle.promptastic.util.Constants.KEY_CONTENT;
+import static com.gziolle.promptastic.util.Constants.KEY_DATABASE_REF;
+import static com.gziolle.promptastic.util.Constants.KEY_TITLE;
+
 public class ScriptListFragment extends Fragment {
 
     @BindView(R.id.script_list)
@@ -79,6 +83,19 @@ public class ScriptListFragment extends Fragment {
                 scriptViewHolder.mTitle.setText(script.getTitle());
                 scriptViewHolder.mContent.setText(script.getContent());
                 scriptViewHolder.mDatabaseReference = getRef(position);
+                scriptViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Bundle bundle = new Bundle();
+                        bundle.putString(KEY_TITLE, scriptViewHolder.mTitle.getText().toString());
+                        bundle.putString(KEY_CONTENT, scriptViewHolder.mContent.getText().toString());
+                        bundle.putString(KEY_DATABASE_REF, scriptViewHolder.mDatabaseReference.getKey());
+                        Intent intent = new Intent(getActivity(), ScriptDetailsActivity.class);
+                        intent.putExtras(bundle);
+
+                        startActivity(intent);
+                    }
+                });
             }
 
             @NonNull
@@ -87,13 +104,6 @@ public class ScriptListFragment extends Fragment {
                 View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.script_list_item, parent, false);
 
                 ScriptViewHolder viewHolder =  new ScriptViewHolder(view);
-                viewHolder.setOnClickListener(new ScriptViewHolder.ClickListener() {
-                    @Override
-                    public void onItemClicked(View view, int position) {
-                        //TODO: lead the user to Script Details Activity
-                    }
-                });
-
                 return viewHolder;
             }
 
@@ -142,10 +152,6 @@ public class ScriptListFragment extends Fragment {
         public ScriptViewHolder(View view){
             super(view);
             ButterKnife.bind(this, view);
-
-            view.setOnClickListener(v -> {
-
-            });
         }
 
         public interface ClickListener{
