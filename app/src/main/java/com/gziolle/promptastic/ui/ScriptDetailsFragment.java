@@ -15,9 +15,10 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.gziolle.promptastic.R;
+import com.gziolle.promptastic.util.Constants;
 
-import static com.gziolle.promptastic.util.Constants.KEY_CONTENT;
-import static com.gziolle.promptastic.util.Constants.KEY_TITLE;
+import static android.app.Activity.RESULT_OK;
+
 
 public class ScriptDetailsFragment extends Fragment {
 
@@ -49,10 +50,12 @@ public class ScriptDetailsFragment extends Fragment {
 
         Intent intent = getActivity().getIntent();
         Bundle bundle = intent.getExtras();
-        mTitle = bundle.getString(KEY_TITLE);
+        mTitle = bundle.getString(Constants.KEY_TITLE);
         mTitleTextView.setText(mTitle);
-        mContent = bundle.getString(KEY_CONTENT);
+        mContent = bundle.getString(Constants.KEY_CONTENT);
         mContentTextView.setText(mContent);
+
+        mKey = bundle.getString(Constants.KEY_DATABASE_REF);
 
         return rootView;
     }
@@ -60,12 +63,24 @@ public class ScriptDetailsFragment extends Fragment {
     @OnClick(R.id.fab_edit_script)
     public void editScript(){
         Bundle bundle = new Bundle();
-        bundle.putString(KEY_TITLE, mTitle);
-        bundle.putString(KEY_CONTENT, mContent);
+        bundle.putString(Constants.KEY_TITLE, mTitle);
+        bundle.putString(Constants.KEY_CONTENT, mContent);
+        bundle.putString(Constants.KEY_DATABASE_REF, mKey);
 
         Intent intent = new Intent(getActivity(), ScriptEditActivity.class);
         intent.putExtras(bundle);
 
-        startActivity(intent);
+        startActivityForResult(intent, Constants.REQUEST_EDIT_SCRIPT);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == Constants.REQUEST_EDIT_SCRIPT && resultCode == RESULT_OK){
+            mTitle = data.getStringExtra(Constants.KEY_TITLE);
+            mTitleTextView.setText(mTitle);
+            mContent = data.getStringExtra(Constants.KEY_CONTENT);
+            mContentTextView.setText(mContent);
+        }
     }
 }
