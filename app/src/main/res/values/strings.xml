@@ -5,4 +5,10 @@
     <string name="edit_text_script_title_hint">Type the script\'\s title here</string>
     <string name="edit_text_script_content_hint">Type the script\'\s content here</string>
 
+    <!--Login Screem -->
+    <string name="edit_text_login_user_name">E-mail</string>
+    <string name="edit_text_login_password">Password</string>
+    <string name="login_button_text">Login</string>
+    <string name="login_new_user">Are you new here? </string>
+    <string name="login_sign_up"> Sign Up!</string>
 </resources>
