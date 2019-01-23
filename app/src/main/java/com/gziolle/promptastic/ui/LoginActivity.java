@@ -5,6 +5,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.EditText;
 
@@ -31,5 +32,11 @@ public class LoginActivity extends AppCompatActivity {
         String username = mUserEditText.getText().toString();
         String password = mPasswordEditText.getText().toString();
         FirebaseAuthManager.getInstance().loginUser(this, username, password);
+    }
+
+    @OnClick(R.id.tv_signup)
+    public void goToSignUpActivity(){
+        Intent intent = new Intent(this, SignupActivity.class);
+        startActivity(intent);
     }
 }

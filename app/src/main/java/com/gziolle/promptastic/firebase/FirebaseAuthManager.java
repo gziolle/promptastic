@@ -10,6 +10,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.gziolle.promptastic.R;
+import com.gziolle.promptastic.ui.LoginActivity;
 import com.gziolle.promptastic.ui.MainActivity;
 
 import androidx.annotation.NonNull;
@@ -43,13 +45,28 @@ public class FirebaseAuthManager {
         return true;
     }
 
+    public void createUser(final Context context, String email, String password){
+        mFirebaseAuth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener((Activity)context, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(Task<AuthResult> task) {
+                        if(!task.isSuccessful()){
+                            Toast.makeText(context, context.getString(R.string.signup_fail), Toast.LENGTH_SHORT).show();
+                        } else{
+                            Intent loginIntent = new Intent(context, LoginActivity.class);
+                            context.startActivity(loginIntent);
+                        }
+                    }
+                });
+    }
+
     public void loginUser(final Context context, String email, String password){
         mFirebaseAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener((Activity)context, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (!task.isSuccessful()) {
-                            Toast.makeText(context, "Failed to login", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context, context.getString(R.string.login_fail), Toast.LENGTH_SHORT).show();
                         }else {
                             Intent profileIntent = new Intent(context, MainActivity.class);
                             context.startActivity(profileIntent);
