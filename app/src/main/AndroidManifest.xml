@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.gziolle.promptastic">
 
     <application
@@ -23,7 +24,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.SignupActivity"></activity>
+        <activity android:name=".ui.SignupActivity" />
+        <activity android:name=".ui.PlayScriptActivity"
+            android:screenOrientation="landscape"
+            android:theme="@style/PlayScriptTheme"/>
     </application>
 
 </manifest>

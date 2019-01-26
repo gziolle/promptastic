@@ -25,4 +25,7 @@
 
     <string name="open">Open</string>
     <string name="close">Close</string>
+
+    <string name="play_script">Play Script</string>
+    <string name="edit_script">Edit Script</string>
 </resources>

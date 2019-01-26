@@ -73,6 +73,16 @@ public class ScriptDetailsFragment extends Fragment {
         startActivityForResult(intent, Constants.REQUEST_EDIT_SCRIPT);
     }
 
+    @OnClick(R.id.fab_play_script)
+    public void playScript(){
+        Bundle bundle = new Bundle();
+        bundle.putString(Constants.KEY_CONTENT, mContent);
+
+        Intent intent = new Intent(getActivity(), PlayScriptActivity.class);
+        intent.putExtras(bundle);
+        startActivity(intent);
+    }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
