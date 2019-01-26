@@ -49,14 +49,16 @@ public class ScriptDetailsFragment extends Fragment {
         ButterKnife.bind(this, rootView);
 
         Intent intent = getActivity().getIntent();
-        Bundle bundle = intent.getExtras();
-        mTitle = bundle.getString(Constants.KEY_TITLE);
-        mTitleTextView.setText(mTitle);
-        mContent = bundle.getString(Constants.KEY_CONTENT);
-        mContentTextView.setText(mContent);
-
-        mKey = bundle.getString(Constants.KEY_DATABASE_REF);
-
+        if(intent != null){
+            Bundle bundle = intent.getExtras();
+            if(bundle != null){
+                mTitle = bundle.getString(Constants.KEY_TITLE);
+                mTitleTextView.setText(mTitle);
+                mContent = bundle.getString(Constants.KEY_CONTENT);
+                mContentTextView.setText(mContent);
+                mKey = bundle.getString(Constants.KEY_DATABASE_REF);
+            }
+        }
         return rootView;
     }
 

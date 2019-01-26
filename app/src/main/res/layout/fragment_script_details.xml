@@ -19,17 +19,26 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Script Titie"/>
-    <TextView
-        android:id="@+id/tv_script_content"
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginTop="@dimen/detail_content_margin_top"
-        android:layout_marginStart="@dimen/edit_text_margin_start_end"
-        android:layout_marginEnd="@dimen/edit_text_margin_start_end"
-        android:textSize="@dimen/detail_content_text_size"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginBottom="@dimen/detail_content_margin_top"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_script_title" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_script_title">
+
+        <TextView
+            android:id="@+id/tv_script_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/edit_text_margin_start_end"
+            android:layout_marginEnd="@dimen/edit_text_margin_start_end"
+            android:textSize="@dimen/detail_content_text_size" />
+    </ScrollView>
+
 
     <com.getbase.floatingactionbutton.FloatingActionsMenu
         android:id="@+id/right_labels"
