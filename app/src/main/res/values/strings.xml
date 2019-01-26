@@ -1,7 +1,10 @@
 <resources>
     <string name="app_name">Promptastic</string>
 
+    <!-- Script List screen-->
     <string name="empty_view_text">Hey, you have not created a script yet!</string>
+
+    <!-- Edit Script Screen-->
     <string name="edit_text_script_title_hint">Type the script\'\s title here</string>
     <string name="edit_text_script_content_hint">Type the script\'\s content here</string>
 

@@ -4,10 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.SystemClock;
-import android.util.Log;
+import android.os.Handler;
 
-import com.gziolle.promptastic.R;
 import com.gziolle.promptastic.firebase.FirebaseAuthManager;
 
 public class SplashActivity extends AppCompatActivity {
@@ -15,9 +13,14 @@ public class SplashActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_splash);
-        routeToActivity();
-        finish();
+        if(getSupportActionBar() != null){
+            getSupportActionBar().hide();
+        }
+
+        new Handler().postDelayed(() -> {
+            routeToActivity();
+            finish();
+        }, 3000);
     }
 
     private void routeToActivity(){

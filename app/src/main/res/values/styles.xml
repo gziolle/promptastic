@@ -13,9 +13,16 @@
         <item name="android:textColor">#FFFFFF</item>
     </style>
 
-    <style name="PlayScriptTheme" parent="@style/AppTheme">
+    <style name="AppTheme.PlayScript" parent="@style/AppTheme">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.Launcher" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowActionBar">false</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="android:windowBackground">@drawable/splash_screen</item>
     </style>
 
 
