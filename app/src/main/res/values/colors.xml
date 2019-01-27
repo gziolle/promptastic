@@ -13,4 +13,6 @@
     <color name="list_item_content_color">#555555</color>
 
     <color name="fab_icon_white">#FFFFFF</color>
+
+    <color name="button_text_color">#ffffff</color>
 </resources>

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <dimen name="activity_default_margin">16dp</dimen>
 
     <dimen name="list_item_margin_start">16dp</dimen>
     <dimen name="list_item_margin_end">16dp</dimen>
@@ -24,5 +25,14 @@
     <dimen name="navigation_view_header_height">150dp</dimen>
 
     <dimen name="play_script_countdown_text_size">48sp</dimen>
+
+    <dimen name="login_icon_width">250dp</dimen>
+    <dimen name="login_icon_height">250dp</dimen>
+    <dimen name="login_edit_text_first_top_margin">16dp</dimen>
+    <dimen name="login_edit_text_top_margin">24dp</dimen>
+    <dimen name="login_sign_up_top_margin">32dp</dimen>
+    <dimen name="login_button_top_margin">24dp</dimen>
+    <dimen name="login_sign_up_end_margin">12dp</dimen>
+
 
 </resources>
