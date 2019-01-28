@@ -34,5 +34,4 @@
     <dimen name="login_button_top_margin">24dp</dimen>
     <dimen name="login_sign_up_end_margin">12dp</dimen>
 
-
 </resources>

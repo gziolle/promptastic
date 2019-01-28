@@ -8,7 +8,6 @@ import butterknife.OnClick;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.gziolle.promptastic.R;
 import com.gziolle.promptastic.firebase.FirebaseAuthManager;
@@ -27,6 +26,10 @@ public class SignupActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
         ButterKnife.bind(this);
+
+        if(getSupportActionBar() != null){
+            getSupportActionBar().hide();
+        }
     }
 
     @OnClick(R.id.bt_signup)
@@ -36,7 +39,12 @@ public class SignupActivity extends AppCompatActivity {
         if (!TextUtils.isEmpty(email) && !TextUtils.isEmpty(password)) {
             FirebaseAuthManager.getInstance().createUser(this, email, password);
         } else {
-            Toast.makeText(this, "Fill in the blanks", Toast.LENGTH_SHORT).show();
+            if(TextUtils.isEmpty(email)){
+                mUserEditText.setError(getString(R.string.login_username_error));
+            }
+            if(TextUtils.isEmpty(password)){
+                mPasswordEditText.setError(getString(R.string.login_password_error));
+            }
         }
     }
 }

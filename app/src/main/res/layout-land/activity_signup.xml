@@ -11,14 +11,23 @@
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:layout_weight="4.5">
+        android:layout_weight="4.5"
+        android:gravity="center_vertical"
+        android:padding="16dp">
 
-        <ImageView
-            android:id="@+id/iv_login_logo"
-            android:layout_width="@dimen/login_icon_width"
-            android:layout_height="@dimen/login_icon_height"
-            android:layout_gravity="center"
-            android:src="@drawable/ic_promptastic_logo" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Good!!!"
+            android:textSize="32sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="To sign up, follow the instructions below"
+            android:textSize="16sp" />
     </LinearLayout>
 
     <LinearLayout
@@ -30,49 +39,27 @@
         android:gravity="center">
 
         <EditText
-            android:id="@+id/et_login_user"
+            android:id="@+id/et_signup_user"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/edit_text_login_user_name"
+            android:hint="@string/signup_email_hint"
             android:inputType="textAutoComplete" />
 
         <EditText
-            android:id="@+id/et_login_password"
+            android:id="@+id/et_signup_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/login_edit_text_top_margin"
-            android:hint="@string/edit_text_login_password"
+            android:hint="@string/signup_password_hint"
             android:inputType="textPassword" />
 
         <Button
-            android:id="@+id/bt_login"
+            android:id="@+id/bt_signup"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/login_button_text"
+            android:text="@string/signup_button_text"
             android:layout_marginTop="@dimen/login_button_top_margin"
             android:background="@drawable/button_background"
             android:textColor="@color/button_text_color" />
-
-        <LinearLayout
-            android:id="@+id/ll_signup"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/login_sign_up_top_margin">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/login_new_user"
-                android:layout_marginEnd="@dimen/login_sign_up_end_margin"/>
-
-            <TextView
-                android:id="@+id/tv_signup"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:focusable="true"
-                android:clickable="true"
-                android:autoLink="all"
-                android:text="@string/login_sign_up"/>
-        </LinearLayout>
     </LinearLayout>
 </LinearLayout>
