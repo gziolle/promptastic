@@ -3,7 +3,7 @@
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="@dimen/activity_default_margin"
+    android:paddingEnd="@dimen/activity_default_margin"
     android:background="@drawable/login_gradient_background">
 
     <LinearLayout
@@ -11,6 +11,7 @@
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:orientation="vertical"
+        android:gravity="center_vertical"
         android:layout_weight="4.5">
 
         <ImageView
@@ -18,7 +19,16 @@
             android:layout_width="@dimen/login_icon_width"
             android:layout_height="@dimen/login_icon_height"
             android:layout_gravity="center"
-            android:src="@drawable/ic_promptastic_logo" />
+            android:src="@drawable/promptastic_name"/>
+
+        <ProgressBar
+            android:id="@+id/login_progress_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="16dp"
+            android:visibility="gone"/>
+
     </LinearLayout>
 
     <LinearLayout

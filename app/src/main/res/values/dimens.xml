@@ -27,7 +27,7 @@
     <dimen name="play_script_countdown_text_size">48sp</dimen>
 
     <dimen name="login_icon_width">250dp</dimen>
-    <dimen name="login_icon_height">250dp</dimen>
+    <dimen name="login_icon_height">200dp</dimen>
     <dimen name="login_edit_text_first_top_margin">16dp</dimen>
     <dimen name="login_edit_text_top_margin">24dp</dimen>
     <dimen name="login_sign_up_top_margin">32dp</dimen>

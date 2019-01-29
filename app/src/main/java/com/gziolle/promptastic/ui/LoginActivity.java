@@ -1,6 +1,5 @@
 package com.gziolle.promptastic.ui;
 
-import androidx.appcompat.app.AppCompatActivity;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -8,21 +7,24 @@ import butterknife.OnClick;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.view.View;
 import android.widget.EditText;
 import android.widget.ProgressBar;
-import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.gziolle.promptastic.R;
 import com.gziolle.promptastic.firebase.FirebaseAuthManager;
+import com.gziolle.promptastic.interfaces.FirebaseResultInterface;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends BaseActivity implements FirebaseResultInterface {
 
     @BindView(R.id.et_login_password)
     EditText mPasswordEditText;
 
     @BindView(R.id.et_login_user)
     EditText mUserEditText;
+
+    @BindView(R.id.login_progress_bar)
+    ProgressBar mProgressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,16 +49,8 @@ public class LoginActivity extends AppCompatActivity {
                 mPasswordEditText.setError(getString(R.string.login_password_error));
             }
         } else{
-            RelativeLayout layout = new RelativeLayout(this);
-            ProgressBar progressBar = new ProgressBar(this,null,android.R.attr.progressBarStyleLarge);
-            progressBar.setIndeterminate(true);
-            progressBar.setVisibility(View.VISIBLE);
-            RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(100,100);
-            params.addRule(RelativeLayout.CENTER_IN_PARENT);
-            layout.addView(progressBar,params);
-
-            setContentView(layout);
-            FirebaseAuthManager.getInstance().loginUser(this, username, password);
+            showProgressBar(mProgressBar);
+            FirebaseAuthManager.getInstance().loginUser(this, username, password, this);
         }
 
     }
@@ -65,5 +59,18 @@ public class LoginActivity extends AppCompatActivity {
     public void goToSignUpActivity(){
         Intent intent = new Intent(this, SignupActivity.class);
         startActivity(intent);
+    }
+
+    @Override
+    public void onFirebaseResult(boolean isSuccessful) {
+        hideProgressBar(mProgressBar);
+        if (!isSuccessful) {
+            Toast.makeText(this, getString(R.string.login_fail), Toast.LENGTH_SHORT).show();
+        }else {
+            Intent intent = new Intent(this, MainActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+        }
+
     }
 }

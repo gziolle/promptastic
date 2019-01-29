@@ -15,20 +15,29 @@
         <activity
             android:name=".ui.ScriptEditActivity"
             android:windowSoftInputMode="adjustPan" />
-        <activity android:name=".ui.LoginActivity"
-            android:theme="@style/AppTheme.Login"/>
+        <activity
+            android:name=".ui.LoginActivity"
+            android:theme="@style/AppTheme.Login" />
         <activity android:name=".ui.ScriptDetailsActivity" />
-        <activity android:name=".ui.SplashActivity"
+        <activity
+            android:name=".ui.SplashActivity"
             android:theme="@style/AppTheme.Launcher">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity android:name=".ui.SignupActivity" />
-        <activity android:name=".ui.PlayScriptActivity"
+        <activity
+            android:name=".ui.PlayScriptActivity"
             android:screenOrientation="landscape"
-            android:theme="@style/AppTheme.PlayScript"/>
+            android:theme="@style/AppTheme.PlayScript" />
+        <activity android:name=".ui.BaseActivity"></activity>
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>
