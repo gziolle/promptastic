@@ -21,7 +21,7 @@ public class BaseActivity extends AppCompatActivity {
 
     void hideProgressBar(ProgressBar progressBar){
         if(progressBar != null){
-            progressBar.setVisibility(View.GONE);
+            progressBar.setVisibility(View.INVISIBLE);
         }
     }
 }
