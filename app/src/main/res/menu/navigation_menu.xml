@@ -1,20 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:id="@+id/scripts"
-        android:icon="@drawable/ic_scripts"
-        android:title="@string/navigation_scripts"/>
+    <group android:id="@+id/group_1" android:checkableBehavior="single">
+        <item android:id="@+id/scripts"
+            android:icon="@drawable/ic_scripts"
+            android:title="@string/navigation_scripts"/>
 
-    <item android:id="@+id/settings"
-        android:icon="@drawable/ic_settings"
-        android:title="@string/navigation_settings"/>
+        <item android:id="@+id/settings"
+            android:icon="@drawable/ic_settings"
+            android:title="@string/navigation_settings"/>
+    </group>
 
-    <item android:id="@+id/about"
-        android:icon="@drawable/ic_info"
-        android:title="@string/navigation_about"/>
+    <group android:id="@+id/group_2" android:checkableBehavior="single">
+        <item android:id="@+id/about"
+            android:icon="@drawable/ic_info"
+            android:title="@string/navigation_about"/>
 
-    <item android:id="@+id/sign_out"
-        android:icon="@drawable/ic_sign_out"
-        android:title="@string/navigation_sign_out"/>
+        <item android:id="@+id/sign_out"
+            android:icon="@drawable/ic_sign_out"
+            android:title="@string/navigation_sign_out"/>
+    </group>
+
 
 </menu>

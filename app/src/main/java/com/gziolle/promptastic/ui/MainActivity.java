@@ -3,6 +3,7 @@ package com.gziolle.promptastic.ui;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
@@ -31,6 +32,9 @@ public class MainActivity extends AppCompatActivity implements ScriptListFragmen
     @BindView(R.id.view_container)
     FrameLayout mViewContainer;
 
+    @BindView(R.id.toolbar)
+    Toolbar mToolbar;
+
     ActionBarDrawerToggle mDrawerToggle;
 
     private static final String DETAILS_FRAGMENT_TAG = "details";
@@ -42,7 +46,10 @@ public class MainActivity extends AppCompatActivity implements ScriptListFragmen
 
         ButterKnife.bind(this);
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        setSupportActionBar(mToolbar);
+        if(getSupportActionBar() != null){
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
 
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.open, R.string.close);
         mDrawerLayout.addDrawerListener(mDrawerToggle);

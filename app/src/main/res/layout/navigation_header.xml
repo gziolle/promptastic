@@ -1,12 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:gravity="center">
+    android:layout_height="@dimen/navigation_view_header_height"
+    android:gravity="center"
+    android:background="@color/colorPrimary">
     
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_width="96dp"
+        android:layout_height="96dp"
+        android:src="@drawable/promptastic_logo_only"
+        android:layout_marginBottom="16dp"/>
+
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="@dimen/navigation_view_header_height"
-        android:src="@drawable/ic_do_not_disturb_alt_black_24dp"/>
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:fontFamily="@font/cabin_sketch"
+        android:textSize="24sp"
+        android:text="Promptastic"
+        tools:text="promptastic"/>
 </LinearLayout>

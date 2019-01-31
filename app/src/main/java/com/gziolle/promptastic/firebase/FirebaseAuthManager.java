@@ -33,6 +33,13 @@ public class FirebaseAuthManager {
         return null;
     }
 
+    public String getFirebaseUserEmail(){
+        if(mFirebaseAuth.getCurrentUser() != null){
+            return mFirebaseAuth.getCurrentUser().getEmail();
+        }
+        return null;
+    }
+
     public boolean isUserLoggedIn(){
         FirebaseUser currentUser = mFirebaseAuth.getCurrentUser();
         if(currentUser == null) {
