@@ -4,6 +4,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="?android:attr/listPreferredItemHeight"
+    android:paddingTop="8dp"
     android:layout_marginStart="@dimen/list_item_margin_start"
     android:layout_marginEnd="@dimen/list_item_margin_end">
 

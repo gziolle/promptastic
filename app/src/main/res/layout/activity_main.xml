@@ -6,12 +6,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <fragment
-        android:id="@+id/fragment_script_list"
-        android:name="com.gziolle.promptastic.ui.ScriptListFragment"
+    <FrameLayout
+        android:id="@+id/view_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="com.gziolle.promptastic.ui.ScriptListFragment"
         tools:layout="@android:layout/list_content" />
 
     <com.google.android.material.navigation.NavigationView
@@ -23,7 +21,7 @@
         app:menu="@menu/navigation_menu">
 
     </com.google.android.material.navigation.NavigationView>
-
-
 </androidx.drawerlayout.widget.DrawerLayout>
+
+
 

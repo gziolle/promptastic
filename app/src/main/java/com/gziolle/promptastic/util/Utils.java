@@ -1,6 +1,7 @@
 package com.gziolle.promptastic.util;
 
 import com.google.firebase.database.FirebaseDatabase;
+import com.gziolle.promptastic.firebase.FirebaseAuthManager;
 
 public class Utils {
 
@@ -10,6 +11,7 @@ public class Utils {
         if(mDatabase == null){
             mDatabase = FirebaseDatabase.getInstance();
             mDatabase.setPersistenceEnabled(true);
+            mDatabase.getReference(Constants.PATH_USERS + FirebaseAuthManager.getInstance().getFirebaseUserId()).keepSynced(true);
         }
         return mDatabase;
     }

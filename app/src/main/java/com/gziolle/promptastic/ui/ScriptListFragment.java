@@ -19,6 +19,7 @@ import com.google.firebase.database.Query;
 import com.gziolle.promptastic.R;
 import com.gziolle.promptastic.data.model.Script;
 import com.gziolle.promptastic.firebase.FirebaseAuthManager;
+import com.gziolle.promptastic.util.Constants;
 import com.gziolle.promptastic.util.Utils;
 
 import androidx.annotation.NonNull;
@@ -38,12 +39,24 @@ public class ScriptListFragment extends Fragment {
 
     @BindView(R.id.script_list)
     RecyclerView mScriptRecyclerView;
-    @BindView(R.id.add_script_fab)
-    FloatingActionButton mAddScriptFab;
+
     @BindView(R.id.empty_view)
     FrameLayout mEmptyView;
 
+    @BindView(R.id.add_script_fab)
+    FloatingActionButton mAddScriptFab;
+
     private FirebaseRecyclerAdapter mAdapter;
+    private OnScriptSelectedListener mScriptSelectedListener;
+    private OnAddScriptListener mAddScriptListener;
+
+    public interface OnScriptSelectedListener{
+        void onScriptSelected(Bundle bundle);
+    }
+
+    public interface OnAddScriptListener{
+        void onAddScriptButtonSelected();
+    }
 
     public ScriptListFragment() {
         // Required empty public constructor
@@ -65,15 +78,15 @@ public class ScriptListFragment extends Fragment {
 
     private void fetchDataFromFirebase(){
         FirebaseDatabase database = Utils.getFirebaseDatabase();
-        Query query = database.getReference().child("users/" + FirebaseAuthManager.getInstance().getFirebaseUserId() + "/scripts");
+        Query query = database.getReference().child(Constants.PATH_USERS + FirebaseAuthManager.getInstance().getFirebaseUserId() + Constants.PATH_SCRIPTS);
 
         FirebaseRecyclerOptions<Script> options = new FirebaseRecyclerOptions.Builder<Script>()
                 .setQuery(query, new SnapshotParser<Script>() {
                     @NonNull
                     @Override
                     public Script parseSnapshot(@NonNull DataSnapshot snapshot) {
-                        return new Script(snapshot.child("title").getValue().toString(),
-                                snapshot.child("content").getValue().toString());
+                        return new Script(snapshot.child(Constants.KEY_TITLE).getValue().toString(),
+                                snapshot.child(Constants.KEY_CONTENT).getValue().toString());
                     }
                 }).build();
 
@@ -90,10 +103,7 @@ public class ScriptListFragment extends Fragment {
                         bundle.putString(KEY_TITLE, scriptViewHolder.mTitle.getText().toString());
                         bundle.putString(KEY_CONTENT, scriptViewHolder.mContent.getText().toString());
                         bundle.putString(KEY_DATABASE_REF, scriptViewHolder.mDatabaseReference.getKey());
-                        Intent intent = new Intent(getActivity(), ScriptDetailsActivity.class);
-                        intent.putExtras(bundle);
-
-                        startActivity(intent);
+                        mScriptSelectedListener.onScriptSelected(bundle);
                     }
                 });
             }
@@ -135,8 +145,19 @@ public class ScriptListFragment extends Fragment {
 
     @OnClick(R.id.add_script_fab)
     public void addScript(View view) {
-        Intent intent = new Intent(getActivity(), ScriptEditActivity.class);
-        startActivity(intent);
+        mAddScriptListener.onAddScriptButtonSelected();
+    }
+
+    public void setOnScriptSelectedListener(OnScriptSelectedListener listener){
+        if(listener != null){
+            mScriptSelectedListener = listener;
+        }
+    }
+
+    public void setOnAddScriptListerner(OnAddScriptListener listener){
+        if(listener != null){
+            mAddScriptListener = listener;
+        }
     }
 
     static class ScriptViewHolder extends RecyclerView.ViewHolder{
@@ -147,19 +168,9 @@ public class ScriptListFragment extends Fragment {
 
         DatabaseReference mDatabaseReference;
 
-        private ScriptViewHolder.ClickListener mListener;
-
         public ScriptViewHolder(View view){
             super(view);
             ButterKnife.bind(this, view);
-        }
-
-        public interface ClickListener{
-            void onItemClicked(View view, int position);
-        }
-
-        public void setOnClickListener(ScriptViewHolder.ClickListener clickListener){
-            mListener = clickListener;
         }
     }
 }

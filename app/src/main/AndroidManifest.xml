@@ -13,12 +13,8 @@
         tools:ignore="GoogleAppIndexingWarning">
         <activity android:name=".ui.MainActivity" />
         <activity
-            android:name=".ui.ScriptEditActivity"
-            android:windowSoftInputMode="adjustPan" />
-        <activity
             android:name=".ui.LoginActivity"
             android:theme="@style/AppTheme.Login" />
-        <activity android:name=".ui.ScriptDetailsActivity" />
         <activity
             android:name=".ui.SplashActivity"
             android:theme="@style/AppTheme.Launcher">

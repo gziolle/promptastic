@@ -13,16 +13,6 @@
         android:focusable="true"
         android:clickable="true"/>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/add_script_fab"
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_gravity="bottom|end"
-        app:fabSize="normal"
-        android:src = "@drawable/ic_add_white"/>
-
     <FrameLayout
         android:id="@+id/empty_view"
         android:layout_width="match_parent"
@@ -34,7 +24,16 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="@string/empty_view_text" />
-
     </FrameLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/add_script_fab"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_gravity="bottom|end"
+        app:fabSize="normal"
+        android:src = "@drawable/ic_add_white"/>
 
 </FrameLayout>
