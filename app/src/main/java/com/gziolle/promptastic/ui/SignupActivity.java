@@ -17,6 +17,9 @@ import com.gziolle.promptastic.interfaces.FirebaseResultInterface;
 
 public class SignupActivity extends BaseActivity implements FirebaseResultInterface {
 
+    @BindView(R.id.et_signup_display_name)
+    EditText mNameEditText;
+
     @BindView(R.id.et_signup_user)
     EditText mUserEditText;
 
@@ -39,11 +42,12 @@ public class SignupActivity extends BaseActivity implements FirebaseResultInterf
 
     @OnClick(R.id.bt_signup)
     public void signupUser() {
+        String displayName = mNameEditText.getText().toString();
         String email = mUserEditText.getText().toString();
         String password = mPasswordEditText.getText().toString();
         if (!TextUtils.isEmpty(email) && !TextUtils.isEmpty(password)) {
             showProgressBar(mProgressBar);
-            FirebaseAuthManager.getInstance().createUser(this, email, password, this);
+            FirebaseAuthManager.getInstance().createUser(this, email, password, displayName, this);
         } else {
             if(TextUtils.isEmpty(email)){
                 mUserEditText.setError(getString(R.string.login_username_error));

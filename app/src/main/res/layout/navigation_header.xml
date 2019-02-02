@@ -14,11 +14,14 @@
         android:layout_marginBottom="16dp"/>
 
     <TextView
+        android:id="@+id/tv_display_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
         android:fontFamily="@font/cabin_sketch"
+        android:maxLines="1"
+        android:ellipsize="end"
         android:textSize="24sp"
-        android:text="Promptastic"
+        android:text="@string/app_name"
         tools:text="promptastic"/>
 </LinearLayout>

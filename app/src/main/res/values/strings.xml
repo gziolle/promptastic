@@ -18,8 +18,9 @@
     <string name="login_username_error">Type your e-mail address</string>
     <string name="login_password_error">Type your password</string>
 
-    <string name="signup_email_hint">First, type an e-mail address</string>
-    <string name="signup_password_hint">Then, a password</string>
+    <string name="signup_name_hint">First, type your name</string>
+    <string name="signup_email_hint">Then, an e-mail address</string>
+    <string name="signup_password_hint">Finally, a password</string>
     <string name="signup_button_text">Sign Up</string>
     <string name="signup_fail">Sign Up Failure. Please, try again</string>
 

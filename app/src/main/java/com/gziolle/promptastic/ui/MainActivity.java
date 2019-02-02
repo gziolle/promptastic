@@ -12,8 +12,11 @@ import butterknife.ButterKnife;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.TextView;
 
 import com.google.android.material.navigation.NavigationView;
 import com.gziolle.promptastic.R;
@@ -36,6 +39,7 @@ public class MainActivity extends AppCompatActivity implements ScriptListFragmen
     Toolbar mToolbar;
 
     ActionBarDrawerToggle mDrawerToggle;
+    TextView mDisplayNameTextView;
 
     private static final String DETAILS_FRAGMENT_TAG = "details";
 
@@ -78,7 +82,6 @@ public class MainActivity extends AppCompatActivity implements ScriptListFragmen
             ScriptListFragment listFragment = new ScriptListFragment();
             getSupportFragmentManager().beginTransaction().add(R.id.view_container, listFragment).commit();
         }
-
     }
 
     @Override
@@ -101,6 +104,19 @@ public class MainActivity extends AppCompatActivity implements ScriptListFragmen
         } else if(fragment instanceof ScriptEditFragment){
             ScriptEditFragment scriptEditFragment = (ScriptEditFragment) fragment;
             scriptEditFragment.setOnScriptSavedListener(this);
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        View headerLayout = mDrawerList.getHeaderView(0);
+        mDisplayNameTextView = headerLayout.findViewById(R.id.tv_display_name);
+        if (mDisplayNameTextView != null) {
+            String displayName = FirebaseAuthManager.getInstance().getFirebaseUserName();
+            if (!TextUtils.isEmpty(displayName)) {
+                mDisplayNameTextView.setText(displayName);
+            }
         }
     }
 

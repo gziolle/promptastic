@@ -8,6 +8,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 import com.gziolle.promptastic.interfaces.FirebaseResultInterface;
 
 import androidx.annotation.NonNull;
@@ -33,9 +34,9 @@ public class FirebaseAuthManager {
         return null;
     }
 
-    public String getFirebaseUserEmail(){
+    public String getFirebaseUserName(){
         if(mFirebaseAuth.getCurrentUser() != null){
-            return mFirebaseAuth.getCurrentUser().getEmail();
+            return mFirebaseAuth.getCurrentUser().getDisplayName();
         }
         return null;
     }
@@ -48,12 +49,19 @@ public class FirebaseAuthManager {
         return true;
     }
 
-    public void createUser(final Context context, String email, String password, FirebaseResultInterface callback){
+    public void createUser(final Context context, String email, String password, String displayName, FirebaseResultInterface callback){
         mFirebaseAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener((Activity)context, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(Task<AuthResult> task) {
-                        callback.onFirebaseResult(task.isSuccessful());
+                        FirebaseUser user = mFirebaseAuth.getCurrentUser();
+                        if(user != null){
+                            UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                                    .setDisplayName(displayName).build();
+
+                            user.updateProfile(profileUpdates);
+                            callback.onFirebaseResult(task.isSuccessful());
+                        }
                     }
                 });
     }

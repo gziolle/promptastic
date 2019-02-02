@@ -46,20 +46,35 @@
         android:layout_weight="5.5"
         android:gravity="center">
 
-        <EditText
-            android:id="@+id/et_signup_user"
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/signup_email_hint"
-            android:inputType="textAutoComplete" />
+            android:layout_height="wrap_content">
 
-        <EditText
-            android:id="@+id/et_signup_password"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/login_edit_text_top_margin"
-            android:hint="@string/signup_password_hint"
-            android:inputType="textPassword" />
+            <EditText
+                android:id="@+id/et_signup_display_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/signup_name_hint"
+                android:inputType="textPassword" />
+
+            <EditText
+                android:id="@+id/et_signup_user"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/signup_email_hint"
+                android:inputType="textAutoComplete" />
+
+            <EditText
+                android:id="@+id/et_signup_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/login_edit_text_top_margin"
+                android:hint="@string/signup_password_hint"
+                android:inputType="textPassword" />
+
+        </ScrollView>
+
+
 
         <Button
             android:id="@+id/bt_signup"

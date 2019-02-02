@@ -34,14 +34,26 @@
     </LinearLayout>
 
     <EditText
+        android:id="@+id/et_signup_display_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/signup_name_hint"
+        android:inputType="textPassword"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ll_signup_congrats"
+        app:layout_constraintVertical_chainStyle="spread" />
+
+    <EditText
         android:id="@+id/et_signup_user"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/signup_email_hint"
+        android:layout_marginTop="@dimen/login_edit_text_top_margin"
         android:inputType="textAutoComplete"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/ll_signup_congrats"
+        app:layout_constraintTop_toBottomOf="@id/et_signup_display_name"
         app:layout_constraintVertical_chainStyle="spread" />
 
     <EditText
