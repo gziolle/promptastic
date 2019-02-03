@@ -6,7 +6,7 @@
     android:layout_height="@dimen/navigation_view_header_height"
     android:gravity="center"
     android:background="@color/colorPrimary">
-    
+
     <de.hdodenhof.circleimageview.CircleImageView
         android:layout_width="96dp"
         android:layout_height="96dp"

@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
@@ -62,10 +63,16 @@ public class MainActivity extends AppCompatActivity implements ScriptListFragmen
         mDrawerList.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch(item.getItemId()){
+                Intent intent;
+                int id = item.getItemId();
+                switch(id){
+                    case R.id.settings:
+                        intent = new Intent(MainActivity.this, SettingsActivity.class);
+                        startActivity(intent);
+                        break;
                     case R.id.sign_out:
                         FirebaseAuthManager.getInstance().signOut();
-                        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                        intent = new Intent(MainActivity.this, LoginActivity.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(intent);
                         finish();
@@ -81,6 +88,15 @@ public class MainActivity extends AppCompatActivity implements ScriptListFragmen
             }
             ScriptListFragment listFragment = new ScriptListFragment();
             getSupportFragmentManager().beginTransaction().add(R.id.view_container, listFragment).commit();
+        }
+
+        View headerLayout = mDrawerList.getHeaderView(0);
+        mDisplayNameTextView = headerLayout.findViewById(R.id.tv_display_name);
+        if (mDisplayNameTextView != null) {
+            String displayName = FirebaseAuthManager.getInstance().getFirebaseUserName();
+            if (!TextUtils.isEmpty(displayName)) {
+                mDisplayNameTextView.setText(displayName);
+            }
         }
     }
 
@@ -110,13 +126,9 @@ public class MainActivity extends AppCompatActivity implements ScriptListFragmen
     @Override
     protected void onResume() {
         super.onResume();
-        View headerLayout = mDrawerList.getHeaderView(0);
-        mDisplayNameTextView = headerLayout.findViewById(R.id.tv_display_name);
-        if (mDisplayNameTextView != null) {
-            String displayName = FirebaseAuthManager.getInstance().getFirebaseUserName();
-            if (!TextUtils.isEmpty(displayName)) {
-                mDisplayNameTextView.setText(displayName);
-            }
+
+        if(mDrawerLayout.isDrawerOpen(mDrawerList)){
+            mDrawerLayout.closeDrawer(GravityCompat.START, false);
         }
     }
 

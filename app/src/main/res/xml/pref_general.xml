@@ -1,0 +1,30 @@
+<androidx.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <ListPreference
+        android:defaultValue="light"
+        android:entries="@array/pref_background_entries"
+        android:entryValues="@array/pref_background_entry_values"
+        android:key="example_list"
+        android:negativeButtonText="@null"
+        android:positiveButtonText="@null"
+        android:title="@string/pref_title_background" />
+
+    <ListPreference
+        android:defaultValue="0"
+        android:entries="@array/text_speed_list_preference_entries"
+        android:entryValues="@array/text_speed_list_preference_entry_values"
+        android:key="text_speed"
+        android:negativeButtonText="@null"
+        android:positiveButtonText="@null"
+        android:title="@string/pref_title_text_speed" />
+
+    <ListPreference
+        android:defaultValue="black"
+        android:entries="@array/text_color_list_preference_entries"
+        android:entryValues="@array/text_color_list_preference_entry_values"
+        android:key="text_color"
+        android:negativeButtonText="@null"
+        android:positiveButtonText="@null"
+        android:title="@string/pref_title_text_color" />
+
+</androidx.preference.PreferenceScreen>

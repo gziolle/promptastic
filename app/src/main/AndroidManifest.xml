@@ -11,7 +11,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".ui.MainActivity" />
+        <activity android:name=".ui.MainActivity"
+            android:hardwareAccelerated="true"/>
         <activity
             android:name=".ui.LoginActivity"
             android:theme="@style/AppTheme.Login" />
@@ -29,11 +30,16 @@
             android:name=".ui.PlayScriptActivity"
             android:screenOrientation="landscape"
             android:theme="@style/AppTheme.PlayScript" />
-        <activity android:name=".ui.BaseActivity"></activity>
+        <activity android:name=".ui.BaseActivity" />
 
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
+
+        <activity
+            android:name=".ui.SettingsActivity"
+            android:label="@string/title_activity_settings"
+            android:hardwareAccelerated="true"/>
     </application>
 
 </manifest>
