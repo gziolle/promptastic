@@ -3,6 +3,7 @@ package com.gziolle.promptastic.ui;
 import android.os.Bundle;
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
+import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceManager;
 
 import com.gziolle.promptastic.R;
@@ -21,7 +22,6 @@ public class SettingsFragment extends PreferenceFragmentCompat {
             Preference preference = getPreferenceScreen().getPreference(i);
             bindPreferenceSummaryToValue(preference);
         }
-
     }
 
     private static Preference.OnPreferenceChangeListener sBindPreferenceSummaryToValueListener = new Preference.OnPreferenceChangeListener() {
@@ -49,7 +49,6 @@ public class SettingsFragment extends PreferenceFragmentCompat {
             return true;
         }
     };
-
 
     private static void bindPreferenceSummaryToValue(Preference preference) {
         // Set the listener to watch for value changes.

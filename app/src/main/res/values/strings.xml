@@ -37,6 +37,8 @@
     <string name="edit_script">Edit Script</string>
     <string name="delete_script">Delete Script</string>
 
+    <string name="play_script_category" translatable="false">play_script_category</string>
+
     <!--Settings-->
 
     <string name="pref_title_background">Background Theme</string>
