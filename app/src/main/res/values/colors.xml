@@ -15,4 +15,6 @@
     <color name="fab_icon_white">#FFFFFF</color>
 
     <color name="button_text_color">#ffffff</color>
+
+    <color name="progress_overlay_background">#000000</color>
 </resources>

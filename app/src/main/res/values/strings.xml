@@ -7,6 +7,7 @@
     <!-- Edit Script Screen-->
     <string name="edit_text_script_title_hint">Type the script\'\s title here</string>
     <string name="edit_text_script_content_hint">Type the script\'\s content here</string>
+    <string name="edit_blank_error">Please, add a title and a text before saving your script</string>
 
     <!--Login Screem -->
     <string name="edit_text_login_user_name">E-mail</string>
@@ -34,6 +35,7 @@
 
     <string name="play_script">Play Script</string>
     <string name="edit_script">Edit Script</string>
+    <string name="delete_script">Delete Script</string>
 
     <!--Settings-->
 

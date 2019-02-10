@@ -20,12 +20,19 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.gziolle.promptastic.R;
 import com.gziolle.promptastic.data.model.Script;
 import com.gziolle.promptastic.firebase.FirebaseAuthManager;
+import com.gziolle.promptastic.util.Constants;
+import com.gziolle.promptastic.util.Utils;
+
+import static com.gziolle.promptastic.util.Constants.PATH_SCRIPTS;
+import static com.gziolle.promptastic.util.Constants.PATH_USERS;
 
 public class MainActivity extends AppCompatActivity implements ScriptListFragment.OnScriptSelectedListener, ScriptListFragment.OnAddScriptListener,
-    ScriptDetailsFragment.OnEditScriptListener, ScriptEditFragment.OnScriptSavedListener{
+    ScriptDetailsFragment.OnScriptListener, ScriptEditFragment.OnScriptSavedListener{
 
     @BindView(R.id.drawer_layout)
     DrawerLayout mDrawerLayout;
@@ -168,6 +175,11 @@ public class MainActivity extends AppCompatActivity implements ScriptListFragmen
         transaction.addToBackStack(null);
 
         transaction.commit();
+    }
+
+    @Override
+    public void onDeleteScript() {
+        getSupportFragmentManager().popBackStack();
     }
 
     @Override

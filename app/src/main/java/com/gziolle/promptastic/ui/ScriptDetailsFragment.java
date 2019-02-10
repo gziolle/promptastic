@@ -13,12 +13,23 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.getbase.floatingactionbutton.FloatingActionsMenu;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.gziolle.promptastic.R;
+import com.gziolle.promptastic.firebase.FirebaseAuthManager;
 import com.gziolle.promptastic.util.Constants;
+import com.gziolle.promptastic.util.Utils;
 
 import static android.app.Activity.RESULT_OK;
+import static com.gziolle.promptastic.util.Constants.PATH_SCRIPTS;
+import static com.gziolle.promptastic.util.Constants.PATH_USERS;
 
 
 public class ScriptDetailsFragment extends Fragment {
@@ -29,14 +40,21 @@ public class ScriptDetailsFragment extends Fragment {
     @BindView(R.id.tv_script_content)
     TextView mContentTextView;
 
-    public OnEditScriptListener mListener;
+    @BindView(R.id.floating_menu)
+    FloatingActionsMenu mFloatingMenu;
+
+    @BindView(R.id.fl_progress_holder)
+    FrameLayout mProgressHolder;
+
+    private OnScriptListener mEditListener;
 
     private String mTitle;
     private String mContent;
     private String mKey;
 
-    public interface OnEditScriptListener{
+    public interface OnScriptListener{
         void onEditScriptSelected(Bundle bundle);
+        void onDeleteScript();
     }
 
     public ScriptDetailsFragment() {
@@ -66,15 +84,6 @@ public class ScriptDetailsFragment extends Fragment {
         return rootView;
     }
 
-    @OnClick(R.id.fab_edit_script)
-    public void editScript(){
-        Bundle bundle = new Bundle();
-        bundle.putString(Constants.KEY_TITLE, mTitle);
-        bundle.putString(Constants.KEY_CONTENT, mContent);
-        bundle.putString(Constants.KEY_DATABASE_REF, mKey);
-        mListener.onEditScriptSelected(bundle);
-    }
-
     @Override
     public void onResume() {
         super.onResume();
@@ -82,14 +91,48 @@ public class ScriptDetailsFragment extends Fragment {
         mContentTextView.setText(mContent);
     }
 
+    @OnClick(R.id.fab_edit_script)
+    public void editScript(){
+        mFloatingMenu.collapse();
+        Bundle bundle = new Bundle();
+        bundle.putString(Constants.KEY_TITLE, mTitle);
+        bundle.putString(Constants.KEY_CONTENT, mContent);
+        bundle.putString(Constants.KEY_DATABASE_REF, mKey);
+        mEditListener.onEditScriptSelected(bundle);
+    }
+
     @OnClick(R.id.fab_play_script)
     public void playScript(){
+        mFloatingMenu.collapse();
         Bundle bundle = new Bundle();
         bundle.putString(Constants.KEY_CONTENT, mContent);
 
         Intent intent = new Intent(getActivity(), PlayScriptActivity.class);
         intent.putExtras(bundle);
         startActivity(intent);
+    }
+
+    @OnClick(R.id.fab_delete_script)
+    public void deleteScript(){
+        mFloatingMenu.collapse();
+        mProgressHolder.setVisibility(View.VISIBLE);
+        final FirebaseDatabase database = Utils.getFirebaseDatabase();
+        DatabaseReference ref = database.getReference();
+        DatabaseReference scriptsRef = ref.child(PATH_USERS
+                + FirebaseAuthManager.getInstance().getFirebaseUserId()
+                + PATH_SCRIPTS + "/" + mKey);
+
+        scriptsRef.removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(Task<Void> task) {
+                mProgressHolder.setVisibility(View.GONE);
+                if(task.isSuccessful()){
+                    mEditListener.onDeleteScript();
+                } else {
+                    Toast.makeText(getActivity(), "Deu ruim", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 
     @Override
@@ -103,9 +146,9 @@ public class ScriptDetailsFragment extends Fragment {
         }
     }
 
-    public void setOnEditScriptListener(OnEditScriptListener listener){
+    public void setOnEditScriptListener(OnScriptListener listener){
         if(listener != null){
-            mListener = listener;
+            mEditListener = listener;
         }
     }
 
