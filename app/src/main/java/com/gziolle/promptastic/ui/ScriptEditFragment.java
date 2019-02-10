@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -90,17 +91,26 @@ public class ScriptEditFragment extends Fragment {
                 mScriptContent.getText().toString()
         );
 
-        if(mScriptKey == null){
-            scriptsRef = ref.child(PATH_USERS + FirebaseAuthManager.getInstance().getFirebaseUserId() + PATH_SCRIPTS);
-            scriptsRef.push().setValue(script);
+        if(TextUtils.isEmpty(script.getTitle()) || TextUtils.isEmpty(script.getContent())){
+            Toast.makeText(getActivity(), getString(R.string.edit_blank_error), Toast.LENGTH_SHORT).show();
         } else{
-            scriptsRef = ref.child(PATH_USERS + FirebaseAuthManager.getInstance().getFirebaseUserId() + PATH_SCRIPTS + "/" + mScriptKey);
-            scriptsRef.setValue(script).addOnCompleteListener(new OnCompleteListener<Void>() {
-                @Override
-                public void onComplete(Task<Void> task) {
-                    mListener.onScriptSaved(script);
-                }
-            });
+            if(mScriptKey == null){
+                scriptsRef = ref.child(PATH_USERS + FirebaseAuthManager.getInstance().getFirebaseUserId() + PATH_SCRIPTS);
+                scriptsRef.push().setValue(script).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(Task<Void> task) {
+                        mListener.onScriptSaved(script);
+                    }
+                });
+            } else{
+                scriptsRef = ref.child(PATH_USERS + FirebaseAuthManager.getInstance().getFirebaseUserId() + PATH_SCRIPTS + "/" + mScriptKey);
+                scriptsRef.setValue(script).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(Task<Void> task) {
+                        mListener.onScriptSaved(script);
+                    }
+                });
+            }
         }
     }
 
