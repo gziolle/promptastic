@@ -17,4 +17,10 @@
     <color name="button_text_color">#ffffff</color>
 
     <color name="progress_overlay_background">#000000</color>
+
+    <color name="play_script_text_color_dark">#fdfdfd</color>
+    <color name="play_script_background_color_dark">#111111</color>
+
+    <color name="play_script_text_color_light">#111111</color>
+    <color name="play_script_background_color_light">#fdfdfd</color>
 </resources>

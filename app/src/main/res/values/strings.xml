@@ -74,29 +74,29 @@
     </string-array>
 
     <string-array name="text_speed_list_preference_entry_values">
-        <item>-2</item>
-        <item>1</item>
-        <item>0</item>
-        <item>1</item>
-        <item>2</item>
+        <item>200000</item>
+        <item>150000</item>
+        <item>100000</item>
+        <item>75000</item>
+        <item>50000</item>
     </string-array>
 
 
-    <string name="pref_title_text_color">Text Color</string>
+    <string name="pref_title_text_color">Text Size</string>
 
-    <string-array name="text_color_list_preference_entries">
-        <item>White</item>
-        <item>Red</item>
-        <item>Black</item>
-        <item>Blue</item>
-        <item>Yellow</item>
+    <string-array name="text_size_list_preference_entries">
+        <item>Very Small</item>
+        <item>Small</item>
+        <item>Normal</item>
+        <item>Big</item>
+        <item>Very Big</item>
     </string-array>
 
-    <string-array name="text_color_list_preference_entry_values">
-        <item>white</item>
-        <item>red</item>
-        <item>black</item>
-        <item>blue</item>
-        <item>yellow</item>
+    <string-array name="text_size_list_preference_entry_values">
+        <item>18.0</item>
+        <item>24.0</item>
+        <item>32.0</item>
+        <item>48.0</item>
+        <item>54.0</item>
     </string-array>
 </resources>

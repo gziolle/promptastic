@@ -2,6 +2,8 @@ package com.gziolle.promptastic.ui;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
+import androidx.preference.PreferenceManager;
 import be.rijckaert.tim.animatedvector.FloatingMusicActionButton;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -10,6 +12,7 @@ import butterknife.OnClick;
 import android.animation.Animator;
 import android.animation.ObjectAnimator;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
@@ -22,6 +25,8 @@ import android.widget.TextView;
 
 import com.gziolle.promptastic.R;
 import com.gziolle.promptastic.util.Constants;
+
+import java.util.Objects;
 
 public class PlayScriptActivity extends AppCompatActivity {
 
@@ -43,6 +48,8 @@ public class PlayScriptActivity extends AppCompatActivity {
     ObjectAnimator mAnimator;
     CountDownTimer mCountDown;
 
+    int mTextDuration;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,7 +62,9 @@ public class PlayScriptActivity extends AppCompatActivity {
         if(bundle != null){
             String text = bundle.getString(Constants.KEY_CONTENT);
             mPlayContainer.setText(text);
-            mPlayContainer.setTextSize(Constants.PLAY_SCRIPT_DEFAULT_TEXT_SIZE);
+            setupScreen();
+        } else{
+            finish();
         }
     }
 
@@ -96,7 +105,7 @@ public class PlayScriptActivity extends AppCompatActivity {
         Handler handler = new Handler();
         handler.postDelayed(() -> {
             mAnimator = ObjectAnimator.ofInt(mScrollView, "scrollY",0, mPlayContainer.getBottom());
-            mAnimator.setDuration(Constants.PLAY_SCRIPT_VERY_SLOW_DURATION);
+            mAnimator.setDuration(mTextDuration);
             mAnimator.addListener(new Animator.AnimatorListener() {
                 @Override
                 public void onAnimationStart(Animator animator) {}
@@ -153,5 +162,24 @@ public class PlayScriptActivity extends AppCompatActivity {
     public void stopPlaying(){
         mAnimator.pause();
         finishPlaying();
+    }
+
+    private void setupScreen(){
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+
+        String theme = prefs.getString("play_theme", Constants.PLAY_SCRIPT_THEME_LIGHT);
+
+        if(Constants.PLAY_SCRIPT_THEME_LIGHT.equals(theme)){
+            mScrollView.setBackgroundColor(ContextCompat.getColor(this,R.color.play_script_background_color_light));
+            mPlayContainer.setTextColor(ContextCompat.getColor(this, R.color.play_script_text_color_light));
+        }else if(Constants.PLAY_SCRIPT_THEME_DARK.equals(theme)){
+            mScrollView.setBackgroundColor(ContextCompat.getColor(this,R.color.play_script_background_color_dark));
+            mPlayContainer.setTextColor(ContextCompat.getColor(this, R.color.play_script_text_color_dark));
+        }
+
+        mTextDuration = Integer.parseInt(Objects.requireNonNull(prefs.getString("text_speed", Constants.PLAY_SCRIPT_DEFAULT_DURATION)));
+
+        float textSize = Float.parseFloat(Objects.requireNonNull(prefs.getString("text_size", Constants.PLAY_SCRIPT_DEFAULT_TEXT_SIZE)));
+        mPlayContainer.setTextSize(textSize);
     }
 }
