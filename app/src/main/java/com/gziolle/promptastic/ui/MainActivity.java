@@ -81,6 +81,10 @@ public class MainActivity extends AppCompatActivity implements ScriptListFragmen
                     intent = new Intent(MainActivity.this, SettingsActivity.class);
                     startActivity(intent);
                     break;
+                case R.id.about:
+                    intent = new Intent(MainActivity.this, AboutActivity.class);
+                    startActivity(intent);
+                    break;
                 case R.id.sign_out:
                     FirebaseAuthManager.getInstance().signOut();
                     intent = new Intent(MainActivity.this, LoginActivity.class);

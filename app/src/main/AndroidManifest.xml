@@ -11,8 +11,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".ui.MainActivity"
-            android:hardwareAccelerated="true"/>
+        <activity
+            android:name=".ui.MainActivity"
+            android:hardwareAccelerated="true" />
         <activity
             android:name=".ui.LoginActivity"
             android:theme="@style/AppTheme.Login" />
@@ -38,8 +39,9 @@
 
         <activity
             android:name=".ui.SettingsActivity"
-            android:label="@string/title_activity_settings"
-            android:hardwareAccelerated="true"/>
+            android:hardwareAccelerated="true"
+            android:label="@string/title_activity_settings" />
+        <activity android:name=".ui.AboutActivity"></activity>
     </application>
 
 </manifest>

@@ -38,4 +38,6 @@
 
     <dimen name="pause_stop_margin">8dp</dimen>
 
+    <dimen name="about_name_text_size">36sp</dimen>
+
 </resources>
