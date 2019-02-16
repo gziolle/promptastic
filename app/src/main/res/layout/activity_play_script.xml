@@ -10,6 +10,9 @@
         android:id="@+id/sv_play_scroll_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:clickable="false"
+        android:focusable="false"
+        android:scrollbars="none"
         android:visibility="gone">
 
         <TextView
@@ -25,15 +28,32 @@
         android:layout_gravity="center"
         android:textSize="@dimen/play_script_countdown_text_size"/>
 
-    <be.rijckaert.tim.animatedvector.FloatingMusicActionButton
-        android:id="@+id/fab_pause_script"
+    <LinearLayout
+        android:id="@+id/fab_area"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:orientation="vertical"
         android:layout_gravity="bottom|end"
-        android:layout_marginBottom="@dimen/fab_margin_bottom"
-        android:layout_marginEnd="@dimen/fab_margin_end"
-        android:visibility="invisible"
-        app:fab_size="normal"
-        app:mode="pauseToPlay"/>
+        android:visibility="gone">
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_stop_script"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_stop"
+            android:layout_marginBottom="@dimen/pause_stop_margin"
+            app:fab_size="normal"/>
+
+        <be.rijckaert.tim.animatedvector.FloatingMusicActionButton
+            android:id="@+id/fab_pause_script"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_marginBottom="@dimen/fab_margin_bottom"
+            android:layout_marginEnd="@dimen/fab_margin_end"
+            app:fab_size="normal"
+            app:mode="pauseToPlay"/>
+
+    </LinearLayout>
 
 </FrameLayout>

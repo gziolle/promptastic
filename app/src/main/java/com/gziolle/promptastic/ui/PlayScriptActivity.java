@@ -1,5 +1,6 @@
 package com.gziolle.promptastic.ui;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import be.rijckaert.tim.animatedvector.FloatingMusicActionButton;
 import butterknife.BindView;
@@ -8,6 +9,7 @@ import butterknife.OnClick;
 
 import android.animation.Animator;
 import android.animation.ObjectAnimator;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -15,6 +17,7 @@ import android.os.Handler;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -34,6 +37,9 @@ public class PlayScriptActivity extends AppCompatActivity {
 
     @BindView(R.id.fab_pause_script)
     FloatingMusicActionButton mPauseButton;
+
+    @BindView(R.id.fab_area)
+    LinearLayout mFabArea;
 
     ObjectAnimator mAnimator;
     CountDownTimer mCountDown;
@@ -57,6 +63,10 @@ public class PlayScriptActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        setupPlay();
+    }
+
+    private void setupPlay(){
         Animation fadeOutAnimation = AnimationUtils.loadAnimation(this, android.R.anim.fade_out);
         fadeOutAnimation.setDuration(Constants.COUNTDOWN_TIME_INTERVAL);
 
@@ -76,7 +86,7 @@ public class PlayScriptActivity extends AppCompatActivity {
                 mCountDownTextView.setVisibility(View.GONE);
                 mScrollView.startAnimation(fadeInAnimation);
                 mScrollView.setVisibility(View.VISIBLE);
-                mPauseButton.setVisibility(View.VISIBLE);
+                mFabArea.setVisibility(View.VISIBLE);
                 playScript();
             }
         };
@@ -107,7 +117,20 @@ public class PlayScriptActivity extends AppCompatActivity {
         }, Constants.COUNTDOWN_TOTAL_TIME);
     }
 
-    private void finishPlaying(){ finish(); }
+    private void finishPlaying(){
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this)
+                .setMessage(getString(R.string.play_script_dialog_message))
+                .setPositiveButton(getString(R.string.play_script_dialog_ok), (dialog, which) -> {
+                    mScrollView.scrollTo(0, 0);
+                    mScrollView.setVisibility(View.GONE);
+                    mFabArea.setVisibility(View.GONE);
+                    mCountDownTextView.setVisibility(View.VISIBLE);
+                    setupPlay();
+                })
+                .setNegativeButton(getString(R.string.play_script_dialog_cancel), (dialog, which) -> finish());
+        AlertDialog dialog = dialogBuilder.create();
+        dialog.show();
+    }
 
     @Override
     protected void onPause() {
@@ -125,5 +148,11 @@ public class PlayScriptActivity extends AppCompatActivity {
                 mAnimator.resume();
             }
         }
+    }
+
+    @OnClick(R.id.fab_stop_script)
+    public void stopPlaying(){
+        mAnimator.pause();
+        finishPlaying();
     }
 }

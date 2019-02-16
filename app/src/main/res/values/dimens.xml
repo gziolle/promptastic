@@ -36,4 +36,6 @@
 
     <dimen name="toolbar_elevation">4dp</dimen>
 
+    <dimen name="pause_stop_margin">8dp</dimen>
+
 </resources>
