@@ -35,6 +35,7 @@ dependencies {
     implementation 'com.getbase:floatingactionbutton:1.10.1'
     implementation 'de.hdodenhof:circleimageview:3.0.0'
     implementation 'androidx.preference:preference:1.0.0'
+    implementation 'com.github.timrijckaert:FloatingMusicActionButton:v2.0.4'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'

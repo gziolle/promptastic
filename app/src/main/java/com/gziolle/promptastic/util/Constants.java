@@ -14,5 +14,11 @@ public class Constants {
     public static int COUNTDOWN_TOTAL_TIME = 3000;
     public static int COUNTDOWN_TIME_INTERVAL = 1000;
     public static float PLAY_SCRIPT_DEFAULT_TEXT_SIZE = 40.0f;
-    public static int PLAY_SCRIPT_DEFAULT_DURATION = 50000;
+
+    public static int PLAY_SCRIPT_VERY_SLOW_DURATION = 150000;
+    public static int PLAY_SCRIPT_SLOW_DURATION = 112500;
+    public static int PLAY_SCRIPT_DEFAULT_DURATION = 75000;
+    public static int PLAY_SCRIPT_FAST_DURATION = 50000;
+    public static int PLAY_SCRIPT_VERY_FAST_DURATION = 35000;
+
 }

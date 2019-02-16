@@ -37,6 +37,10 @@
     <string name="edit_script">Edit Script</string>
     <string name="delete_script">Delete Script</string>
 
+    <string name="play_script_dialog_message">Would you like to play the script again?</string>
+    <string name="play_script_dialog_ok">OK</string>
+    <string name="play_script_dialog_cancel">Cancel</string>
+
     <string name="play_script_category" translatable="false">play_script_category</string>
 
     <!--Settings-->
@@ -92,5 +96,4 @@
         <item>blue</item>
         <item>yellow</item>
     </string-array>
-
 </resources>

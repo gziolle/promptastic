@@ -1,8 +1,10 @@
 package com.gziolle.promptastic.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
+import be.rijckaert.tim.animatedvector.FloatingMusicActionButton;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 import android.animation.Animator;
 import android.animation.ObjectAnimator;
@@ -30,6 +32,9 @@ public class PlayScriptActivity extends AppCompatActivity {
     @BindView(R.id.tv_play_script_countdown)
     TextView mCountDownTextView;
 
+    @BindView(R.id.fab_pause_script)
+    FloatingMusicActionButton mPauseButton;
+
     ObjectAnimator mAnimator;
     CountDownTimer mCountDown;
 
@@ -55,6 +60,9 @@ public class PlayScriptActivity extends AppCompatActivity {
         Animation fadeOutAnimation = AnimationUtils.loadAnimation(this, android.R.anim.fade_out);
         fadeOutAnimation.setDuration(Constants.COUNTDOWN_TIME_INTERVAL);
 
+        Animation fadeInAnimation = AnimationUtils.loadAnimation(this, android.R.anim.fade_in);
+        fadeInAnimation.setDuration(Constants.COUNTDOWN_TIME_INTERVAL);
+
         mCountDown = new CountDownTimer(Constants.COUNTDOWN_TOTAL_TIME, Constants.COUNTDOWN_TIME_INTERVAL) {
             @Override
             public void onTick(long millisUntilFinished) {
@@ -66,7 +74,9 @@ public class PlayScriptActivity extends AppCompatActivity {
             @Override
             public void onFinish() {
                 mCountDownTextView.setVisibility(View.GONE);
+                mScrollView.startAnimation(fadeInAnimation);
                 mScrollView.setVisibility(View.VISIBLE);
+                mPauseButton.setVisibility(View.VISIBLE);
                 playScript();
             }
         };
@@ -75,39 +85,45 @@ public class PlayScriptActivity extends AppCompatActivity {
 
     private void playScript(){
         Handler handler = new Handler();
+        handler.postDelayed(() -> {
+            mAnimator = ObjectAnimator.ofInt(mScrollView, "scrollY",0, mPlayContainer.getBottom());
+            mAnimator.setDuration(Constants.PLAY_SCRIPT_VERY_SLOW_DURATION);
+            mAnimator.addListener(new Animator.AnimatorListener() {
+                @Override
+                public void onAnimationStart(Animator animator) {}
 
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                mAnimator = ObjectAnimator.ofInt(mScrollView, "scrollY",0, mPlayContainer.getBottom());
-                mAnimator.setDuration(Constants.PLAY_SCRIPT_DEFAULT_DURATION);
-                mAnimator.addListener(new Animator.AnimatorListener() {
-                    @Override
-                    public void onAnimationStart(Animator animator) {}
+                @Override
+                public void onAnimationEnd(Animator animator) {
+                    finishPlaying();
+                }
 
-                    @Override
-                    public void onAnimationEnd(Animator animator) {
-                        finishPlaying();
-                    }
+                @Override
+                public void onAnimationCancel(Animator animator) {}
 
-                    @Override
-                    public void onAnimationCancel(Animator animator) {}
-
-                    @Override
-                    public void onAnimationRepeat(Animator animator) {}
-                });
-                mAnimator.start();
-            }
+                @Override
+                public void onAnimationRepeat(Animator animator) {}
+            });
+            mAnimator.start();
         }, Constants.COUNTDOWN_TOTAL_TIME);
     }
 
-    private void finishPlaying(){
-        finish();
-    }
+    private void finishPlaying(){ finish(); }
 
     @Override
     protected void onPause() {
         super.onPause();
         mCountDown.cancel();
+    }
+
+    @OnClick(R.id.fab_pause_script)
+    public void pauseScript(){
+        mPauseButton.playAnimation();
+        if(mAnimator != null){
+            if(!mAnimator.isPaused()){
+                mAnimator.pause();
+            } else{
+                mAnimator.resume();
+            }
+        }
     }
 }
