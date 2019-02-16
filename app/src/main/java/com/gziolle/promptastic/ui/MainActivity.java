@@ -7,6 +7,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -20,16 +21,9 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.google.android.material.navigation.NavigationView;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.gziolle.promptastic.R;
 import com.gziolle.promptastic.data.model.Script;
 import com.gziolle.promptastic.firebase.FirebaseAuthManager;
-import com.gziolle.promptastic.util.Constants;
-import com.gziolle.promptastic.util.Utils;
-
-import static com.gziolle.promptastic.util.Constants.PATH_SCRIPTS;
-import static com.gziolle.promptastic.util.Constants.PATH_USERS;
 
 public class MainActivity extends AppCompatActivity implements ScriptListFragment.OnScriptSelectedListener, ScriptListFragment.OnAddScriptListener,
     ScriptDetailsFragment.OnScriptListener, ScriptEditFragment.OnScriptSavedListener{
@@ -63,29 +57,38 @@ public class MainActivity extends AppCompatActivity implements ScriptListFragmen
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
 
-        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.open, R.string.close);
+        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, mToolbar, R.string.open, R.string.close);
         mDrawerLayout.addDrawerListener(mDrawerToggle);
         mDrawerToggle.syncState();
 
-        mDrawerList.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                Intent intent;
-                int id = item.getItemId();
-                switch(id){
-                    case R.id.settings:
-                        intent = new Intent(MainActivity.this, SettingsActivity.class);
-                        startActivity(intent);
-                        break;
-                    case R.id.sign_out:
-                        FirebaseAuthManager.getInstance().signOut();
-                        intent = new Intent(MainActivity.this, LoginActivity.class);
-                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        startActivity(intent);
-                        finish();
-                }
-                return false;
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.addOnBackStackChangedListener(() -> {
+            if (fragmentManager.getBackStackEntryCount() > 0) {
+                setToolbarAsUp(v -> getSupportFragmentManager().popBackStack());
+            } else {
+                getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+                mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, mToolbar, R.string.open, R.string.close);
+                mDrawerLayout.addDrawerListener(mDrawerToggle);
+                mDrawerToggle.syncState();
             }
+        });
+
+        mDrawerList.setNavigationItemSelectedListener(item -> {
+            Intent intent;
+            int id = item.getItemId();
+            switch(id){
+                case R.id.settings:
+                    intent = new Intent(MainActivity.this, SettingsActivity.class);
+                    startActivity(intent);
+                    break;
+                case R.id.sign_out:
+                    FirebaseAuthManager.getInstance().signOut();
+                    intent = new Intent(MainActivity.this, LoginActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(intent);
+                    finish();
+            }
+            return false;
         });
 
         if(mViewContainer != null){
@@ -112,6 +115,11 @@ public class MainActivity extends AppCompatActivity implements ScriptListFragmen
         if(mDrawerToggle.onOptionsItemSelected(item)){
             return true;
         }
+        switch(item.getItemId()){
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+        }
         return super.onOptionsItemSelected(item);
     }
 
@@ -133,7 +141,6 @@ public class MainActivity extends AppCompatActivity implements ScriptListFragmen
     @Override
     protected void onResume() {
         super.onResume();
-
         if(mDrawerLayout.isDrawerOpen(mDrawerList)){
             mDrawerLayout.closeDrawer(GravityCompat.START, false);
         }
@@ -189,5 +196,13 @@ public class MainActivity extends AppCompatActivity implements ScriptListFragmen
             detailsFragment.setText(script.getTitle(), script.getContent());
         }
         getSupportFragmentManager().popBackStack();
+    }
+
+    protected void setToolbarAsUp(View.OnClickListener clickListener) {
+        // Initialise the toolbar
+        if (mToolbar != null) {
+            mToolbar.setNavigationIcon(R.drawable.ic_arrow_back_black);
+            mToolbar.setNavigationOnClickListener(clickListener);
+        }
     }
 }

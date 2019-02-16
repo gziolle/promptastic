@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.fragment.app.Fragment;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -11,6 +12,7 @@ import butterknife.OnClick;
 
 import android.text.TextUtils;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
@@ -26,6 +28,8 @@ import com.gziolle.promptastic.R;
 import com.gziolle.promptastic.firebase.FirebaseAuthManager;
 import com.gziolle.promptastic.util.Constants;
 import com.gziolle.promptastic.util.Utils;
+
+import java.util.Objects;
 
 import static android.app.Activity.RESULT_OK;
 import static com.gziolle.promptastic.util.Constants.PATH_SCRIPTS;
@@ -64,6 +68,7 @@ public class ScriptDetailsFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
     }
 
     @Override
@@ -152,7 +157,7 @@ public class ScriptDetailsFragment extends Fragment {
         }
     }
 
-    public void setText(String title, String content){
+    void setText(String title, String content){
         mTitle = title;
         mContent = content;
     }
