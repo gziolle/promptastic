@@ -148,6 +148,10 @@ public class MainActivity extends AppCompatActivity implements ScriptListFragmen
         if(mDrawerLayout.isDrawerOpen(mDrawerList)){
             mDrawerLayout.closeDrawer(GravityCompat.START, false);
         }
+
+        if(getSupportFragmentManager().getBackStackEntryCount() > 0){
+            setToolbarAsUp(v -> getSupportFragmentManager().popBackStack());
+        }
     }
 
     @Override
