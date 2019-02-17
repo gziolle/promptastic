@@ -46,6 +46,9 @@
 
     <string name="open_source_licenses">Open Source Licenses</string>
 
+    <string name="script_saved">Script saved!</string>
+    <string name="script_deleted">Script deleted!</string>
+
     <!--Settings-->
 
     <string name="pref_title_background">Background Theme</string>
@@ -80,7 +83,6 @@
         <item>75000</item>
         <item>50000</item>
     </string-array>
-
 
     <string name="pref_title_text_color">Text Size</string>
 

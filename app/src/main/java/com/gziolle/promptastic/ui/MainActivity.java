@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
@@ -21,6 +22,7 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.snackbar.Snackbar;
 import com.gziolle.promptastic.R;
 import com.gziolle.promptastic.data.model.Script;
 import com.gziolle.promptastic.firebase.FirebaseAuthManager;
@@ -39,6 +41,9 @@ public class MainActivity extends AppCompatActivity implements ScriptListFragmen
 
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
+
+    @BindView(R.id.coordinator_layout)
+    CoordinatorLayout mCoordinatorLayout;
 
     ActionBarDrawerToggle mDrawerToggle;
     TextView mDisplayNameTextView;
@@ -195,6 +200,8 @@ public class MainActivity extends AppCompatActivity implements ScriptListFragmen
     @Override
     public void onDeleteScript() {
         getSupportFragmentManager().popBackStack();
+        Snackbar snackbar = Snackbar.make(mCoordinatorLayout, getString(R.string.script_deleted), Snackbar.LENGTH_SHORT);
+        snackbar.show();
     }
 
     @Override
@@ -204,6 +211,8 @@ public class MainActivity extends AppCompatActivity implements ScriptListFragmen
             detailsFragment.setText(script.getTitle(), script.getContent());
         }
         getSupportFragmentManager().popBackStack();
+        Snackbar snackbar = Snackbar.make(mCoordinatorLayout, getString(R.string.script_saved), Snackbar.LENGTH_SHORT);
+        snackbar.show();
     }
 
     protected void setToolbarAsUp(View.OnClickListener clickListener) {
