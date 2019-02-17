@@ -160,7 +160,9 @@ public class PlayScriptActivity extends AppCompatActivity {
 
     @OnClick(R.id.fab_stop_script)
     public void stopPlaying(){
-        mAnimator.pause();
+        if(mAnimator != null && !mAnimator.isPaused()){
+            mAnimator.pause();
+        }
         finishPlaying();
     }
 
