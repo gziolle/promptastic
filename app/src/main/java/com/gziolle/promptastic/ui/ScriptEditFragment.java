@@ -1,5 +1,6 @@
 package com.gziolle.promptastic.ui;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -12,6 +13,7 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -82,6 +84,13 @@ public class ScriptEditFragment extends Fragment {
 
     @OnClick(R.id.fab_save_script)
     public void saveScript(View view) {
+        InputMethodManager imm = (InputMethodManager) getActivity()
+                .getSystemService(Context.INPUT_METHOD_SERVICE);
+
+        if(imm != null){
+            imm.hideSoftInputFromWindow(getView().getWindowToken(), 0);
+        }
+
         final FirebaseDatabase database = Utils.getFirebaseDatabase();
         DatabaseReference ref = database.getReference();
         DatabaseReference scriptsRef;
