@@ -82,6 +82,8 @@ public class MainActivity extends AppCompatActivity implements ScriptListFragmen
             Intent intent;
             int id = item.getItemId();
             switch(id){
+                case R.id.scripts:
+                    mDrawerLayout.closeDrawer(GravityCompat.START, false);
                 case R.id.settings:
                     intent = new Intent(MainActivity.this, SettingsActivity.class);
                     startActivity(intent);
@@ -216,7 +218,6 @@ public class MainActivity extends AppCompatActivity implements ScriptListFragmen
     }
 
     protected void setToolbarAsUp(View.OnClickListener clickListener) {
-        // Initialise the toolbar
         if (mToolbar != null) {
             mToolbar.setNavigationIcon(R.drawable.ic_arrow_back_black);
             mToolbar.setNavigationOnClickListener(clickListener);

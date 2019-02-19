@@ -48,6 +48,9 @@ public class PlayScriptActivity extends AppCompatActivity {
     ObjectAnimator mAnimator;
     CountDownTimer mCountDown;
 
+    Handler mHandler;
+    AlertDialog mAlertDialog;
+
     int mTextDuration;
 
     @Override
@@ -102,8 +105,8 @@ public class PlayScriptActivity extends AppCompatActivity {
     }
 
     private void playScript(){
-        Handler handler = new Handler();
-        handler.postDelayed(() -> {
+        mHandler = new Handler();
+        mHandler.postDelayed(() -> {
             mAnimator = ObjectAnimator.ofInt(mScrollView, "scrollY",0, mPlayContainer.getBottom());
             mAnimator.setDuration(mTextDuration);
             mAnimator.addListener(new Animator.AnimatorListener() {
@@ -116,7 +119,7 @@ public class PlayScriptActivity extends AppCompatActivity {
                 }
 
                 @Override
-                public void onAnimationCancel(Animator animator) {}
+                public void onAnimationCancel(Animator animator) { }
 
                 @Override
                 public void onAnimationRepeat(Animator animator) {}
@@ -126,18 +129,24 @@ public class PlayScriptActivity extends AppCompatActivity {
     }
 
     private void finishPlaying(){
-        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this)
-                .setMessage(getString(R.string.play_script_dialog_message))
-                .setPositiveButton(getString(R.string.play_script_dialog_ok), (dialog, which) -> {
-                    mScrollView.scrollTo(0, 0);
-                    mScrollView.setVisibility(View.GONE);
-                    mFabArea.setVisibility(View.GONE);
-                    mCountDownTextView.setVisibility(View.VISIBLE);
-                    setupPlay();
-                })
-                .setNegativeButton(getString(R.string.play_script_dialog_cancel), (dialog, which) -> finish());
-        AlertDialog dialog = dialogBuilder.create();
-        dialog.show();
+        if((mAlertDialog == null) || (!mAlertDialog.isShowing())){
+            AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this)
+                    .setMessage(getString(R.string.play_script_dialog_message))
+                    .setPositiveButton(getString(R.string.play_script_dialog_ok), (dialog, which) -> {
+                        mHandler.removeCallbacksAndMessages(null);
+                        if(mAnimator != null){
+                            mAnimator.cancel();
+                        }
+                        mScrollView.scrollTo(0, 0);
+                        mScrollView.setVisibility(View.GONE);
+                        mFabArea.setVisibility(View.GONE);
+                        mCountDownTextView.setVisibility(View.VISIBLE);
+                        setupPlay();
+                    })
+                    .setNegativeButton(getString(R.string.play_script_dialog_cancel), (dialog, which) -> finish());
+            mAlertDialog = dialogBuilder.create();
+            mAlertDialog.show();
+        }
     }
 
     @Override
