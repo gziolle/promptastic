@@ -89,6 +89,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/login_button_top_margin"
         android:background="@drawable/button_background"
+        android:fontFamily="@font/cabin_sketch"
         android:text="@string/signup_button_text"
         android:layout_marginStart="@dimen/login_margin_start"
         android:layout_marginEnd="@dimen/login_margin_end"
