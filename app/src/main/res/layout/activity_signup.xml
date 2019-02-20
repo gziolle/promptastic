@@ -22,6 +22,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/cabin_sketch"
             android:gravity="center"
             android:text="@string/signup_good"
             android:textSize="32sp" />
@@ -29,6 +30,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/cabin_sketch"
             android:gravity="center"
             android:text="@string/signup_description"
             android:textSize="16sp" />
@@ -42,6 +44,7 @@
         android:layout_marginStart="@dimen/login_margin_start"
         android:layout_marginEnd="@dimen/login_margin_end"
         android:inputType="text"
+        android:fontFamily="@font/cabin_sketch"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/ll_signup_congrats"
@@ -57,6 +60,7 @@
         android:inputType="textAutoComplete"
         android:layout_marginStart="@dimen/login_margin_start"
         android:layout_marginEnd="@dimen/login_margin_end"
+        android:fontFamily="@font/cabin_sketch"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/et_signup_display_name"
@@ -72,6 +76,7 @@
         android:inputType="textPassword"
         android:layout_marginStart="@dimen/login_margin_start"
         android:layout_marginEnd="@dimen/login_margin_end"
+        android:fontFamily="@font/cabin_sketch"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/et_signup_user"

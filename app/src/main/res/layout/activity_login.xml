@@ -30,6 +30,7 @@
         android:layout_marginTop="32dp"
         android:layout_marginStart="@dimen/login_margin_start"
         android:layout_marginEnd="@dimen/login_margin_end"
+        android:fontFamily="@font/cabin_sketch"
         app:layout_constraintTop_toBottomOf="@id/iv_login_logo"
         app:layout_constraintBottom_toTopOf="@id/et_login_password"
         app:layout_constraintStart_toStartOf="parent"
@@ -44,6 +45,7 @@
         android:layout_marginStart="@dimen/login_margin_start"
         android:layout_marginEnd="@dimen/login_margin_end"
         android:hint="@string/edit_text_login_password"
+        android:fontFamily="@font/cabin_sketch"
         android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -61,6 +63,7 @@
         android:layout_marginTop="@dimen/login_button_top_margin"
         android:background="@drawable/button_background"
         android:textColor="@color/button_text_color"
+        android:fontFamily="@font/cabin_sketch"
         app:layout_constraintTop_toBottomOf="@id/et_login_password"
         app:layout_constraintBottom_toTopOf="@id/ll_signup"
         app:layout_constraintStart_toStartOf="parent"
@@ -80,6 +83,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/cabin_sketch"
             android:text="@string/login_new_user"
             android:layout_marginEnd="@dimen/login_sign_up_end_margin"/>
 
@@ -87,6 +91,7 @@
             android:id="@+id/tv_signup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/cabin_sketch"
             android:focusable="true"
             android:clickable="true"
             android:autoLink="web"

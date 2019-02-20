@@ -13,21 +13,23 @@
         android:orientation="vertical"
         android:layout_weight="4.5"
         android:gravity="center_vertical"
-        android:padding="16dp">
+        android:padding="@dimen/signup_left_layout_padding_end">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
+            android:fontFamily="@font/cabin_sketch"
             android:text="@string/signup_good"
-            android:textSize="32sp" />
+            android:textSize="@dimen/signup_good_text_size" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
+            android:fontFamily="@font/cabin_sketch"
             android:text="@string/signup_description"
-            android:textSize="16sp" />
+            android:textSize="@dimen/signup_description_text_size" />
 
         <ProgressBar
             android:id="@+id/signup_progress_bar"
@@ -59,6 +61,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/signup_name_hint"
+                    android:fontFamily="@font/cabin_sketch"
                     android:inputType="textPassword" />
 
                 <EditText
@@ -67,6 +70,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/login_edit_text_top_margin"
                     android:hint="@string/signup_email_hint"
+                    android:fontFamily="@font/cabin_sketch"
                     android:inputType="textAutoComplete" />
 
                 <EditText
@@ -75,6 +79,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/login_edit_text_top_margin"
                     android:hint="@string/signup_password_hint"
+                    android:fontFamily="@font/cabin_sketch"
                     android:inputType="textPassword" />
             </LinearLayout>
         </ScrollView>
@@ -86,6 +91,7 @@
             android:text="@string/signup_button_text"
             android:layout_marginTop="@dimen/login_button_top_margin"
             android:background="@drawable/button_background"
+            android:fontFamily="@font/cabin_sketch"
             android:textColor="@color/button_text_color" />
     </LinearLayout>
 

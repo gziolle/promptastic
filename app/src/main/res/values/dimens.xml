@@ -45,4 +45,8 @@
 
     <dimen name="script_item_padding_top">8dp</dimen>
 
+    <dimen name="signup_left_layout_padding_end">16dp</dimen>
+    <dimen name="signup_good_text_size">32dp</dimen>
+    <dimen name="signup_description_text_size">16dp</dimen>
+
 </resources>
