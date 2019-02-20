@@ -11,11 +11,12 @@
     <LinearLayout
         android:id="@+id/ll_signup_congrats"
         android:layout_width="match_parent"
-        android:layout_height="250dp"
+        android:layout_height="150dp"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/et_signup_display_name"
         android:gravity="center">
 
         <TextView
@@ -38,10 +39,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/signup_name_hint"
-        android:inputType="textPassword"
+        android:layout_marginStart="@dimen/login_margin_start"
+        android:layout_marginEnd="@dimen/login_margin_end"
+        android:inputType="text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/ll_signup_congrats"
+        app:layout_constraintBottom_toTopOf="@id/et_signup_user"
         app:layout_constraintVertical_chainStyle="spread" />
 
     <EditText
@@ -51,9 +55,12 @@
         android:hint="@string/signup_email_hint"
         android:layout_marginTop="@dimen/login_edit_text_top_margin"
         android:inputType="textAutoComplete"
+        android:layout_marginStart="@dimen/login_margin_start"
+        android:layout_marginEnd="@dimen/login_margin_end"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/et_signup_display_name"
+        app:layout_constraintBottom_toTopOf="@id/et_signup_password"
         app:layout_constraintVertical_chainStyle="spread" />
 
     <EditText
@@ -63,9 +70,12 @@
         android:layout_marginTop="@dimen/login_edit_text_top_margin"
         android:hint="@string/signup_password_hint"
         android:inputType="textPassword"
+        android:layout_marginStart="@dimen/login_margin_start"
+        android:layout_marginEnd="@dimen/login_margin_end"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/et_signup_user"
+        app:layout_constraintBottom_toTopOf="@id/bt_signup"
         app:layout_constraintVertical_chainStyle="spread" />
 
     <Button
@@ -75,10 +85,13 @@
         android:layout_marginTop="@dimen/login_button_top_margin"
         android:background="@drawable/button_background"
         android:text="@string/signup_button_text"
+        android:layout_marginStart="@dimen/login_margin_start"
+        android:layout_marginEnd="@dimen/login_margin_end"
         android:textColor="@color/button_text_color"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/et_signup_password"
+        app:layout_constraintBottom_toTopOf="@id/signup_progress_bar"
         app:layout_constraintVertical_chainStyle="spread" />
 
     <ProgressBar
@@ -89,6 +102,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/bt_signup"
-        android:visibility="gone"/>
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:visibility="invisible"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

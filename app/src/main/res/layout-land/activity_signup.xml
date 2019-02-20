@@ -50,31 +50,34 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <EditText
-                android:id="@+id/et_signup_display_name"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/signup_name_hint"
-                android:inputType="textPassword" />
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+                <EditText
+                    android:id="@+id/et_signup_display_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/signup_name_hint"
+                    android:inputType="textPassword" />
 
-            <EditText
-                android:id="@+id/et_signup_user"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/signup_email_hint"
-                android:inputType="textAutoComplete" />
+                <EditText
+                    android:id="@+id/et_signup_user"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/login_edit_text_top_margin"
+                    android:hint="@string/signup_email_hint"
+                    android:inputType="textAutoComplete" />
 
-            <EditText
-                android:id="@+id/et_signup_password"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/login_edit_text_top_margin"
-                android:hint="@string/signup_password_hint"
-                android:inputType="textPassword" />
-
+                <EditText
+                    android:id="@+id/et_signup_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/login_edit_text_top_margin"
+                    android:hint="@string/signup_password_hint"
+                    android:inputType="textPassword" />
+            </LinearLayout>
         </ScrollView>
-
-
 
         <Button
             android:id="@+id/bt_signup"
@@ -85,4 +88,5 @@
             android:background="@drawable/button_background"
             android:textColor="@color/button_text_color" />
     </LinearLayout>
+
 </LinearLayout>

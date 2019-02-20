@@ -40,4 +40,7 @@
 
     <dimen name="about_name_text_size">36sp</dimen>
 
+    <dimen name="login_margin_start">0dp</dimen>
+    <dimen name="login_margin_end">0dp</dimen>
+
 </resources>

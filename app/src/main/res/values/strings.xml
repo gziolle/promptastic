@@ -15,7 +15,7 @@
     <string name="edit_text_login_password">Password</string>
     <string name="login_button_text">Login</string>
     <string name="login_new_user">Are you new here?&#032;</string>
-    <string name="login_sign_up">&#032;Sign Up!</string>
+    <string name="login_sign_up"><u>&#032;Sign Up!</u></string>
     <string name="login_fail">Login Failure. Please, try again</string>
     <string name="login_username_error">Type your e-mail address</string>
     <string name="login_password_error">Type your password</string>
@@ -44,7 +44,7 @@
 
     <string name="play_script_category" translatable="false">play_script_category</string>
 
-    <string name="open_source_licenses">Open Source Licenses</string>
+    <string name="open_source_licenses"><u>Open Source Licenses</u></string>
 
     <string name="script_saved">Script saved!</string>
     <string name="script_deleted">Script deleted!</string>
