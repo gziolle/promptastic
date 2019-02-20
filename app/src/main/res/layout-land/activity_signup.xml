@@ -19,14 +19,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="Good!!!"
+            android:text="@string/signup_good"
             android:textSize="32sp" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="To sign up, follow the instructions below"
+            android:text="@string/signup_description"
             android:textSize="16sp" />
 
         <ProgressBar
@@ -52,7 +52,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:orientation="vertical">
                 <EditText
                     android:id="@+id/et_signup_display_name"

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="?android:attr/listPreferredItemHeight"
-    android:paddingTop="8dp"
+    android:layout_height="wrap_content"
+    android:minHeight="?android:attr/listPreferredItemHeight"
+    android:paddingTop="@dimen/script_item_padding_top"
     android:layout_marginStart="@dimen/list_item_margin_start"
     android:layout_marginEnd="@dimen/list_item_margin_end">
 
@@ -12,7 +12,6 @@
         android:id="@+id/script_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:text="Script Title"
         android:layout_marginBottom="@dimen/list_item_title_margin_top"
         android:textColor="@color/list_item_title_color"
         android:textSize="@dimen/list_item_title_text_size"/>
@@ -24,6 +23,5 @@
         android:maxLines="1"
         android:ellipsize="end"
         android:textColor="@color/list_item_content_color"
-        android:textSize="@dimen/list_item_content_text_size"
-        tools:text="Script content content content content end end end end enddasduhaudhasudhe" />
+        android:textSize="@dimen/list_item_content_text_size" />
 </LinearLayout>
