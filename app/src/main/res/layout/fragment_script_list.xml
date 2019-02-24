@@ -33,6 +33,7 @@
         android:layout_marginBottom="@dimen/fab_margin_bottom"
         android:layout_marginEnd="@dimen/fab_margin_end"
         android:layout_gravity="bottom|end"
+        android:contentDescription="@string/create_script"
         app:fabSize="normal"
         android:src="@drawable/ic_add_white"/>
 

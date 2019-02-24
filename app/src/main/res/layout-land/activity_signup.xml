@@ -26,6 +26,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:fontFamily="@font/cabin_sketch"
+                android:textColor="@color/colorPrimaryText"
                 android:text="@string/signup_good"
                 android:textSize="@dimen/signup_good_text_size" />
 
@@ -35,6 +36,7 @@
                 android:gravity="center"
                 android:fontFamily="@font/cabin_sketch"
                 android:text="@string/signup_description"
+                android:textColor="@color/colorPrimaryText"
                 android:textSize="@dimen/signup_description_text_size" />
 
             <ProgressBar
@@ -98,7 +100,8 @@
                 android:layout_marginTop="@dimen/login_button_top_margin"
                 android:background="@drawable/button_background"
                 android:fontFamily="@font/cabin_sketch"
-                android:textColor="@color/button_text_color" />
+                android:textColor="@color/button_text_color"
+                android:contentDescription="@string/signup_button_text"/>
         </LinearLayout>
     </LinearLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

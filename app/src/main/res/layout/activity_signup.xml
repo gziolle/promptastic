@@ -27,6 +27,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/cabin_sketch"
+                android:textColor="@color/colorPrimaryText"
                 android:gravity="center"
                 android:text="@string/signup_good"
                 android:textSize="32sp" />
@@ -35,6 +36,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/cabin_sketch"
+                android:textColor="@color/colorPrimaryText"
                 android:gravity="center"
                 android:text="@string/signup_description"
                 android:textSize="16sp" />
@@ -98,6 +100,7 @@
             android:layout_marginStart="@dimen/login_margin_start"
             android:layout_marginEnd="@dimen/login_margin_end"
             android:textColor="@color/button_text_color"
+            android:contentDescription="@string/signup_button_text"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/et_signup_password"

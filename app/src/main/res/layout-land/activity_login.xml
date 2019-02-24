@@ -71,6 +71,7 @@
                 android:text="@string/login_button_text"
                 android:layout_marginTop="@dimen/login_button_top_margin"
                 android:fontFamily="@font/cabin_sketch"
+                android:contentDescription="@string/login_button_text"
                 android:background="@drawable/button_background"
                 android:textColor="@color/button_text_color" />
 
@@ -85,6 +86,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/cabin_sketch"
                     android:text="@string/login_new_user"
+                    android:textColor="@color/colorPrimaryText"
                     android:layout_marginEnd="@dimen/login_sign_up_end_margin"/>
 
                 <TextView
@@ -92,6 +94,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/cabin_sketch"
+                    android:textColor="@color/colorPrimaryText"
                     android:focusable="true"
                     android:clickable="true"
                     android:autoLink="all"
