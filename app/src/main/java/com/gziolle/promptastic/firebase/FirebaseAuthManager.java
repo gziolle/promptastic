@@ -51,29 +51,22 @@ public class FirebaseAuthManager {
 
     public void createUser(final Context context, String email, String password, String displayName, FirebaseResultInterface callback){
         mFirebaseAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener((Activity)context, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(Task<AuthResult> task) {
-                        FirebaseUser user = mFirebaseAuth.getCurrentUser();
-                        if(user != null){
-                            UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
-                                    .setDisplayName(displayName).build();
+                .addOnCompleteListener((Activity)context, task -> {
+                    FirebaseUser user = mFirebaseAuth.getCurrentUser();
+                    if(user != null){
+                        UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                                .setDisplayName(displayName).build();
 
-                            user.updateProfile(profileUpdates);
-                            callback.onFirebaseResult(task.isSuccessful());
-                        }
+                        user.updateProfile(profileUpdates);
                     }
+                    callback.onFirebaseResult(task.isSuccessful(), task.getException());
                 });
     }
 
     public void loginUser(final Context context, String email, String password, FirebaseResultInterface callback){
         mFirebaseAuth.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener((Activity)context, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        callback.onFirebaseResult(task.isSuccessful());
-                    }
-                });
+                .addOnCompleteListener((Activity)context, task ->
+                        callback.onFirebaseResult(task.isSuccessful(), task.getException()));
     }
 
     public void signOut(){

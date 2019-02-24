@@ -1,98 +1,104 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal"
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    android:id="@+id/signup_coordinator_layout"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="@dimen/activity_default_margin"
-    android:background="@drawable/login_gradient_background">
+    android:layout_height="match_parent">
 
     <LinearLayout
-        android:id="@+id/left_layout"
-        android:layout_width="0dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:layout_weight="4.5"
-        android:gravity="center_vertical"
-        android:padding="@dimen/signup_left_layout_padding_end">
+        android:padding="@dimen/activity_default_margin"
+        android:background="@drawable/login_gradient_background">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:fontFamily="@font/cabin_sketch"
-            android:text="@string/signup_good"
-            android:textSize="@dimen/signup_good_text_size" />
+        <LinearLayout
+            android:id="@+id/left_layout"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_weight="4.5"
+            android:gravity="center_vertical"
+            android:padding="@dimen/signup_left_layout_padding_end">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:fontFamily="@font/cabin_sketch"
-            android:text="@string/signup_description"
-            android:textSize="@dimen/signup_description_text_size" />
-
-        <ProgressBar
-            android:id="@+id/signup_progress_bar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_gravity="center_horizontal"
-            android:visibility="gone"/>
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/right_layout"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:layout_weight="5.5"
-        android:gravity="center">
-
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <LinearLayout
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
-                <EditText
-                    android:id="@+id/et_signup_display_name"
+                android:gravity="center"
+                android:fontFamily="@font/cabin_sketch"
+                android:text="@string/signup_good"
+                android:textSize="@dimen/signup_good_text_size" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:fontFamily="@font/cabin_sketch"
+                android:text="@string/signup_description"
+                android:textSize="@dimen/signup_description_text_size" />
+
+            <ProgressBar
+                android:id="@+id/signup_progress_bar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_gravity="center_horizontal"
+                android:visibility="gone"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/right_layout"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_weight="5.5"
+            android:gravity="center">
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/signup_name_hint"
-                    android:fontFamily="@font/cabin_sketch"
-                    android:inputType="textPassword" />
+                    android:orientation="vertical">
+                    <EditText
+                        android:id="@+id/et_signup_display_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/signup_name_hint"
+                        android:fontFamily="@font/cabin_sketch"
+                        android:inputType="textPassword" />
 
-                <EditText
-                    android:id="@+id/et_signup_user"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/login_edit_text_top_margin"
-                    android:hint="@string/signup_email_hint"
-                    android:fontFamily="@font/cabin_sketch"
-                    android:inputType="textAutoComplete" />
+                    <EditText
+                        android:id="@+id/et_signup_user"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/login_edit_text_top_margin"
+                        android:hint="@string/signup_email_hint"
+                        android:fontFamily="@font/cabin_sketch"
+                        android:inputType="textAutoComplete" />
 
-                <EditText
-                    android:id="@+id/et_signup_password"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/login_edit_text_top_margin"
-                    android:hint="@string/signup_password_hint"
-                    android:fontFamily="@font/cabin_sketch"
-                    android:inputType="textPassword" />
-            </LinearLayout>
-        </ScrollView>
+                    <EditText
+                        android:id="@+id/et_signup_password"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/login_edit_text_top_margin"
+                        android:hint="@string/signup_password_hint"
+                        android:fontFamily="@font/cabin_sketch"
+                        android:inputType="textPassword" />
+                </LinearLayout>
+            </ScrollView>
 
-        <Button
-            android:id="@+id/bt_signup"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/signup_button_text"
-            android:layout_marginTop="@dimen/login_button_top_margin"
-            android:background="@drawable/button_background"
-            android:fontFamily="@font/cabin_sketch"
-            android:textColor="@color/button_text_color" />
+            <Button
+                android:id="@+id/bt_signup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/signup_button_text"
+                android:layout_marginTop="@dimen/login_button_top_margin"
+                android:background="@drawable/button_background"
+                android:fontFamily="@font/cabin_sketch"
+                android:textColor="@color/button_text_color" />
+        </LinearLayout>
     </LinearLayout>
-
-</LinearLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

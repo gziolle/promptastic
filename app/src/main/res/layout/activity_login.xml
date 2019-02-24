@@ -1,112 +1,116 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    android:id="@+id/login_coordinator_layout"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="@dimen/activity_default_margin"
-    android:background="@drawable/login_gradient_background"
-    tools:context=".ui.LoginActivity">
+    android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/iv_login_logo"
-        android:layout_width="@dimen/login_icon_width"
-        android:layout_height="@dimen/login_icon_height"
-        android:layout_marginTop="16dp"
-        android:contentDescription="@string/promptastic_logo_content_description"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintVertical_chainStyle="spread"
-        app:layout_constraintBottom_toTopOf="@id/et_login_user"
-        android:src="@drawable/promptastic_name" />
-
-    <EditText
-        android:id="@+id/et_login_user"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/edit_text_login_user_name"
-        android:inputType="textAutoComplete"
-        android:layout_marginTop="32dp"
-        android:layout_marginStart="@dimen/login_margin_start"
-        android:layout_marginEnd="@dimen/login_margin_end"
-        android:fontFamily="@font/cabin_sketch"
-        app:layout_constraintTop_toBottomOf="@id/iv_login_logo"
-        app:layout_constraintBottom_toTopOf="@id/et_login_password"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintVertical_chainStyle="spread" />
+        android:layout_height="match_parent"
+        android:padding="@dimen/activity_default_margin"
+        android:background="@drawable/login_gradient_background">
 
-    <EditText
-        android:id="@+id/et_login_password"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/login_edit_text_top_margin"
-        android:layout_marginStart="@dimen/login_margin_start"
-        android:layout_marginEnd="@dimen/login_margin_end"
-        android:hint="@string/edit_text_login_password"
-        android:fontFamily="@font/cabin_sketch"
-        android:inputType="textPassword"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintVertical_chainStyle="spread"
-        app:layout_constraintTop_toBottomOf="@id/et_login_user"
-        app:layout_constraintBottom_toTopOf="@id/bt_login"/>
+        <ImageView
+            android:id="@+id/iv_login_logo"
+            android:layout_width="@dimen/login_icon_width"
+            android:layout_height="@dimen/login_icon_height"
+            android:layout_marginTop="16dp"
+            android:contentDescription="@string/promptastic_logo_content_description"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintVertical_chainStyle="spread"
+            app:layout_constraintBottom_toTopOf="@id/et_login_user"
+            android:src="@drawable/promptastic_name" />
 
-    <Button
-        android:id="@+id/bt_login"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/login_button_text"
-        android:layout_marginStart="@dimen/login_margin_start"
-        android:layout_marginEnd="@dimen/login_margin_end"
-        android:layout_marginTop="@dimen/login_button_top_margin"
-        android:background="@drawable/button_background"
-        android:textColor="@color/button_text_color"
-        android:fontFamily="@font/cabin_sketch"
-        app:layout_constraintTop_toBottomOf="@id/et_login_password"
-        app:layout_constraintBottom_toTopOf="@id/ll_signup"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintVertical_chainStyle="spread"/>
+        <EditText
+            android:id="@+id/et_login_user"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/edit_text_login_user_name"
+            android:inputType="textAutoComplete"
+            android:layout_marginTop="32dp"
+            android:layout_marginStart="@dimen/login_margin_start"
+            android:layout_marginEnd="@dimen/login_margin_end"
+            android:fontFamily="@font/cabin_sketch"
+            app:layout_constraintTop_toBottomOf="@id/iv_login_logo"
+            app:layout_constraintBottom_toTopOf="@id/et_login_password"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintVertical_chainStyle="spread" />
 
-    <LinearLayout
-        android:id="@+id/ll_signup"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/login_sign_up_top_margin"
-        app:layout_constraintBottom_toTopOf="@id/login_progress_bar"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/bt_login">
+        <EditText
+            android:id="@+id/et_login_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/login_edit_text_top_margin"
+            android:layout_marginStart="@dimen/login_margin_start"
+            android:layout_marginEnd="@dimen/login_margin_end"
+            android:hint="@string/edit_text_login_password"
+            android:fontFamily="@font/cabin_sketch"
+            android:inputType="textPassword"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintVertical_chainStyle="spread"
+            app:layout_constraintTop_toBottomOf="@id/et_login_user"
+            app:layout_constraintBottom_toTopOf="@id/bt_login"/>
 
-        <TextView
+        <Button
+            android:id="@+id/bt_login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/login_button_text"
+            android:layout_marginStart="@dimen/login_margin_start"
+            android:layout_marginEnd="@dimen/login_margin_end"
+            android:layout_marginTop="@dimen/login_button_top_margin"
+            android:background="@drawable/button_background"
+            android:textColor="@color/button_text_color"
+            android:fontFamily="@font/cabin_sketch"
+            app:layout_constraintTop_toBottomOf="@id/et_login_password"
+            app:layout_constraintBottom_toTopOf="@id/ll_signup"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintVertical_chainStyle="spread"/>
+
+        <LinearLayout
+            android:id="@+id/ll_signup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/cabin_sketch"
-            android:text="@string/login_new_user"
-            android:layout_marginEnd="@dimen/login_sign_up_end_margin"/>
+            android:layout_marginTop="@dimen/login_sign_up_top_margin"
+            app:layout_constraintBottom_toTopOf="@id/login_progress_bar"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/bt_login">
 
-        <TextView
-            android:id="@+id/tv_signup"
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/cabin_sketch"
+                android:text="@string/login_new_user"
+                android:layout_marginEnd="@dimen/login_sign_up_end_margin"/>
+
+            <TextView
+                android:id="@+id/tv_signup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/cabin_sketch"
+                android:focusable="true"
+                android:clickable="true"
+                android:autoLink="web"
+                android:text="@string/login_sign_up"/>
+        </LinearLayout>
+
+        <ProgressBar
+            android:id="@+id/login_progress_bar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/cabin_sketch"
-            android:focusable="true"
-            android:clickable="true"
-            android:autoLink="web"
-            android:text="@string/login_sign_up"/>
-    </LinearLayout>
-
-    <ProgressBar
-        android:id="@+id/login_progress_bar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/ll_signup"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:visibility="invisible"/>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+            android:layout_marginTop="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ll_signup"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:visibility="invisible"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -27,6 +27,10 @@
     <string name="signup_fail">Sign Up Failure. Please, try again</string>
     <string name="signup_good">Good!!!</string>
     <string name="signup_description">To sign up, follow the instructions below</string>
+    <string name="signup_dialog_title">Success!!!!</string>
+    <string name="signup_dialog_message">Your account has been created. Please, login to continue</string>
+    <string name="signup_dialog_ok">OK</string>
+    <string name="signup_error_message">Please, try again later</string>
 
     <string name="navigation_scripts">Scripts</string>
     <string name="navigation_settings">Settings</string>

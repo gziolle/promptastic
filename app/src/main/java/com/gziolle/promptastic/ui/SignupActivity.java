@@ -1,19 +1,22 @@
 package com.gziolle.promptastic.ui;
 
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 import android.app.AlertDialog;
 import android.os.Bundle;
+import android.text.InputFilter;
 import android.text.TextUtils;
 import android.widget.EditText;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.gziolle.promptastic.R;
 import com.gziolle.promptastic.firebase.FirebaseAuthManager;
 import com.gziolle.promptastic.interfaces.FirebaseResultInterface;
+import com.gziolle.promptastic.util.Constants;
 
 public class SignupActivity extends BaseActivity implements FirebaseResultInterface {
 
@@ -29,6 +32,9 @@ public class SignupActivity extends BaseActivity implements FirebaseResultInterf
     @BindView(R.id.signup_progress_bar)
     ProgressBar mProgressBar;
 
+    @BindView(R.id.signup_coordinator_layout)
+    CoordinatorLayout mCoordinatorLayout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,6 +44,9 @@ public class SignupActivity extends BaseActivity implements FirebaseResultInterf
         if(getSupportActionBar() != null){
             getSupportActionBar().hide();
         }
+
+        mNameEditText.setFilters(new InputFilter[] {
+                new InputFilter.LengthFilter(Constants.NAME_MAX_LENGTH) });
     }
 
     @OnClick(R.id.bt_signup)
@@ -59,19 +68,20 @@ public class SignupActivity extends BaseActivity implements FirebaseResultInterf
     }
 
     @Override
-    public void onFirebaseResult(boolean isSuccessful) {
+    public void onFirebaseResult(boolean isSuccessful, Exception exception) {
         hideProgressBar(mProgressBar);
         if(isSuccessful){
             AlertDialog.Builder builder = new AlertDialog.Builder(this)
-                    .setTitle("Success")
-                    .setMessage("Your account has been created. Please, login to continue")
-                    .setPositiveButton("OK", (dialog, which) -> {
+                    .setTitle(getString(R.string.signup_dialog_title))
+                    .setMessage(getString(R.string.signup_dialog_message))
+                    .setPositiveButton(getString(R.string.signup_dialog_ok), (dialog, which) -> {
                         finish();
                     });
             AlertDialog dialog = builder.create();
             dialog.show();
         } else{
-            Toast.makeText(this, "Please, try again", Toast.LENGTH_SHORT).show();
+            Snackbar snackbar = Snackbar.make(mCoordinatorLayout, exception.getMessage(), Snackbar.LENGTH_SHORT);
+            snackbar.show();
         }
     }
 }

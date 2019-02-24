@@ -1,95 +1,102 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal"
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/login_coordinator_layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingStart="@dimen/activity_default_margin"
-    android:paddingEnd="@dimen/activity_default_margin"
-    android:background="@drawable/login_gradient_background">
+    android:layout_height="match_parent">
 
     <LinearLayout
-        android:id="@+id/left_layout"
-        android:layout_width="0dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center_vertical"
-        android:orientation="vertical"
-        android:layout_weight="4.5">
-
-        <ImageView
-            android:id="@+id/iv_login_logo"
-            android:layout_width="@dimen/login_icon_width"
-            android:layout_height="@dimen/login_icon_height"
-            android:layout_gravity="center"
-            android:contentDescription="@string/promptastic_logo_content_description"
-            android:src="@drawable/promptastic_name"/>
-
-        <ProgressBar
-            android:id="@+id/login_progress_bar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="16dp"
-            android:visibility="invisible"/>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/right_layout"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:layout_weight="5.5"
-        android:gravity="center">
-
-        <EditText
-            android:id="@+id/et_login_user"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/cabin_sketch"
-            android:hint="@string/edit_text_login_user_name"
-            android:inputType="textAutoComplete" />
-
-        <EditText
-            android:id="@+id/et_login_password"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/cabin_sketch"
-            android:layout_marginTop="@dimen/login_edit_text_top_margin"
-            android:hint="@string/edit_text_login_password"
-            android:inputType="textPassword" />
-
-        <Button
-            android:id="@+id/bt_login"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/login_button_text"
-            android:layout_marginTop="@dimen/login_button_top_margin"
-            android:fontFamily="@font/cabin_sketch"
-            android:background="@drawable/button_background"
-            android:textColor="@color/button_text_color" />
+        android:paddingStart="@dimen/activity_default_margin"
+        android:paddingEnd="@dimen/activity_default_margin"
+        android:background="@drawable/login_gradient_background">
 
         <LinearLayout
-            android:id="@+id/ll_signup"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/login_sign_up_top_margin">
+            android:id="@+id/left_layout"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:orientation="vertical"
+            android:layout_weight="4.5">
 
-            <TextView
+            <ImageView
+                android:id="@+id/iv_login_logo"
+                android:layout_width="@dimen/login_icon_width"
+                android:layout_height="@dimen/login_icon_height"
+                android:layout_gravity="center"
+                android:contentDescription="@string/promptastic_logo_content_description"
+                android:src="@drawable/promptastic_name"/>
+
+            <ProgressBar
+                android:id="@+id/login_progress_bar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/cabin_sketch"
-                android:text="@string/login_new_user"
-                android:layout_marginEnd="@dimen/login_sign_up_end_margin"/>
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="16dp"
+                android:visibility="invisible"/>
 
-            <TextView
-                android:id="@+id/tv_signup"
-                android:layout_width="wrap_content"
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/right_layout"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_weight="5.5"
+            android:gravity="center">
+
+            <EditText
+                android:id="@+id/et_login_user"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/cabin_sketch"
-                android:focusable="true"
-                android:clickable="true"
-                android:autoLink="all"
-                android:text="@string/login_sign_up"/>
+                android:hint="@string/edit_text_login_user_name"
+                android:inputType="textAutoComplete" />
+
+            <EditText
+                android:id="@+id/et_login_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/cabin_sketch"
+                android:layout_marginTop="@dimen/login_edit_text_top_margin"
+                android:hint="@string/edit_text_login_password"
+                android:inputType="textPassword" />
+
+            <Button
+                android:id="@+id/bt_login"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/login_button_text"
+                android:layout_marginTop="@dimen/login_button_top_margin"
+                android:fontFamily="@font/cabin_sketch"
+                android:background="@drawable/button_background"
+                android:textColor="@color/button_text_color" />
+
+            <LinearLayout
+                android:id="@+id/ll_signup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/login_sign_up_top_margin">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/cabin_sketch"
+                    android:text="@string/login_new_user"
+                    android:layout_marginEnd="@dimen/login_sign_up_end_margin"/>
+
+                <TextView
+                    android:id="@+id/tv_signup"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/cabin_sketch"
+                    android:focusable="true"
+                    android:clickable="true"
+                    android:autoLink="all"
+                    android:text="@string/login_sign_up"/>
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
-</LinearLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

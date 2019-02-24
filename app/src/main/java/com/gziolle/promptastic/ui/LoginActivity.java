@@ -1,5 +1,6 @@
 package com.gziolle.promptastic.ui;
 
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -11,6 +12,7 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.gziolle.promptastic.R;
 import com.gziolle.promptastic.firebase.FirebaseAuthManager;
 import com.gziolle.promptastic.interfaces.FirebaseResultInterface;
@@ -25,6 +27,9 @@ public class LoginActivity extends BaseActivity implements FirebaseResultInterfa
 
     @BindView(R.id.login_progress_bar)
     ProgressBar mProgressBar;
+
+    @BindView(R.id.login_coordinator_layout)
+    CoordinatorLayout mCoordinatorLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,15 +67,14 @@ public class LoginActivity extends BaseActivity implements FirebaseResultInterfa
     }
 
     @Override
-    public void onFirebaseResult(boolean isSuccessful) {
+    public void onFirebaseResult(boolean isSuccessful, Exception exception) {
         hideProgressBar(mProgressBar);
         if (!isSuccessful) {
-            Toast.makeText(this, getString(R.string.login_fail), Toast.LENGTH_SHORT).show();
+            Snackbar.make(mCoordinatorLayout, exception.getMessage(), Snackbar.LENGTH_SHORT).show();
         }else {
             Intent intent = new Intent(this, MainActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
         }
-
     }
 }
