@@ -78,7 +78,8 @@ public class ScriptListFragment extends Fragment {
 
     private void fetchDataFromFirebase(){
         FirebaseDatabase database = Utils.getFirebaseDatabase();
-        Query query = database.getReference().child(Constants.PATH_USERS + FirebaseAuthManager.getInstance().getFirebaseUserId() + Constants.PATH_SCRIPTS);
+        Query query = database.getReference().child(Constants.PATH_USERS +
+                FirebaseAuthManager.getInstance().getFirebaseUserId() + Constants.PATH_SCRIPTS);
 
         FirebaseRecyclerOptions<Script> options = new FirebaseRecyclerOptions.Builder<Script>()
                 .setQuery(query, new SnapshotParser<Script>() {

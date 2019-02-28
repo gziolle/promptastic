@@ -23,4 +23,6 @@
 
     <color name="play_script_text_color_light">#111111</color>
     <color name="play_script_background_color_light">#fdfdfd</color>
+
+    <color name="widget_list_item_background_color">#ffffff</color>
 </resources>

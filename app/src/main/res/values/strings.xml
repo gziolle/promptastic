@@ -110,4 +110,6 @@
     </string-array>
 
     <string name="promptastic_logo_content_description">Promptastic Logo</string>
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="add_widget">Add widget</string>
 </resources>
