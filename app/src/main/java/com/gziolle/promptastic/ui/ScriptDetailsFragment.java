@@ -6,6 +6,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.fragment.app.Fragment;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -25,6 +26,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.gziolle.promptastic.R;
+import com.gziolle.promptastic.data.model.Script;
 import com.gziolle.promptastic.firebase.FirebaseAuthManager;
 import com.gziolle.promptastic.util.Constants;
 import com.gziolle.promptastic.util.Utils;
@@ -112,6 +114,7 @@ public class ScriptDetailsFragment extends Fragment {
         Bundle bundle = new Bundle();
         bundle.putString(Constants.KEY_CONTENT, mContent);
 
+        sendUpdateWidgetIntent();
         Intent intent = new Intent(getActivity(), PlayScriptActivity.class);
         intent.putExtras(bundle);
         startActivity(intent);
@@ -160,5 +163,14 @@ public class ScriptDetailsFragment extends Fragment {
     void setText(String title, String content){
         mTitle = title;
         mContent = content;
+    }
+
+    private void sendUpdateWidgetIntent(){
+        Intent intent = new Intent();
+        intent.setAction(Constants.ACTION_UPDATE_WIDGET);
+        Script script = new Script(mTitle, mContent);
+        intent.putExtra(Constants.KEY_SCRIPT_EXTRA, script);
+        LocalBroadcastManager.getInstance(getActivity().getApplicationContext()).sendBroadcast(intent);
+        getActivity().sendBroadcast(intent);
     }
 }

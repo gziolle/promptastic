@@ -52,6 +52,7 @@ public class PlayScriptActivity extends AppCompatActivity {
     AlertDialog mAlertDialog;
 
     int mTextDuration;
+    boolean mIsRunning = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,6 +75,7 @@ public class PlayScriptActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        mIsRunning = true;
         setupPlay();
     }
 
@@ -115,7 +117,9 @@ public class PlayScriptActivity extends AppCompatActivity {
 
                 @Override
                 public void onAnimationEnd(Animator animator) {
-                    finishPlaying();
+                    if(mIsRunning){
+                        finishPlaying();
+                    }
                 }
 
                 @Override
@@ -143,7 +147,13 @@ public class PlayScriptActivity extends AppCompatActivity {
                         mCountDownTextView.setVisibility(View.VISIBLE);
                         setupPlay();
                     })
-                    .setNegativeButton(getString(R.string.play_script_dialog_cancel), (dialog, which) -> finish());
+                    .setNegativeButton(getString(R.string.play_script_dialog_cancel), (dialog, which) -> {
+                        if(mAnimator != null){
+                            mAnimator.cancel();
+                            mAnimator.removeAllListeners();
+                        }
+                        finish();
+                    });
             mAlertDialog = dialogBuilder.create();
             mAlertDialog.show();
         }
@@ -152,6 +162,7 @@ public class PlayScriptActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
+        mIsRunning = false;
         mCountDown.cancel();
     }
 

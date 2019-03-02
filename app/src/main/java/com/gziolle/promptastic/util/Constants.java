@@ -5,6 +5,7 @@ public class Constants {
     public static final String KEY_TITLE = "title";
     public static final String KEY_CONTENT = "content";
     public static final String KEY_DATABASE_REF = "database_ref";
+    public static final String KEY_SCRIPT_EXTRA = "script";
 
     public static final String PATH_USERS = "users/";
     public static final String PATH_SCRIPTS = "/scripts";
@@ -24,6 +25,7 @@ public class Constants {
     public static final String PLAY_SCRIPT_THEME_LIGHT = "light";
     public static final String PLAY_SCRIPT_THEME_DARK = "dark";
 
+    public static final String ACTION_UPDATE_WIDGET = "com.gziolle.promptastic.UPDATE_WIDGET";
     public static final int NAME_MAX_LENGTH = 60;
 
 }
