@@ -7,7 +7,6 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.util.Log;
 import android.widget.RemoteViews;
 
 import com.gziolle.promptastic.R;
@@ -25,9 +24,8 @@ public class ScriptWidget extends AppWidgetProvider {
     static void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
                                 int appWidgetId, Script script) {
         // Construct the RemoteViews object
-        Log.d("Ziollera", "updateAppWidget");
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.script_widget);
-        Intent intent = null;
+        Intent intent;
         if(script != null){
             views.setTextViewText(R.id.tv_widget_last_played_script, context.getString(R.string.widget_last_played_script));
             views.setTextViewText(R.id.tv_widget_script_title, script.getTitle());

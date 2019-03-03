@@ -18,30 +18,27 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         int preferenceCount = preferenceCategory.getPreferenceCount();
 
         for(int i = 0; i < preferenceCount; i++){
-            Preference preference = preferenceCategory.getPreference(i);;
+            Preference preference = preferenceCategory.getPreference(i);
             bindPreferenceSummaryToValue(preference);
         }
     }
 
-    private static Preference.OnPreferenceChangeListener sBindPreferenceSummaryToValueListener = new Preference.OnPreferenceChangeListener() {
-        @Override
-        public boolean onPreferenceChange(Preference preference, Object value) {
-            String stringValue = value.toString();
+    private static Preference.OnPreferenceChangeListener sBindPreferenceSummaryToValueListener = (preference, value) -> {
+        String stringValue = value.toString();
 
-            if (preference instanceof ListPreference) {
-                ListPreference listPreference = (ListPreference) preference;
-                int index = listPreference.findIndexOfValue(stringValue);
+        if (preference instanceof ListPreference) {
+            ListPreference listPreference = (ListPreference) preference;
+            int index = listPreference.findIndexOfValue(stringValue);
 
-                preference.setSummary(
-                        index >= 0
-                                ? listPreference.getEntries()[index]
-                                : null);
+            preference.setSummary(
+                    index >= 0
+                            ? listPreference.getEntries()[index]
+                            : null);
 
-            } else {
-                preference.setSummary(stringValue);
-            }
-            return true;
+        } else {
+            preference.setSummary(stringValue);
         }
+        return true;
     };
 
     private static void bindPreferenceSummaryToValue(Preference preference) {

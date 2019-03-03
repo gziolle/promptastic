@@ -1,6 +1,5 @@
 package com.gziolle.promptastic.ui;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,9 +9,7 @@ import android.widget.TextView;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
-import com.firebase.ui.database.SnapshotParser;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
@@ -82,14 +79,8 @@ public class ScriptListFragment extends Fragment {
                 FirebaseAuthManager.getInstance().getFirebaseUserId() + Constants.PATH_SCRIPTS);
 
         FirebaseRecyclerOptions<Script> options = new FirebaseRecyclerOptions.Builder<Script>()
-                .setQuery(query, new SnapshotParser<Script>() {
-                    @NonNull
-                    @Override
-                    public Script parseSnapshot(@NonNull DataSnapshot snapshot) {
-                        return new Script(snapshot.child(Constants.KEY_TITLE).getValue().toString(),
-                                snapshot.child(Constants.KEY_CONTENT).getValue().toString());
-                    }
-                }).build();
+                .setQuery(query, snapshot -> new Script(snapshot.child(Constants.KEY_TITLE).getValue().toString(),
+                        snapshot.child(Constants.KEY_CONTENT).getValue().toString())).build();
 
         mAdapter = new FirebaseRecyclerAdapter<Script, ScriptViewHolder>(options) {
             @Override
@@ -97,15 +88,12 @@ public class ScriptListFragment extends Fragment {
                 scriptViewHolder.mTitle.setText(script.getTitle());
                 scriptViewHolder.mContent.setText(script.getContent());
                 scriptViewHolder.mDatabaseReference = getRef(position);
-                scriptViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Bundle bundle = new Bundle();
-                        bundle.putString(KEY_TITLE, scriptViewHolder.mTitle.getText().toString());
-                        bundle.putString(KEY_CONTENT, scriptViewHolder.mContent.getText().toString());
-                        bundle.putString(KEY_DATABASE_REF, scriptViewHolder.mDatabaseReference.getKey());
-                        mScriptSelectedListener.onScriptSelected(bundle);
-                    }
+                scriptViewHolder.itemView.setOnClickListener(v -> {
+                    Bundle bundle = new Bundle();
+                    bundle.putString(KEY_TITLE, scriptViewHolder.mTitle.getText().toString());
+                    bundle.putString(KEY_CONTENT, scriptViewHolder.mContent.getText().toString());
+                    bundle.putString(KEY_DATABASE_REF, scriptViewHolder.mDatabaseReference.getKey());
+                    mScriptSelectedListener.onScriptSelected(bundle);
                 });
             }
 
@@ -114,8 +102,7 @@ public class ScriptListFragment extends Fragment {
             public ScriptViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
                 View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.script_list_item, parent, false);
 
-                ScriptViewHolder viewHolder =  new ScriptViewHolder(view);
-                return viewHolder;
+                return new ScriptViewHolder(view);
             }
 
             @Override

@@ -3,15 +3,10 @@ package com.gziolle.promptastic.firebase;
 import android.app.Activity;
 import android.content.Context;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
 import com.gziolle.promptastic.interfaces.FirebaseResultInterface;
-
-import androidx.annotation.NonNull;
 
 public class FirebaseAuthManager {
 
@@ -43,10 +38,7 @@ public class FirebaseAuthManager {
 
     public boolean isUserLoggedIn(){
         FirebaseUser currentUser = mFirebaseAuth.getCurrentUser();
-        if(currentUser == null) {
-            return false;
-        }
-        return true;
+        return currentUser != null;
     }
 
     public void createUser(final Context context, String email, String password, String displayName, FirebaseResultInterface callback){

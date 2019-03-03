@@ -74,9 +74,7 @@ public class SignupActivity extends BaseActivity implements FirebaseResultInterf
             AlertDialog.Builder builder = new AlertDialog.Builder(this)
                     .setTitle(getString(R.string.signup_dialog_title))
                     .setMessage(getString(R.string.signup_dialog_message))
-                    .setPositiveButton(getString(R.string.signup_dialog_ok), (dialog, which) -> {
-                        finish();
-                    });
+                    .setPositiveButton(getString(R.string.signup_dialog_ok), (dialog, which) -> finish());
             AlertDialog dialog = builder.create();
             dialog.show();
         } else{

@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
 import androidx.fragment.app.Fragment;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import butterknife.BindView;
@@ -13,7 +12,6 @@ import butterknife.OnClick;
 
 import android.text.TextUtils;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
@@ -21,8 +19,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.getbase.floatingactionbutton.FloatingActionsMenu;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.gziolle.promptastic.R;
@@ -30,8 +26,6 @@ import com.gziolle.promptastic.data.model.Script;
 import com.gziolle.promptastic.firebase.FirebaseAuthManager;
 import com.gziolle.promptastic.util.Constants;
 import com.gziolle.promptastic.util.Utils;
-
-import java.util.Objects;
 
 import static android.app.Activity.RESULT_OK;
 import static com.gziolle.promptastic.util.Constants.PATH_SCRIPTS;
@@ -130,15 +124,12 @@ public class ScriptDetailsFragment extends Fragment {
                 + FirebaseAuthManager.getInstance().getFirebaseUserId()
                 + PATH_SCRIPTS + "/" + mKey);
 
-        scriptsRef.removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(Task<Void> task) {
-                mProgressHolder.setVisibility(View.GONE);
-                if(task.isSuccessful()){
-                    mEditListener.onDeleteScript();
-                } else {
-                    Toast.makeText(getActivity(), "Deu ruim", Toast.LENGTH_SHORT).show();
-                }
+        scriptsRef.removeValue().addOnCompleteListener(task -> {
+            mProgressHolder.setVisibility(View.GONE);
+            if(task.isSuccessful()){
+                mEditListener.onDeleteScript();
+            } else {
+                Toast.makeText(getActivity(), "Deu ruim", Toast.LENGTH_SHORT).show();
             }
         });
     }

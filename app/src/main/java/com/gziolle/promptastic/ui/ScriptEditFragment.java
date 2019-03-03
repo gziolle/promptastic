@@ -15,10 +15,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -41,6 +40,8 @@ public class ScriptEditFragment extends Fragment {
     EditText mScriptContent;
     @BindView(R.id.fab_save_script)
     FloatingActionButton mSaveScriptFab;
+    @BindView(R.id.fl_progress_holder)
+    FrameLayout mProgressHolder;
 
     private String mScriptKey;
 
@@ -48,7 +49,7 @@ public class ScriptEditFragment extends Fragment {
         void onScriptSaved(Script script);
     }
 
-    public OnScriptSavedListener mListener;
+    private OnScriptSavedListener mListener;
 
     public ScriptEditFragment() {
         // Required empty public constructor
@@ -91,6 +92,7 @@ public class ScriptEditFragment extends Fragment {
             imm.hideSoftInputFromWindow(getView().getWindowToken(), 0);
         }
 
+        mProgressHolder.setVisibility(View.VISIBLE);
         final FirebaseDatabase database = Utils.getFirebaseDatabase();
         DatabaseReference ref = database.getReference();
         DatabaseReference scriptsRef;
@@ -105,19 +107,16 @@ public class ScriptEditFragment extends Fragment {
         } else{
             if(mScriptKey == null){
                 scriptsRef = ref.child(PATH_USERS + FirebaseAuthManager.getInstance().getFirebaseUserId() + PATH_SCRIPTS);
-                scriptsRef.push().setValue(script).addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(Task<Void> task) {
-                        mListener.onScriptSaved(script);
-                    }
+                scriptsRef.push().setValue(script).addOnCompleteListener(task -> {
+                    mProgressHolder.setVisibility(View.GONE);
+                    mListener.onScriptSaved(script);
+
                 });
             } else{
                 scriptsRef = ref.child(PATH_USERS + FirebaseAuthManager.getInstance().getFirebaseUserId() + PATH_SCRIPTS + "/" + mScriptKey);
-                scriptsRef.setValue(script).addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(Task<Void> task) {
-                        mListener.onScriptSaved(script);
-                    }
+                scriptsRef.setValue(script).addOnCompleteListener(task -> {
+                    mProgressHolder.setVisibility(View.GONE);
+                    mListener.onScriptSaved(script);
                 });
             }
         }
