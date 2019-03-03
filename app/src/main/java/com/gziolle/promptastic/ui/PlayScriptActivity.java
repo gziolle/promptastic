@@ -1,3 +1,7 @@
+/*
+ * Copyright (C) 2019 Guilherme Ziolle
+ */
+
 package com.gziolle.promptastic.ui;
 
 import androidx.appcompat.app.AlertDialog;
@@ -27,6 +31,10 @@ import com.gziolle.promptastic.R;
 import com.gziolle.promptastic.util.Constants;
 
 import java.util.Objects;
+
+/*
+ * Manages script playing, pausing and rewind.
+ */
 
 public class PlayScriptActivity extends AppCompatActivity {
 

@@ -1,7 +1,15 @@
+/*
+ * Copyright (C) 2019 Guilherme Ziolle
+ */
+
 package com.gziolle.promptastic.util;
 
 import com.google.firebase.database.FirebaseDatabase;
 import com.gziolle.promptastic.firebase.FirebaseAuthManager;
+
+/*
+ * Holds useful methods for the app
+ */
 
 public class Utils {
 

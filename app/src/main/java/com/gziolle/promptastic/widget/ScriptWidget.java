@@ -1,3 +1,7 @@
+/*
+ * Copyright (C) 2019 Guilherme Ziolle
+ */
+
 package com.gziolle.promptastic.widget;
 
 import android.app.PendingIntent;
@@ -17,8 +21,9 @@ import com.gziolle.promptastic.util.Constants;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 /**
- * Implementation of App Widget functionality.
+ * App Widget which displays the last script played by the user.
  */
+
 public class ScriptWidget extends AppWidgetProvider {
 
     static void updateAppWidget(Context context, AppWidgetManager appWidgetManager,

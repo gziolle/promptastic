@@ -1,3 +1,7 @@
+/*
+ * Copyright (C) 2019 Guilherme Ziolle
+ */
+
 package com.gziolle.promptastic.firebase;
 
 import android.app.Activity;
@@ -7,6 +11,10 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
 import com.gziolle.promptastic.interfaces.FirebaseResultInterface;
+
+/*
+ * Manages Firebase Authentication for the entire app
+ */
 
 public class FirebaseAuthManager {
 

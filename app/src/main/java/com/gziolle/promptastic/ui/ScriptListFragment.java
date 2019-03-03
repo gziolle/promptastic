@@ -1,3 +1,7 @@
+/*
+ * Copyright (C) 2019 Guilherme Ziolle
+ */
+
 package com.gziolle.promptastic.ui;
 
 import android.os.Bundle;
@@ -31,6 +35,10 @@ import butterknife.OnClick;
 import static com.gziolle.promptastic.util.Constants.KEY_CONTENT;
 import static com.gziolle.promptastic.util.Constants.KEY_DATABASE_REF;
 import static com.gziolle.promptastic.util.Constants.KEY_TITLE;
+
+/*
+ * Displays a list of scripts added by the user
+ */
 
 public class ScriptListFragment extends Fragment {
 

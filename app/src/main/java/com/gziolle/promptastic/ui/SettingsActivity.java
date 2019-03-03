@@ -1,3 +1,7 @@
+/*
+ * Copyright (C) 2019 Guilherme Ziolle
+ */
+
 package com.gziolle.promptastic.ui;
 
 import android.os.Bundle;
@@ -10,6 +14,10 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 import com.gziolle.promptastic.R;
+
+/*
+ * Handles App settings
+ */
 
 public class SettingsActivity extends AppCompatActivity {
 

@@ -1,3 +1,7 @@
+/*
+ * Copyright (C) 2019 Guilherme Ziolle
+ */
+
 package com.gziolle.promptastic.ui;
 
 import android.content.Intent;
@@ -31,6 +35,9 @@ import static android.app.Activity.RESULT_OK;
 import static com.gziolle.promptastic.util.Constants.PATH_SCRIPTS;
 import static com.gziolle.promptastic.util.Constants.PATH_USERS;
 
+/*
+ * Displays the script's title and content, as well as some script options
+ */
 
 public class ScriptDetailsFragment extends Fragment {
 

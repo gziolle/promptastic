@@ -1,3 +1,7 @@
+/*
+ * Copyright (C) 2019 Guilherme Ziolle
+ */
+
 package com.gziolle.promptastic.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -7,6 +11,10 @@ import android.os.Bundle;
 import android.os.Handler;
 
 import com.gziolle.promptastic.firebase.FirebaseAuthManager;
+
+/*
+ * Displays an intro image to the user
+ */
 
 public class SplashActivity extends AppCompatActivity {
 

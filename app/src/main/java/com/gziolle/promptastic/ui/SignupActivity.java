@@ -1,3 +1,7 @@
+/*
+ * Copyright (C) 2019 Guilherme Ziolle
+ */
+
 package com.gziolle.promptastic.ui;
 
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
@@ -17,6 +21,10 @@ import com.gziolle.promptastic.R;
 import com.gziolle.promptastic.firebase.FirebaseAuthManager;
 import com.gziolle.promptastic.interfaces.FirebaseResultInterface;
 import com.gziolle.promptastic.util.Constants;
+
+/*
+ * Handles User sign up to Firebase Authentication servers
+ */
 
 public class SignupActivity extends BaseActivity implements FirebaseResultInterface {
 

@@ -1,3 +1,7 @@
+/*
+ * Copyright (C) 2019 Guilherme Ziolle
+ */
+
 package com.gziolle.promptastic.ui;
 
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
@@ -16,6 +20,9 @@ import com.gziolle.promptastic.R;
 import com.gziolle.promptastic.firebase.FirebaseAuthManager;
 import com.gziolle.promptastic.interfaces.FirebaseResultInterface;
 
+/*
+ * Handles User authentication to the app
+ */
 public class LoginActivity extends BaseActivity implements FirebaseResultInterface {
 
     @BindView(R.id.et_login_password)

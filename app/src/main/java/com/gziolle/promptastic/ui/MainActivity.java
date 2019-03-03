@@ -1,3 +1,7 @@
+/*
+ * Copyright (C) 2019 Guilherme Ziolle
+ */
+
 package com.gziolle.promptastic.ui;
 
 import androidx.annotation.NonNull;
@@ -26,6 +30,10 @@ import com.google.android.material.snackbar.Snackbar;
 import com.gziolle.promptastic.R;
 import com.gziolle.promptastic.data.model.Script;
 import com.gziolle.promptastic.firebase.FirebaseAuthManager;
+
+/*
+ * Handles Fragments transactions, callbacks and activity routes
+ */
 
 public class MainActivity extends AppCompatActivity implements ScriptListFragment.OnScriptSelectedListener, ScriptListFragment.OnAddScriptListener,
     ScriptDetailsFragment.OnScriptListener, ScriptEditFragment.OnScriptSavedListener{

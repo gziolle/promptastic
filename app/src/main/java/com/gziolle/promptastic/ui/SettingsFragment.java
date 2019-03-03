@@ -1,3 +1,7 @@
+/*
+ * Copyright (C) 2019 Guilherme Ziolle
+ */
+
 package com.gziolle.promptastic.ui;
 
 import android.os.Bundle;
@@ -9,6 +13,10 @@ import androidx.preference.PreferenceManager;
 import com.gziolle.promptastic.R;
 
 import androidx.preference.PreferenceFragmentCompat;
+
+/*
+ * Handles App settings
+ */
 
 public class SettingsFragment extends PreferenceFragmentCompat {
     @Override

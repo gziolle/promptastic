@@ -1,3 +1,7 @@
+/*
+ * Copyright (C) 2019 Guilherme Ziolle
+ */
+
 package com.gziolle.promptastic.ui;
 
 import android.content.Context;
@@ -31,6 +35,10 @@ import static com.gziolle.promptastic.util.Constants.KEY_DATABASE_REF;
 import static com.gziolle.promptastic.util.Constants.KEY_TITLE;
 import static com.gziolle.promptastic.util.Constants.PATH_SCRIPTS;
 import static com.gziolle.promptastic.util.Constants.PATH_USERS;
+
+/*
+ * Allows and manages script creation and editing
+ */
 
 public class ScriptEditFragment extends Fragment {
 

@@ -1,7 +1,15 @@
+/*
+ * Copyright (C) 2019 Guilherme Ziolle
+ */
+
 package com.gziolle.promptastic.data.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
+/*
+ * Database object that represents a script
+ */
 
 public class Script implements Parcelable {
 

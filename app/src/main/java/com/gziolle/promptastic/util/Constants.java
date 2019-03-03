@@ -1,4 +1,12 @@
+/*
+ * Copyright (C) 2019 Guilherme Ziolle
+ */
+
 package com.gziolle.promptastic.util;
+
+/*
+ * Holds all constants used by the app
+ */
 
 public class Constants {
 
