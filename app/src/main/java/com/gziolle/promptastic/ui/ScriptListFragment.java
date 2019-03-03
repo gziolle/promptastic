@@ -89,6 +89,7 @@ public class ScriptListFragment extends Fragment {
                 scriptViewHolder.mContent.setText(script.getContent());
                 scriptViewHolder.mDatabaseReference = getRef(position);
                 scriptViewHolder.itemView.setOnClickListener(v -> {
+                    v.setSelected(true);
                     Bundle bundle = new Bundle();
                     bundle.putString(KEY_TITLE, scriptViewHolder.mTitle.getText().toString());
                     bundle.putString(KEY_CONTENT, scriptViewHolder.mContent.getText().toString());

@@ -20,7 +20,7 @@ public class SplashActivity extends AppCompatActivity {
         new Handler().postDelayed(() -> {
             routeToActivity();
             finish();
-        }, 3000);
+        }, 1500);
     }
 
     private void routeToActivity(){

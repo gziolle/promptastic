@@ -50,6 +50,8 @@ public class MainActivity extends AppCompatActivity implements ScriptListFragmen
 
     private static final String DETAILS_FRAGMENT_TAG = "details";
 
+    private boolean mTwoPane;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,28 +64,52 @@ public class MainActivity extends AppCompatActivity implements ScriptListFragmen
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
 
-        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, mToolbar, R.string.open, R.string.close);
+        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, mToolbar, R.string.open, R.string.close){
+            @Override
+            public void onDrawerOpened(View drawerView) {
+                super.onDrawerOpened(drawerView);
+                mDrawerList.bringToFront();
+                mDrawerLayout.requestLayout();
+            }
+        };
         mDrawerLayout.addDrawerListener(mDrawerToggle);
         mDrawerToggle.syncState();
 
         FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.addOnBackStackChangedListener(() -> {
-            if (fragmentManager.getBackStackEntryCount() > 0) {
-                setToolbarAsUp(v -> getSupportFragmentManager().popBackStack());
-            } else {
-                getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-                mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, mToolbar, R.string.open, R.string.close);
-                mDrawerLayout.addDrawerListener(mDrawerToggle);
-                mDrawerToggle.syncState();
+        if(findViewById(R.id.script_detail_container) == null){
+            mTwoPane = false;
+            fragmentManager.addOnBackStackChangedListener(() -> {
+                if (fragmentManager.getBackStackEntryCount() > 0) {
+                    setToolbarAsUp(v -> getSupportFragmentManager().popBackStack());
+                } else {
+                    getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+                    mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, mToolbar, R.string.open, R.string.close);
+                    mDrawerLayout.addDrawerListener(mDrawerToggle);
+                    mDrawerToggle.syncState();
+                }
+            });
+            if(mViewContainer != null){
+                if(savedInstanceState != null){
+                    //No need to create new fragments;
+                    return;
+                }
+                ScriptListFragment listFragment = new ScriptListFragment();
+                fragmentManager.beginTransaction().add(R.id.view_container, listFragment).commit();
             }
-        });
+        } else {
+            //Two Pane mode
+            mTwoPane = true;
+            if(savedInstanceState == null){
+                fragmentManager.beginTransaction().add(R.id.script_detail_container, new EmptyViewFragment()).commit();
+            }
+        }
 
         mDrawerList.setNavigationItemSelectedListener(item -> {
             Intent intent;
             int id = item.getItemId();
             switch(id){
                 case R.id.scripts:
-                    mDrawerLayout.closeDrawer(GravityCompat.START, false);
+                    break;
                 case R.id.settings:
                     intent = new Intent(MainActivity.this, SettingsActivity.class);
                     startActivity(intent);
@@ -101,15 +127,6 @@ public class MainActivity extends AppCompatActivity implements ScriptListFragmen
             }
             return false;
         });
-
-        if(mViewContainer != null){
-            if(savedInstanceState != null){
-                //No need to create new fragments;
-                return;
-            }
-            ScriptListFragment listFragment = new ScriptListFragment();
-            getSupportFragmentManager().beginTransaction().add(R.id.view_container, listFragment).commit();
-        }
 
         View headerLayout = mDrawerList.getHeaderView(0);
         mDisplayNameTextView = headerLayout.findViewById(R.id.tv_display_name);
@@ -156,8 +173,10 @@ public class MainActivity extends AppCompatActivity implements ScriptListFragmen
             mDrawerLayout.closeDrawer(GravityCompat.START, false);
         }
 
-        if(getSupportFragmentManager().getBackStackEntryCount() > 0){
-            setToolbarAsUp(v -> getSupportFragmentManager().popBackStack());
+        if(!mTwoPane){
+            if(getSupportFragmentManager().getBackStackEntryCount() > 0){
+                setToolbarAsUp(v -> getSupportFragmentManager().popBackStack());
+            }
         }
     }
 
@@ -168,9 +187,13 @@ public class MainActivity extends AppCompatActivity implements ScriptListFragmen
 
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-        transaction.replace(R.id.view_container, fragment, DETAILS_FRAGMENT_TAG);
-        transaction.addToBackStack(null);
-
+        if(!mTwoPane){
+            transaction.replace(R.id.view_container, fragment, DETAILS_FRAGMENT_TAG);
+            transaction.addToBackStack(null);
+        } else{
+            transaction.replace(R.id.script_detail_container, fragment, DETAILS_FRAGMENT_TAG);
+            transaction.addToBackStack(null);
+        }
         transaction.commit();
     }
 
@@ -180,9 +203,12 @@ public class MainActivity extends AppCompatActivity implements ScriptListFragmen
 
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-        transaction.replace(R.id.view_container, fragment);
-        transaction.addToBackStack(null);
-
+        if(!mTwoPane){
+            transaction.replace(R.id.view_container, fragment);
+            transaction.addToBackStack(null);
+        } else {
+            transaction.replace(R.id.script_detail_container, fragment);
+        }
         transaction.commit();
     }
 
@@ -193,9 +219,12 @@ public class MainActivity extends AppCompatActivity implements ScriptListFragmen
 
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-        transaction.replace(R.id.view_container, fragment);
-        transaction.addToBackStack(null);
-
+        if(!mTwoPane){
+            transaction.replace(R.id.view_container, fragment);
+            transaction.addToBackStack(null);
+        } else {
+            transaction.replace(R.id.script_detail_container, fragment);
+        }
         transaction.commit();
     }
 
@@ -204,6 +233,9 @@ public class MainActivity extends AppCompatActivity implements ScriptListFragmen
         getSupportFragmentManager().popBackStack();
         Snackbar snackbar = Snackbar.make(mCoordinatorLayout, getString(R.string.script_deleted), Snackbar.LENGTH_SHORT);
         snackbar.show();
+        if(mTwoPane){
+            getSupportFragmentManager().beginTransaction().replace(R.id.script_detail_container, new EmptyViewFragment()).commit();
+        }
     }
 
     @Override
@@ -211,8 +243,14 @@ public class MainActivity extends AppCompatActivity implements ScriptListFragmen
         ScriptDetailsFragment detailsFragment = (ScriptDetailsFragment) getSupportFragmentManager().findFragmentByTag(DETAILS_FRAGMENT_TAG);
         if(detailsFragment != null){
             detailsFragment.setText(script.getTitle(), script.getContent());
+            if(mTwoPane){
+                getSupportFragmentManager().beginTransaction().replace(R.id.script_detail_container, detailsFragment).commit();
+            }
         }
-        getSupportFragmentManager().popBackStack();
+
+        if(!mTwoPane){
+            getSupportFragmentManager().popBackStack();
+        }
         Snackbar snackbar = Snackbar.make(mCoordinatorLayout, getString(R.string.script_saved), Snackbar.LENGTH_SHORT);
         snackbar.show();
     }
