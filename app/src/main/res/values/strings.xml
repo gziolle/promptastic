@@ -55,6 +55,7 @@
 
     <string name="script_saved">Script saved!</string>
     <string name="script_deleted">Script deleted!</string>
+    <string name="script_not_saved">Please, try again later</string>
 
     <!--Settings-->
 

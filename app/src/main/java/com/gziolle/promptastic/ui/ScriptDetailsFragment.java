@@ -23,6 +23,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.getbase.floatingactionbutton.FloatingActionsMenu;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.gziolle.promptastic.R;
@@ -62,7 +63,7 @@ public class ScriptDetailsFragment extends Fragment {
     public interface OnScriptListener {
         void onEditScriptSelected(Bundle bundle);
 
-        void onDeleteScript();
+        void onDeleteScript(Boolean isSuccessful);
     }
 
     public ScriptDetailsFragment() {
@@ -135,11 +136,7 @@ public class ScriptDetailsFragment extends Fragment {
 
         scriptsRef.removeValue().addOnCompleteListener(task -> {
             mProgressHolder.setVisibility(View.GONE);
-            if (task.isSuccessful()) {
-                mEditListener.onDeleteScript();
-            } else {
-                Toast.makeText(getActivity(), "Deu ruim", Toast.LENGTH_SHORT).show();
-            }
+            mEditListener.onDeleteScript(task.isSuccessful());
         });
     }
 

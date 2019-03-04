@@ -241,14 +241,24 @@ public class MainActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void onDeleteScript() {
-        getSupportFragmentManager().popBackStack();
-        Snackbar snackbar = Snackbar.make(mCoordinatorLayout, getString(R.string.script_deleted), Snackbar.LENGTH_SHORT);
-        snackbar.show();
-        if (mTwoPane) {
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.script_detail_container, new EmptyViewFragment()).commit();
+    public void onDeleteScript(Boolean isSuccessful) {
+        Snackbar snackbar;
+        if(isSuccessful){
+            getSupportFragmentManager().popBackStack();
+            snackbar = Snackbar.make(
+                    mCoordinatorLayout, getString(R.string.script_deleted), Snackbar.LENGTH_SHORT);
+            if (mTwoPane) {
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.script_detail_container, new EmptyViewFragment()).commit();
+            }
+        }else {
+            snackbar = Snackbar.make(
+                    mCoordinatorLayout, getString(R.string.script_not_saved),
+                    Snackbar.LENGTH_SHORT);
         }
+
+        snackbar.show();
+
     }
 
     @Override
