@@ -281,6 +281,9 @@ public class MainActivity extends AppCompatActivity implements
         snackbar.show();
     }
 
+    /**
+     * Sets the toolbar left button as a "back" button
+     * */
     protected void setToolbarAsUp(View.OnClickListener clickListener) {
         if (mToolbar != null) {
             mToolbar.setNavigationIcon(R.drawable.ic_arrow_back_black);

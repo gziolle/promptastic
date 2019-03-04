@@ -57,6 +57,9 @@ public class SignupActivity extends BaseActivity implements FirebaseResultInterf
                 new InputFilter.LengthFilter(Constants.NAME_MAX_LENGTH)});
     }
 
+    /**
+     * Sends user information to Firebase Authentication servers to sign him up
+     * */
     @OnClick(R.id.bt_signup)
     public void signupUser() {
         String displayName = mNameEditText.getText().toString();

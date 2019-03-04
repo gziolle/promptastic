@@ -21,12 +21,18 @@ public class BaseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
     }
 
+    /**
+     * Displays a progress holder layout
+     * */
     void showProgressBar(ProgressBar progressBar) {
         if (progressBar != null) {
             progressBar.setVisibility(View.VISIBLE);
         }
     }
 
+    /**
+     * Hides the progress layout
+     */
     void hideProgressBar(ProgressBar progressBar) {
         if (progressBar != null) {
             progressBar.setVisibility(View.INVISIBLE);

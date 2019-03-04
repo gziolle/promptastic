@@ -52,6 +52,9 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         return true;
     };
 
+    /**
+     * Displays teh selected value at the preference's summary
+     * */
     private static void bindPreferenceSummaryToValue(Preference preference) {
         preference.setOnPreferenceChangeListener(sBindPreferenceSummaryToValueListener);
         sBindPreferenceSummaryToValueListener.onPreferenceChange(preference,

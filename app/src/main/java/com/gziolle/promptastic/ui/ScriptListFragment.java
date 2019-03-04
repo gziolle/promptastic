@@ -56,10 +56,16 @@ public class ScriptListFragment extends Fragment {
     private OnAddScriptListener mAddScriptListener;
 
     public interface OnScriptSelectedListener {
+        /**
+         * Listener method for when a script is selected
+         * */
         void onScriptSelected(Bundle bundle);
     }
 
     public interface OnAddScriptListener {
+        /**
+         * Listener method for when the Add Script button is clicked
+         * */
         void onAddScriptButtonSelected();
     }
 
@@ -84,6 +90,9 @@ public class ScriptListFragment extends Fragment {
         return rootView;
     }
 
+    /**
+     * Fetches the data from Firebase Realtime Daatabase and serves it to the RecyclerView
+     * */
     private void fetchDataFromFirebase() {
         FirebaseDatabase database = Utils.getFirebaseDatabase();
         Query query = database.getReference().child(Constants.PATH_USERS +
@@ -164,6 +173,9 @@ public class ScriptListFragment extends Fragment {
         }
     }
 
+    /**
+     * ViewHolder class for the script list item
+     * */
     static class ScriptViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.script_title)
         TextView mTitle;

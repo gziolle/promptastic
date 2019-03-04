@@ -87,6 +87,9 @@ public class PlayScriptActivity extends AppCompatActivity {
         setupPlay();
     }
 
+    /**
+     * Sets up all animations for the script
+     * */
     private void setupPlay() {
         Animation fadeOutAnimation = AnimationUtils.loadAnimation(this,
                 android.R.anim.fade_out);
@@ -117,6 +120,9 @@ public class PlayScriptActivity extends AppCompatActivity {
         mCountDown.start();
     }
 
+    /**
+     * Plays the script as a scroll down animation
+     * */
     private void playScript() {
         mHandler = new Handler();
         mHandler.postDelayed(() -> {
@@ -147,6 +153,9 @@ public class PlayScriptActivity extends AppCompatActivity {
         }, Constants.COUNTDOWN_TOTAL_TIME);
     }
 
+    /**
+     * Displays a dialog once the plaing is interrupted or finished.
+     * */
     private void finishPlaying() {
         if ((mAlertDialog == null) || (!mAlertDialog.isShowing())) {
             AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this)
@@ -181,6 +190,9 @@ public class PlayScriptActivity extends AppCompatActivity {
         mCountDown.cancel();
     }
 
+    /**
+     * Pauses the script animation
+     * */
     @OnClick(R.id.fab_pause_script)
     public void pauseScript() {
         mPauseButton.playAnimation();
@@ -193,6 +205,9 @@ public class PlayScriptActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Stops the script animation
+     * */
     @OnClick(R.id.fab_stop_script)
     public void stopPlaying() {
         if (mAnimator != null && !mAnimator.isPaused()) {
@@ -201,6 +216,9 @@ public class PlayScriptActivity extends AppCompatActivity {
         finishPlaying();
     }
 
+    /**
+     * Applies all app settings to the screen
+     * */
     private void setupScreen() {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
 

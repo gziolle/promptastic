@@ -15,6 +15,9 @@ public class Utils {
 
     private static FirebaseDatabase mDatabase;
 
+    /**
+     * Returns the firebase Realtime Database instance
+     * */
     public static FirebaseDatabase getFirebaseDatabase() {
         if (mDatabase == null) {
             mDatabase = FirebaseDatabase.getInstance();

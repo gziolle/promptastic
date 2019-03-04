@@ -61,8 +61,14 @@ public class ScriptDetailsFragment extends Fragment {
     private String mKey;
 
     public interface OnScriptListener {
+        /**
+         * Listener method for sxript editing
+         * */
         void onEditScriptSelected(Bundle bundle);
 
+        /**
+         * Listener method for script deletion
+         * */
         void onDeleteScript(Boolean isSuccessful);
     }
 
@@ -102,6 +108,9 @@ public class ScriptDetailsFragment extends Fragment {
         mContentTextView.setText(mContent);
     }
 
+    /**
+     * Routes the edited script back to MainActivity
+     * */
     @OnClick(R.id.fab_edit_script)
     public void editScript() {
         mFloatingMenu.collapse();
@@ -112,6 +121,9 @@ public class ScriptDetailsFragment extends Fragment {
         mEditListener.onEditScriptSelected(bundle);
     }
 
+    /**
+     * Routes the user to the Play Script Activity
+     * */
     @OnClick(R.id.fab_play_script)
     public void playScript() {
         mFloatingMenu.collapse();
@@ -124,6 +136,9 @@ public class ScriptDetailsFragment extends Fragment {
         startActivity(intent);
     }
 
+    /**
+     * Deletes the current script
+     * */
     @OnClick(R.id.fab_delete_script)
     public void deleteScript() {
         mFloatingMenu.collapse();

@@ -47,6 +47,9 @@ public class LoginActivity extends BaseActivity implements FirebaseResultInterfa
         }
     }
 
+    /**
+     * Gets the user's username and password and attempts to login
+     * */
     @OnClick(R.id.bt_login)
     public void loginUser() {
         String username = mUserEditText.getText().toString().trim();
@@ -67,6 +70,9 @@ public class LoginActivity extends BaseActivity implements FirebaseResultInterfa
 
     }
 
+    /**
+     * Routes the user to the Sign U activity
+     * */
     @OnClick(R.id.tv_signup)
     public void goToSignUpActivity() {
         Intent intent = new Intent(this, SignupActivity.class);

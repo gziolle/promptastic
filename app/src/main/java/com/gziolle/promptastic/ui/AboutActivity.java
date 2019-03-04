@@ -27,7 +27,9 @@ public class AboutActivity extends AppCompatActivity {
         ButterKnife.bind(this);
     }
 
-
+    /**
+     * Opens the Open Source licenses list
+     * */
     @OnClick(R.id.tv_about_open_source)
     void goToOpenSourceLicenses() {
         startActivity(new Intent(this, OssLicensesMenuActivity.class));

@@ -91,6 +91,9 @@ public class ScriptEditFragment extends Fragment {
         return rootView;
     }
 
+    /**
+     * Saves the script edited by the user
+     * */
     @OnClick(R.id.fab_save_script)
     public void saveScript(View view) {
         InputMethodManager imm = (InputMethodManager) getActivity()
