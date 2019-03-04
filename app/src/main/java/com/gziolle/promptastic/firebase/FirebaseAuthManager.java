@@ -49,6 +49,9 @@ public class FirebaseAuthManager {
         return currentUser != null;
     }
 
+    /**
+     * Attempts to create a user with the information provided
+     * */
     public void createUser(final Context context, String email, String password,
                            String displayName, FirebaseResultInterface callback) {
         mFirebaseAuth.createUserWithEmailAndPassword(email, password)
@@ -65,6 +68,9 @@ public class FirebaseAuthManager {
                 });
     }
 
+    /**
+     * Attempts to perform a login with the user's information
+     * */
     public void loginUser(final Context context, String email,
                           String password, FirebaseResultInterface callback) {
         mFirebaseAuth.signInWithEmailAndPassword(email, password)
