@@ -5,6 +5,7 @@
 package com.gziolle.promptastic.ui;
 
 import android.os.Bundle;
+
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
@@ -22,16 +23,18 @@ public class SettingsFragment extends PreferenceFragmentCompat {
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
         setPreferencesFromResource(R.xml.pref_general, rootKey);
-        PreferenceCategory preferenceCategory = (PreferenceCategory) findPreference(getString(R.string.play_script_category));
+        PreferenceCategory preferenceCategory =
+                (PreferenceCategory) findPreference(getString(R.string.play_script_category));
         int preferenceCount = preferenceCategory.getPreferenceCount();
 
-        for(int i = 0; i < preferenceCount; i++){
+        for (int i = 0; i < preferenceCount; i++) {
             Preference preference = preferenceCategory.getPreference(i);
             bindPreferenceSummaryToValue(preference);
         }
     }
 
-    private static Preference.OnPreferenceChangeListener sBindPreferenceSummaryToValueListener = (preference, value) -> {
+    private static Preference.OnPreferenceChangeListener sBindPreferenceSummaryToValueListener =
+            (preference, value) -> {
         String stringValue = value.toString();
 
         if (preference instanceof ListPreference) {

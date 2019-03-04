@@ -55,11 +55,11 @@ public class ScriptListFragment extends Fragment {
     private OnScriptSelectedListener mScriptSelectedListener;
     private OnAddScriptListener mAddScriptListener;
 
-    public interface OnScriptSelectedListener{
+    public interface OnScriptSelectedListener {
         void onScriptSelected(Bundle bundle);
     }
 
-    public interface OnAddScriptListener{
+    public interface OnAddScriptListener {
         void onAddScriptButtonSelected();
     }
 
@@ -69,11 +69,14 @@ public class ScriptListFragment extends Fragment {
 
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_script_list, container, false);
+    public View onCreateView(@NonNull LayoutInflater inflater,
+                             @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View rootView = inflater.inflate(
+                R.layout.fragment_script_list, container, false);
         ButterKnife.bind(this, rootView);
 
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), RecyclerView.VERTICAL, false);
+        LinearLayoutManager layoutManager =
+                new LinearLayoutManager(getActivity(), RecyclerView.VERTICAL, false);
         mScriptRecyclerView.setLayoutManager(layoutManager);
 
         fetchDataFromFirebase();
@@ -81,18 +84,20 @@ public class ScriptListFragment extends Fragment {
         return rootView;
     }
 
-    private void fetchDataFromFirebase(){
+    private void fetchDataFromFirebase() {
         FirebaseDatabase database = Utils.getFirebaseDatabase();
         Query query = database.getReference().child(Constants.PATH_USERS +
                 FirebaseAuthManager.getInstance().getFirebaseUserId() + Constants.PATH_SCRIPTS);
 
         FirebaseRecyclerOptions<Script> options = new FirebaseRecyclerOptions.Builder<Script>()
-                .setQuery(query, snapshot -> new Script(snapshot.child(Constants.KEY_TITLE).getValue().toString(),
+                .setQuery(query, snapshot ->
+                        new Script(snapshot.child(Constants.KEY_TITLE).getValue().toString(),
                         snapshot.child(Constants.KEY_CONTENT).getValue().toString())).build();
 
         mAdapter = new FirebaseRecyclerAdapter<Script, ScriptViewHolder>(options) {
             @Override
-            protected void onBindViewHolder(@NonNull ScriptViewHolder scriptViewHolder, int position, @NonNull Script script) {
+            protected void onBindViewHolder(@NonNull ScriptViewHolder scriptViewHolder,
+                                            int position, @NonNull Script script) {
                 scriptViewHolder.mTitle.setText(script.getTitle());
                 scriptViewHolder.mContent.setText(script.getContent());
                 scriptViewHolder.mDatabaseReference = getRef(position);
@@ -101,7 +106,8 @@ public class ScriptListFragment extends Fragment {
                     Bundle bundle = new Bundle();
                     bundle.putString(KEY_TITLE, scriptViewHolder.mTitle.getText().toString());
                     bundle.putString(KEY_CONTENT, scriptViewHolder.mContent.getText().toString());
-                    bundle.putString(KEY_DATABASE_REF, scriptViewHolder.mDatabaseReference.getKey());
+                    bundle.putString(
+                            KEY_DATABASE_REF, scriptViewHolder.mDatabaseReference.getKey());
                     mScriptSelectedListener.onScriptSelected(bundle);
                 });
             }
@@ -109,17 +115,18 @@ public class ScriptListFragment extends Fragment {
             @NonNull
             @Override
             public ScriptViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.script_list_item, parent, false);
+                View view = LayoutInflater.from(parent.getContext())
+                        .inflate(R.layout.script_list_item, parent, false);
 
                 return new ScriptViewHolder(view);
             }
 
             @Override
             public void onDataChanged() {
-                if(getItemCount() == 0){
+                if (getItemCount() == 0) {
                     mScriptRecyclerView.setVisibility(View.GONE);
                     mEmptyView.setVisibility(View.VISIBLE);
-                } else{
+                } else {
                     mScriptRecyclerView.setVisibility(View.VISIBLE);
                     mEmptyView.setVisibility(View.GONE);
                 }
@@ -145,19 +152,19 @@ public class ScriptListFragment extends Fragment {
         mAddScriptListener.onAddScriptButtonSelected();
     }
 
-    public void setOnScriptSelectedListener(OnScriptSelectedListener listener){
-        if(listener != null){
+    public void setOnScriptSelectedListener(OnScriptSelectedListener listener) {
+        if (listener != null) {
             mScriptSelectedListener = listener;
         }
     }
 
-    public void setOnAddScriptListerner(OnAddScriptListener listener){
-        if(listener != null){
+    public void setOnAddScriptListerner(OnAddScriptListener listener) {
+        if (listener != null) {
             mAddScriptListener = listener;
         }
     }
 
-    static class ScriptViewHolder extends RecyclerView.ViewHolder{
+    static class ScriptViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.script_title)
         TextView mTitle;
         @BindView(R.id.script_content)
@@ -165,7 +172,7 @@ public class ScriptListFragment extends Fragment {
 
         DatabaseReference mDatabaseReference;
 
-        public ScriptViewHolder(View view){
+        public ScriptViewHolder(View view) {
             super(view);
             ButterKnife.bind(this, view);
         }

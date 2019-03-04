@@ -49,12 +49,12 @@ public class SignupActivity extends BaseActivity implements FirebaseResultInterf
         setContentView(R.layout.activity_signup);
         ButterKnife.bind(this);
 
-        if(getSupportActionBar() != null){
+        if (getSupportActionBar() != null) {
             getSupportActionBar().hide();
         }
 
-        mNameEditText.setFilters(new InputFilter[] {
-                new InputFilter.LengthFilter(Constants.NAME_MAX_LENGTH) });
+        mNameEditText.setFilters(new InputFilter[]{
+                new InputFilter.LengthFilter(Constants.NAME_MAX_LENGTH)});
     }
 
     @OnClick(R.id.bt_signup)
@@ -64,12 +64,13 @@ public class SignupActivity extends BaseActivity implements FirebaseResultInterf
         String password = mPasswordEditText.getText().toString();
         if (!TextUtils.isEmpty(email) && !TextUtils.isEmpty(password)) {
             showProgressBar(mProgressBar);
-            FirebaseAuthManager.getInstance().createUser(this, email, password, displayName, this);
+            FirebaseAuthManager.getInstance()
+                    .createUser(this, email, password, displayName, this);
         } else {
-            if(TextUtils.isEmpty(email)){
+            if (TextUtils.isEmpty(email)) {
                 mUserEditText.setError(getString(R.string.login_username_error));
             }
-            if(TextUtils.isEmpty(password)){
+            if (TextUtils.isEmpty(password)) {
                 mPasswordEditText.setError(getString(R.string.login_password_error));
             }
         }
@@ -78,15 +79,16 @@ public class SignupActivity extends BaseActivity implements FirebaseResultInterf
     @Override
     public void onFirebaseResult(boolean isSuccessful, Exception exception) {
         hideProgressBar(mProgressBar);
-        if(isSuccessful){
+        if (isSuccessful) {
             AlertDialog.Builder builder = new AlertDialog.Builder(this)
                     .setTitle(getString(R.string.signup_dialog_title))
                     .setMessage(getString(R.string.signup_dialog_message))
                     .setPositiveButton(getString(R.string.signup_dialog_ok), (dialog, which) -> finish());
             AlertDialog dialog = builder.create();
             dialog.show();
-        } else{
-            Snackbar snackbar = Snackbar.make(mCoordinatorLayout, exception.getMessage(), Snackbar.LENGTH_SHORT);
+        } else {
+            Snackbar snackbar = Snackbar.make(
+                    mCoordinatorLayout, exception.getMessage(), Snackbar.LENGTH_SHORT);
             snackbar.show();
         }
     }

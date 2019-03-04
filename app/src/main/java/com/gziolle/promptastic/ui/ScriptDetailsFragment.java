@@ -59,8 +59,9 @@ public class ScriptDetailsFragment extends Fragment {
     private String mContent;
     private String mKey;
 
-    public interface OnScriptListener{
+    public interface OnScriptListener {
         void onEditScriptSelected(Bundle bundle);
+
         void onDeleteScript();
     }
 
@@ -78,12 +79,13 @@ public class ScriptDetailsFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View rootView =  inflater.inflate(R.layout.fragment_script_details, container, false);
+        View rootView = inflater.inflate(
+                R.layout.fragment_script_details, container, false);
         ButterKnife.bind(this, rootView);
 
         Bundle args = getArguments();
 
-        if(args != null && TextUtils.isEmpty(mTitle) && TextUtils.isEmpty(mContent)){
+        if (args != null && TextUtils.isEmpty(mTitle) && TextUtils.isEmpty(mContent)) {
             mTitle = args.getString(Constants.KEY_TITLE);
             mContent = args.getString(Constants.KEY_CONTENT);
             mKey = args.getString(Constants.KEY_DATABASE_REF);
@@ -100,7 +102,7 @@ public class ScriptDetailsFragment extends Fragment {
     }
 
     @OnClick(R.id.fab_edit_script)
-    public void editScript(){
+    public void editScript() {
         mFloatingMenu.collapse();
         Bundle bundle = new Bundle();
         bundle.putString(Constants.KEY_TITLE, mTitle);
@@ -110,7 +112,7 @@ public class ScriptDetailsFragment extends Fragment {
     }
 
     @OnClick(R.id.fab_play_script)
-    public void playScript(){
+    public void playScript() {
         mFloatingMenu.collapse();
         Bundle bundle = new Bundle();
         bundle.putString(Constants.KEY_CONTENT, mContent);
@@ -122,7 +124,7 @@ public class ScriptDetailsFragment extends Fragment {
     }
 
     @OnClick(R.id.fab_delete_script)
-    public void deleteScript(){
+    public void deleteScript() {
         mFloatingMenu.collapse();
         mProgressHolder.setVisibility(View.VISIBLE);
         final FirebaseDatabase database = Utils.getFirebaseDatabase();
@@ -133,7 +135,7 @@ public class ScriptDetailsFragment extends Fragment {
 
         scriptsRef.removeValue().addOnCompleteListener(task -> {
             mProgressHolder.setVisibility(View.GONE);
-            if(task.isSuccessful()){
+            if (task.isSuccessful()) {
                 mEditListener.onDeleteScript();
             } else {
                 Toast.makeText(getActivity(), "Deu ruim", Toast.LENGTH_SHORT).show();
@@ -144,7 +146,7 @@ public class ScriptDetailsFragment extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == Constants.REQUEST_EDIT_SCRIPT && resultCode == RESULT_OK){
+        if (requestCode == Constants.REQUEST_EDIT_SCRIPT && resultCode == RESULT_OK) {
             mTitle = data.getStringExtra(Constants.KEY_TITLE);
             mTitleTextView.setText(mTitle);
             mContent = data.getStringExtra(Constants.KEY_CONTENT);
@@ -152,23 +154,24 @@ public class ScriptDetailsFragment extends Fragment {
         }
     }
 
-    public void setOnEditScriptListener(OnScriptListener listener){
-        if(listener != null){
+    public void setOnEditScriptListener(OnScriptListener listener) {
+        if (listener != null) {
             mEditListener = listener;
         }
     }
 
-    void setText(String title, String content){
+    void setText(String title, String content) {
         mTitle = title;
         mContent = content;
     }
 
-    private void sendUpdateWidgetIntent(){
+    private void sendUpdateWidgetIntent() {
         Intent intent = new Intent();
         intent.setAction(Constants.ACTION_UPDATE_WIDGET);
         Script script = new Script(mTitle, mContent);
         intent.putExtra(Constants.KEY_SCRIPT_EXTRA, script);
-        LocalBroadcastManager.getInstance(getActivity().getApplicationContext()).sendBroadcast(intent);
+        LocalBroadcastManager
+                .getInstance(getActivity().getApplicationContext()).sendBroadcast(intent);
         getActivity().sendBroadcast(intent);
     }
 }

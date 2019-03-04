@@ -71,11 +71,11 @@ public class PlayScriptActivity extends AppCompatActivity {
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
 
-        if(bundle != null){
+        if (bundle != null) {
             String text = bundle.getString(Constants.KEY_CONTENT);
             mPlayContainer.setText(text);
             setupScreen();
-        } else{
+        } else {
             finish();
         }
     }
@@ -87,14 +87,17 @@ public class PlayScriptActivity extends AppCompatActivity {
         setupPlay();
     }
 
-    private void setupPlay(){
-        Animation fadeOutAnimation = AnimationUtils.loadAnimation(this, android.R.anim.fade_out);
+    private void setupPlay() {
+        Animation fadeOutAnimation = AnimationUtils.loadAnimation(this,
+                android.R.anim.fade_out);
         fadeOutAnimation.setDuration(Constants.COUNTDOWN_TIME_INTERVAL);
 
-        Animation fadeInAnimation = AnimationUtils.loadAnimation(this, android.R.anim.fade_in);
+        Animation fadeInAnimation = AnimationUtils.loadAnimation(this,
+                android.R.anim.fade_in);
         fadeInAnimation.setDuration(Constants.COUNTDOWN_TIME_INTERVAL);
 
-        mCountDown = new CountDownTimer(Constants.COUNTDOWN_TOTAL_TIME, Constants.COUNTDOWN_TIME_INTERVAL) {
+        mCountDown = new CountDownTimer(Constants.COUNTDOWN_TOTAL_TIME,
+                Constants.COUNTDOWN_TIME_INTERVAL) {
             @Override
             public void onTick(long millisUntilFinished) {
                 long currentTime = (millisUntilFinished / 1000) + 1;
@@ -114,39 +117,43 @@ public class PlayScriptActivity extends AppCompatActivity {
         mCountDown.start();
     }
 
-    private void playScript(){
+    private void playScript() {
         mHandler = new Handler();
         mHandler.postDelayed(() -> {
-            mAnimator = ObjectAnimator.ofInt(mScrollView, "scrollY",0, mPlayContainer.getBottom());
+            mAnimator = ObjectAnimator.ofInt(mScrollView,
+                    "scrollY", 0, mPlayContainer.getBottom());
             mAnimator.setDuration(mTextDuration);
             mAnimator.addListener(new Animator.AnimatorListener() {
                 @Override
-                public void onAnimationStart(Animator animator) {}
+                public void onAnimationStart(Animator animator) {
+                }
 
                 @Override
                 public void onAnimationEnd(Animator animator) {
-                    if(mIsRunning){
+                    if (mIsRunning) {
                         finishPlaying();
                     }
                 }
 
                 @Override
-                public void onAnimationCancel(Animator animator) { }
+                public void onAnimationCancel(Animator animator) {
+                }
 
                 @Override
-                public void onAnimationRepeat(Animator animator) {}
+                public void onAnimationRepeat(Animator animator) {
+                }
             });
             mAnimator.start();
         }, Constants.COUNTDOWN_TOTAL_TIME);
     }
 
-    private void finishPlaying(){
-        if((mAlertDialog == null) || (!mAlertDialog.isShowing())){
+    private void finishPlaying() {
+        if ((mAlertDialog == null) || (!mAlertDialog.isShowing())) {
             AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this)
                     .setMessage(getString(R.string.play_script_dialog_message))
                     .setPositiveButton(getString(R.string.play_script_dialog_ok), (dialog, which) -> {
                         mHandler.removeCallbacksAndMessages(null);
-                        if(mAnimator != null){
+                        if (mAnimator != null) {
                             mAnimator.cancel();
                         }
                         mScrollView.scrollTo(0, 0);
@@ -156,7 +163,7 @@ public class PlayScriptActivity extends AppCompatActivity {
                         setupPlay();
                     })
                     .setNegativeButton(getString(R.string.play_script_dialog_cancel), (dialog, which) -> {
-                        if(mAnimator != null){
+                        if (mAnimator != null) {
                             mAnimator.cancel();
                             mAnimator.removeAllListeners();
                         }
@@ -175,41 +182,47 @@ public class PlayScriptActivity extends AppCompatActivity {
     }
 
     @OnClick(R.id.fab_pause_script)
-    public void pauseScript(){
+    public void pauseScript() {
         mPauseButton.playAnimation();
-        if(mAnimator != null){
-            if(!mAnimator.isPaused()){
+        if (mAnimator != null) {
+            if (!mAnimator.isPaused()) {
                 mAnimator.pause();
-            } else{
+            } else {
                 mAnimator.resume();
             }
         }
     }
 
     @OnClick(R.id.fab_stop_script)
-    public void stopPlaying(){
-        if(mAnimator != null && !mAnimator.isPaused()){
+    public void stopPlaying() {
+        if (mAnimator != null && !mAnimator.isPaused()) {
             mAnimator.pause();
         }
         finishPlaying();
     }
 
-    private void setupScreen(){
+    private void setupScreen() {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
 
         String theme = prefs.getString("play_theme", Constants.PLAY_SCRIPT_THEME_LIGHT);
 
-        if(Constants.PLAY_SCRIPT_THEME_LIGHT.equals(theme)){
-            mScrollView.setBackgroundColor(ContextCompat.getColor(this,R.color.play_script_background_color_light));
-            mPlayContainer.setTextColor(ContextCompat.getColor(this, R.color.play_script_text_color_light));
-        }else if(Constants.PLAY_SCRIPT_THEME_DARK.equals(theme)){
-            mScrollView.setBackgroundColor(ContextCompat.getColor(this,R.color.play_script_background_color_dark));
-            mPlayContainer.setTextColor(ContextCompat.getColor(this, R.color.play_script_text_color_dark));
+        if (Constants.PLAY_SCRIPT_THEME_LIGHT.equals(theme)) {
+            mScrollView.setBackgroundColor(ContextCompat
+                    .getColor(this, R.color.play_script_background_color_light));
+            mPlayContainer.setTextColor(ContextCompat
+                    .getColor(this, R.color.play_script_text_color_light));
+        } else if (Constants.PLAY_SCRIPT_THEME_DARK.equals(theme)) {
+            mScrollView.setBackgroundColor(ContextCompat
+                    .getColor(this, R.color.play_script_background_color_dark));
+            mPlayContainer.setTextColor(ContextCompat
+                    .getColor(this, R.color.play_script_text_color_dark));
         }
 
-        mTextDuration = Integer.parseInt(Objects.requireNonNull(prefs.getString("text_speed", Constants.PLAY_SCRIPT_DEFAULT_DURATION)));
+        mTextDuration = Integer.parseInt(Objects.requireNonNull(
+                prefs.getString("text_speed", Constants.PLAY_SCRIPT_DEFAULT_DURATION)));
 
-        float textSize = Float.parseFloat(Objects.requireNonNull(prefs.getString("text_size", Constants.PLAY_SCRIPT_DEFAULT_TEXT_SIZE)));
+        float textSize = Float.parseFloat(Objects.requireNonNull(
+                prefs.getString("text_size", Constants.PLAY_SCRIPT_DEFAULT_TEXT_SIZE)));
         mPlayContainer.setTextSize(textSize);
     }
 }

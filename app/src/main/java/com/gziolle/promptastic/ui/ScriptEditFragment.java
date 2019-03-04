@@ -53,7 +53,7 @@ public class ScriptEditFragment extends Fragment {
 
     private String mScriptKey;
 
-    public interface OnScriptSavedListener{
+    public interface OnScriptSavedListener {
         void onScriptSaved(Script script);
     }
 
@@ -72,18 +72,18 @@ public class ScriptEditFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View rootView =  inflater.inflate(R.layout.fragment_script_edit, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_script_edit, container, false);
         ButterKnife.bind(this, rootView);
 
         Bundle args = getArguments();
 
-        if(args != null){
+        if (args != null) {
             String title = args.getString(KEY_TITLE);
-            if(!TextUtils.isEmpty(title)){
+            if (!TextUtils.isEmpty(title)) {
                 mScriptTitle.setText(title);
             }
             String content = args.getString(KEY_CONTENT);
-            if(!TextUtils.isEmpty(content)){
+            if (!TextUtils.isEmpty(content)) {
                 mScriptContent.setText(content);
             }
             mScriptKey = args.getString(KEY_DATABASE_REF);
@@ -96,7 +96,7 @@ public class ScriptEditFragment extends Fragment {
         InputMethodManager imm = (InputMethodManager) getActivity()
                 .getSystemService(Context.INPUT_METHOD_SERVICE);
 
-        if(imm != null){
+        if (imm != null) {
             imm.hideSoftInputFromWindow(getView().getWindowToken(), 0);
         }
 
@@ -110,17 +110,17 @@ public class ScriptEditFragment extends Fragment {
                 mScriptContent.getText().toString()
         );
 
-        if(TextUtils.isEmpty(script.getTitle()) || TextUtils.isEmpty(script.getContent())){
+        if (TextUtils.isEmpty(script.getTitle()) || TextUtils.isEmpty(script.getContent())) {
             Toast.makeText(getActivity(), getString(R.string.edit_blank_error), Toast.LENGTH_SHORT).show();
-        } else{
-            if(mScriptKey == null){
+        } else {
+            if (mScriptKey == null) {
                 scriptsRef = ref.child(PATH_USERS + FirebaseAuthManager.getInstance().getFirebaseUserId() + PATH_SCRIPTS);
                 scriptsRef.push().setValue(script).addOnCompleteListener(task -> {
                     mProgressHolder.setVisibility(View.GONE);
                     mListener.onScriptSaved(script);
 
                 });
-            } else{
+            } else {
                 scriptsRef = ref.child(PATH_USERS + FirebaseAuthManager.getInstance().getFirebaseUserId() + PATH_SCRIPTS + "/" + mScriptKey);
                 scriptsRef.setValue(script).addOnCompleteListener(task -> {
                     mProgressHolder.setVisibility(View.GONE);
@@ -130,8 +130,8 @@ public class ScriptEditFragment extends Fragment {
         }
     }
 
-    public void setOnScriptSavedListener(OnScriptSavedListener listener){
-        if(listener != null){
+    public void setOnScriptSavedListener(OnScriptSavedListener listener) {
+        if (listener != null) {
             mListener = listener;
         }
     }

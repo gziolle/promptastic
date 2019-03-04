@@ -15,11 +15,12 @@ public class Utils {
 
     private static FirebaseDatabase mDatabase;
 
-    public static FirebaseDatabase getFirebaseDatabase(){
-        if(mDatabase == null){
+    public static FirebaseDatabase getFirebaseDatabase() {
+        if (mDatabase == null) {
             mDatabase = FirebaseDatabase.getInstance();
             mDatabase.setPersistenceEnabled(true);
-            mDatabase.getReference(Constants.PATH_USERS + FirebaseAuthManager.getInstance().getFirebaseUserId()).keepSynced(true);
+            mDatabase.getReference(Constants.PATH_USERS +
+                    FirebaseAuthManager.getInstance().getFirebaseUserId()).keepSynced(true);
         }
         return mDatabase;
     }

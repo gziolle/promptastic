@@ -31,20 +31,23 @@ public class ScriptWidget extends AppWidgetProvider {
         // Construct the RemoteViews object
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.script_widget);
         Intent intent;
-        if(script != null){
-            views.setTextViewText(R.id.tv_widget_last_played_script, context.getString(R.string.widget_last_played_script));
+        if (script != null) {
+            views.setTextViewText(R.id.tv_widget_last_played_script,
+                    context.getString(R.string.widget_last_played_script));
             views.setTextViewText(R.id.tv_widget_script_title, script.getTitle());
 
-        } else{
+        } else {
             views.setTextViewText(R.id.tv_widget_last_played_script, "");
-            views.setTextViewText(R.id.tv_widget_script_title, context.getString(R.string.widget_no_script));
+            views.setTextViewText(R.id.tv_widget_script_title,
+                    context.getString(R.string.widget_no_script));
         }
 
         intent = new Intent(context, SplashActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
 
-        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, 0);
+        PendingIntent pendingIntent =
+                PendingIntent.getActivity(context, 0, intent, 0);
         views.setOnClickPendingIntent(R.id.widget_title, pendingIntent);
 
         // Instruct the widget manager to update the widget
@@ -62,7 +65,8 @@ public class ScriptWidget extends AppWidgetProvider {
     @Override
     public void onEnabled(Context context) {
         // Enter relevant functionality for when the first widget is created
-        LocalBroadcastManager.getInstance(context).registerReceiver(this, new IntentFilter(Constants.ACTION_UPDATE_WIDGET));
+        LocalBroadcastManager.getInstance(context)
+                .registerReceiver(this, new IntentFilter(Constants.ACTION_UPDATE_WIDGET));
     }
 
     @Override
@@ -74,14 +78,15 @@ public class ScriptWidget extends AppWidgetProvider {
     @Override
     public void onReceive(Context context, Intent intent) {
         super.onReceive(context, intent);
-        if(Constants.ACTION_UPDATE_WIDGET.equals(intent.getAction())){
+        if (Constants.ACTION_UPDATE_WIDGET.equals(intent.getAction())) {
             Script script = intent.getParcelableExtra(Constants.KEY_SCRIPT_EXTRA);
-            AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context.getApplicationContext());
+            AppWidgetManager appWidgetManager =
+                    AppWidgetManager.getInstance(context.getApplicationContext());
             ComponentName thisWidget = new ComponentName(context, ScriptWidget.class);
 
             int[] appWidgetIds = appWidgetManager.getAppWidgetIds(thisWidget);
-            if(appWidgetIds != null && appWidgetIds.length > 0){
-                for(int id : appWidgetIds){
+            if (appWidgetIds != null && appWidgetIds.length > 0) {
+                for (int id : appWidgetIds) {
                     updateAppWidget(context, appWidgetManager, id, script);
                 }
             }

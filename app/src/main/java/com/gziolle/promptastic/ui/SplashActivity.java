@@ -21,7 +21,7 @@ public class SplashActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if(getSupportActionBar() != null){
+        if (getSupportActionBar() != null) {
             getSupportActionBar().hide();
         }
 
@@ -31,11 +31,11 @@ public class SplashActivity extends AppCompatActivity {
         }, 1500);
     }
 
-    private void routeToActivity(){
+    private void routeToActivity() {
         Intent intent;
-        if (FirebaseAuthManager.getInstance().isUserLoggedIn()){
+        if (FirebaseAuthManager.getInstance().isUserLoggedIn()) {
             intent = new Intent(this, MainActivity.class);
-        } else{
+        } else {
             intent = new Intent(this, LoginActivity.class);
         }
         startActivity(intent);

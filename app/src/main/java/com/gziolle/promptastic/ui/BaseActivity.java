@@ -21,14 +21,14 @@ public class BaseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
     }
 
-    void showProgressBar(ProgressBar progressBar){
-        if(progressBar != null){
+    void showProgressBar(ProgressBar progressBar) {
+        if (progressBar != null) {
             progressBar.setVisibility(View.VISIBLE);
         }
     }
 
-    void hideProgressBar(ProgressBar progressBar){
-        if(progressBar != null){
+    void hideProgressBar(ProgressBar progressBar) {
+        if (progressBar != null) {
             progressBar.setVisibility(View.INVISIBLE);
         }
     }

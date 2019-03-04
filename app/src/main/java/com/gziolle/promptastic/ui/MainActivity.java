@@ -35,8 +35,9 @@ import com.gziolle.promptastic.firebase.FirebaseAuthManager;
  * Handles Fragments transactions, callbacks and activity routes
  */
 
-public class MainActivity extends AppCompatActivity implements ScriptListFragment.OnScriptSelectedListener, ScriptListFragment.OnAddScriptListener,
-    ScriptDetailsFragment.OnScriptListener, ScriptEditFragment.OnScriptSavedListener{
+public class MainActivity extends AppCompatActivity implements
+        ScriptListFragment.OnScriptSelectedListener, ScriptListFragment.OnAddScriptListener,
+        ScriptDetailsFragment.OnScriptListener, ScriptEditFragment.OnScriptSavedListener {
 
     @BindView(R.id.drawer_layout)
     DrawerLayout mDrawerLayout;
@@ -68,11 +69,12 @@ public class MainActivity extends AppCompatActivity implements ScriptListFragmen
         ButterKnife.bind(this);
 
         setSupportActionBar(mToolbar);
-        if(getSupportActionBar() != null){
+        if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
 
-        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, mToolbar, R.string.open, R.string.close){
+        mDrawerToggle = new ActionBarDrawerToggle(this,
+                mDrawerLayout, mToolbar, R.string.open, R.string.close) {
             @Override
             public void onDrawerOpened(View drawerView) {
                 super.onDrawerOpened(drawerView);
@@ -84,20 +86,21 @@ public class MainActivity extends AppCompatActivity implements ScriptListFragmen
         mDrawerToggle.syncState();
 
         FragmentManager fragmentManager = getSupportFragmentManager();
-        if(findViewById(R.id.script_detail_container) == null){
+        if (findViewById(R.id.script_detail_container) == null) {
             mTwoPane = false;
             fragmentManager.addOnBackStackChangedListener(() -> {
                 if (fragmentManager.getBackStackEntryCount() > 0) {
                     setToolbarAsUp(v -> getSupportFragmentManager().popBackStack());
                 } else {
                     getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-                    mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, mToolbar, R.string.open, R.string.close);
+                    mDrawerToggle = new ActionBarDrawerToggle(this,
+                            mDrawerLayout, mToolbar, R.string.open, R.string.close);
                     mDrawerLayout.addDrawerListener(mDrawerToggle);
                     mDrawerToggle.syncState();
                 }
             });
-            if(mViewContainer != null){
-                if(savedInstanceState != null){
+            if (mViewContainer != null) {
+                if (savedInstanceState != null) {
                     //No need to create new fragments;
                     return;
                 }
@@ -107,15 +110,16 @@ public class MainActivity extends AppCompatActivity implements ScriptListFragmen
         } else {
             //Two Pane mode
             mTwoPane = true;
-            if(savedInstanceState == null){
-                fragmentManager.beginTransaction().add(R.id.script_detail_container, new EmptyViewFragment()).commit();
+            if (savedInstanceState == null) {
+                fragmentManager.beginTransaction()
+                        .add(R.id.script_detail_container, new EmptyViewFragment()).commit();
             }
         }
 
         mDrawerList.setNavigationItemSelectedListener(item -> {
             Intent intent;
             int id = item.getItemId();
-            switch(id){
+            switch (id) {
                 case R.id.scripts:
                     break;
                 case R.id.settings:
@@ -148,10 +152,10 @@ public class MainActivity extends AppCompatActivity implements ScriptListFragmen
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if(mDrawerToggle.onOptionsItemSelected(item)){
+        if (mDrawerToggle.onOptionsItemSelected(item)) {
             return true;
         }
-        switch(item.getItemId()){
+        switch (item.getItemId()) {
             case android.R.id.home:
                 onBackPressed();
                 return true;
@@ -161,14 +165,14 @@ public class MainActivity extends AppCompatActivity implements ScriptListFragmen
 
     @Override
     public void onAttachFragment(@NonNull Fragment fragment) {
-        if(fragment instanceof ScriptListFragment){
+        if (fragment instanceof ScriptListFragment) {
             ScriptListFragment scriptListFragment = (ScriptListFragment) fragment;
             scriptListFragment.setOnScriptSelectedListener(this);
             scriptListFragment.setOnAddScriptListerner(this);
-        } else if(fragment instanceof ScriptDetailsFragment){
+        } else if (fragment instanceof ScriptDetailsFragment) {
             ScriptDetailsFragment scriptDetailsFragment = (ScriptDetailsFragment) fragment;
             scriptDetailsFragment.setOnEditScriptListener(this);
-        } else if(fragment instanceof ScriptEditFragment){
+        } else if (fragment instanceof ScriptEditFragment) {
             ScriptEditFragment scriptEditFragment = (ScriptEditFragment) fragment;
             scriptEditFragment.setOnScriptSavedListener(this);
         }
@@ -177,12 +181,12 @@ public class MainActivity extends AppCompatActivity implements ScriptListFragmen
     @Override
     protected void onResume() {
         super.onResume();
-        if(mDrawerLayout.isDrawerOpen(mDrawerList)){
+        if (mDrawerLayout.isDrawerOpen(mDrawerList)) {
             mDrawerLayout.closeDrawer(GravityCompat.START, false);
         }
 
-        if(!mTwoPane){
-            if(getSupportFragmentManager().getBackStackEntryCount() > 0){
+        if (!mTwoPane) {
+            if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
                 setToolbarAsUp(v -> getSupportFragmentManager().popBackStack());
             }
         }
@@ -195,10 +199,10 @@ public class MainActivity extends AppCompatActivity implements ScriptListFragmen
 
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-        if(!mTwoPane){
+        if (!mTwoPane) {
             transaction.replace(R.id.view_container, fragment, DETAILS_FRAGMENT_TAG);
             transaction.addToBackStack(null);
-        } else{
+        } else {
             transaction.replace(R.id.script_detail_container, fragment, DETAILS_FRAGMENT_TAG);
             transaction.addToBackStack(null);
         }
@@ -211,7 +215,7 @@ public class MainActivity extends AppCompatActivity implements ScriptListFragmen
 
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-        if(!mTwoPane){
+        if (!mTwoPane) {
             transaction.replace(R.id.view_container, fragment);
             transaction.addToBackStack(null);
         } else {
@@ -227,7 +231,7 @@ public class MainActivity extends AppCompatActivity implements ScriptListFragmen
 
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-        if(!mTwoPane){
+        if (!mTwoPane) {
             transaction.replace(R.id.view_container, fragment);
             transaction.addToBackStack(null);
         } else {
@@ -241,22 +245,26 @@ public class MainActivity extends AppCompatActivity implements ScriptListFragmen
         getSupportFragmentManager().popBackStack();
         Snackbar snackbar = Snackbar.make(mCoordinatorLayout, getString(R.string.script_deleted), Snackbar.LENGTH_SHORT);
         snackbar.show();
-        if(mTwoPane){
-            getSupportFragmentManager().beginTransaction().replace(R.id.script_detail_container, new EmptyViewFragment()).commit();
+        if (mTwoPane) {
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.script_detail_container, new EmptyViewFragment()).commit();
         }
     }
 
     @Override
     public void onScriptSaved(Script script) {
-        ScriptDetailsFragment detailsFragment = (ScriptDetailsFragment) getSupportFragmentManager().findFragmentByTag(DETAILS_FRAGMENT_TAG);
-        if(detailsFragment != null){
+        ScriptDetailsFragment detailsFragment =
+                (ScriptDetailsFragment) getSupportFragmentManager()
+                        .findFragmentByTag(DETAILS_FRAGMENT_TAG);
+        if (detailsFragment != null) {
             detailsFragment.setText(script.getTitle(), script.getContent());
-            if(mTwoPane){
-                getSupportFragmentManager().beginTransaction().replace(R.id.script_detail_container, detailsFragment).commit();
+            if (mTwoPane) {
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.script_detail_container, detailsFragment).commit();
             }
         }
 
-        if(!mTwoPane){
+        if (!mTwoPane) {
             getSupportFragmentManager().popBackStack();
         }
         Snackbar snackbar = Snackbar.make(mCoordinatorLayout, getString(R.string.script_saved), Snackbar.LENGTH_SHORT);

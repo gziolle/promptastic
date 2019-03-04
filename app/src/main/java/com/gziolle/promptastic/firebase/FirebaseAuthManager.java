@@ -21,8 +21,8 @@ public class FirebaseAuthManager {
     private volatile static FirebaseAuthManager sFirebaseManager;
     private static FirebaseAuth mFirebaseAuth;
 
-    public static FirebaseAuthManager getInstance(){
-        if(sFirebaseManager == null){
+    public static FirebaseAuthManager getInstance() {
+        if (sFirebaseManager == null) {
             sFirebaseManager = new FirebaseAuthManager();
             mFirebaseAuth = FirebaseAuth.getInstance();
         }
@@ -30,32 +30,34 @@ public class FirebaseAuthManager {
         return sFirebaseManager;
     }
 
-    public String getFirebaseUserId(){
-        if(mFirebaseAuth.getCurrentUser() != null){
+    public String getFirebaseUserId() {
+        if (mFirebaseAuth.getCurrentUser() != null) {
             return mFirebaseAuth.getCurrentUser().getUid();
         }
         return null;
     }
 
-    public String getFirebaseUserName(){
-        if(mFirebaseAuth.getCurrentUser() != null){
+    public String getFirebaseUserName() {
+        if (mFirebaseAuth.getCurrentUser() != null) {
             return mFirebaseAuth.getCurrentUser().getDisplayName();
         }
         return null;
     }
 
-    public boolean isUserLoggedIn(){
+    public boolean isUserLoggedIn() {
         FirebaseUser currentUser = mFirebaseAuth.getCurrentUser();
         return currentUser != null;
     }
 
-    public void createUser(final Context context, String email, String password, String displayName, FirebaseResultInterface callback){
+    public void createUser(final Context context, String email, String password,
+                           String displayName, FirebaseResultInterface callback) {
         mFirebaseAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener((Activity)context, task -> {
+                .addOnCompleteListener((Activity) context, task -> {
                     FirebaseUser user = mFirebaseAuth.getCurrentUser();
-                    if(user != null){
-                        UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
-                                .setDisplayName(displayName).build();
+                    if (user != null) {
+                        UserProfileChangeRequest profileUpdates =
+                                new UserProfileChangeRequest.Builder()
+                                        .setDisplayName(displayName).build();
 
                         user.updateProfile(profileUpdates);
                     }
@@ -63,13 +65,14 @@ public class FirebaseAuthManager {
                 });
     }
 
-    public void loginUser(final Context context, String email, String password, FirebaseResultInterface callback){
+    public void loginUser(final Context context, String email,
+                          String password, FirebaseResultInterface callback) {
         mFirebaseAuth.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener((Activity)context, task ->
+                .addOnCompleteListener((Activity) context, task ->
                         callback.onFirebaseResult(task.isSuccessful(), task.getException()));
     }
 
-    public void signOut(){
+    public void signOut() {
         mFirebaseAuth.signOut();
     }
 }

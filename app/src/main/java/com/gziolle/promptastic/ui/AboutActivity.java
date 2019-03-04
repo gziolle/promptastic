@@ -29,7 +29,7 @@ public class AboutActivity extends AppCompatActivity {
 
 
     @OnClick(R.id.tv_about_open_source)
-    void goToOpenSourceLicenses(){
+    void goToOpenSourceLicenses() {
         startActivity(new Intent(this, OssLicensesMenuActivity.class));
     }
 }

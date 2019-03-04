@@ -42,7 +42,7 @@ public class LoginActivity extends BaseActivity implements FirebaseResultInterfa
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
-        if(getSupportActionBar() != null){
+        if (getSupportActionBar() != null) {
             getSupportActionBar().hide();
         }
     }
@@ -52,22 +52,23 @@ public class LoginActivity extends BaseActivity implements FirebaseResultInterfa
         String username = mUserEditText.getText().toString().trim();
         String password = mPasswordEditText.getText().toString().trim();
 
-        if(TextUtils.isEmpty(username) || TextUtils.isEmpty(password)){
-            if(TextUtils.isEmpty(username)){
+        if (TextUtils.isEmpty(username) || TextUtils.isEmpty(password)) {
+            if (TextUtils.isEmpty(username)) {
                 mUserEditText.setError(getString(R.string.login_username_error));
             }
-            if(TextUtils.isEmpty(password)){
+            if (TextUtils.isEmpty(password)) {
                 mPasswordEditText.setError(getString(R.string.login_password_error));
             }
-        } else{
+        } else {
             showProgressBar(mProgressBar);
-            FirebaseAuthManager.getInstance().loginUser(this, username, password, this);
+            FirebaseAuthManager.getInstance()
+                    .loginUser(this, username, password, this);
         }
 
     }
 
     @OnClick(R.id.tv_signup)
-    public void goToSignUpActivity(){
+    public void goToSignUpActivity() {
         Intent intent = new Intent(this, SignupActivity.class);
         startActivity(intent);
     }
@@ -77,7 +78,7 @@ public class LoginActivity extends BaseActivity implements FirebaseResultInterfa
         hideProgressBar(mProgressBar);
         if (!isSuccessful) {
             Snackbar.make(mCoordinatorLayout, exception.getMessage(), Snackbar.LENGTH_SHORT).show();
-        }else {
+        } else {
             Intent intent = new Intent(this, MainActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
