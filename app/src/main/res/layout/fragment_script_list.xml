@@ -35,6 +35,6 @@
         android:layout_gravity="bottom|end"
         android:contentDescription="@string/create_script"
         app:fabSize="normal"
-        android:src="@drawable/ic_add_white"/>
+        android:src="@drawable/ic_note_white"/>
 
 </FrameLayout>

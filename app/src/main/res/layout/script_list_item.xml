@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_script_list_item"
+    android:background="@drawable/script_list_item_selector"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:minHeight="?android:attr/listPreferredItemHeight"
     android:paddingTop="@dimen/script_item_padding_top"
-    android:layout_marginStart="@dimen/list_item_margin_start"
-    android:layout_marginEnd="@dimen/list_item_margin_end">
+    android:paddingStart="@dimen/list_item_margin_start"
+    android:paddingEnd="@dimen/list_item_margin_end">
 
     <TextView
         android:id="@+id/script_title"

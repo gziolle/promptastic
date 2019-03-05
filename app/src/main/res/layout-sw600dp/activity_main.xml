@@ -51,9 +51,8 @@
             android:divider="?android:attr/dividerHorizontal"
             android:orientation="horizontal">
 
-            <fragment
+            <FrameLayout
                 android:id="@+id/fragment_script_list"
-                android:name="com.gziolle.promptastic.ui.ScriptListFragment"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="2" />

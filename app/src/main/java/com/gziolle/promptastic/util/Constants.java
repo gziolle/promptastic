@@ -36,4 +36,7 @@ public class Constants {
     public static final String ACTION_UPDATE_WIDGET = "com.gziolle.promptastic.UPDATE_WIDGET";
     public static final int NAME_MAX_LENGTH = 60;
 
+    public static final String SELECTED_ITEM = "selectedItem";
+    public static final String IS_TWO_PANE = "isTwoPane";
+    public static final String SELECTED_KEY = "mSelectedKey";
 }

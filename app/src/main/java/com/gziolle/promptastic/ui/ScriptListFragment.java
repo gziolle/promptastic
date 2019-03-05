@@ -4,11 +4,15 @@
 
 package com.gziolle.promptastic.ui;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -22,6 +26,8 @@ import com.gziolle.promptastic.data.model.Script;
 import com.gziolle.promptastic.firebase.FirebaseAuthManager;
 import com.gziolle.promptastic.util.Constants;
 import com.gziolle.promptastic.util.Utils;
+
+import java.util.Objects;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -55,17 +61,20 @@ public class ScriptListFragment extends Fragment {
     private OnScriptSelectedListener mScriptSelectedListener;
     private OnAddScriptListener mAddScriptListener;
 
+    private String mSelectedItemKey = "";
+    private boolean mIsTwoPane = false;
+
     public interface OnScriptSelectedListener {
         /**
          * Listener method for when a script is selected
-         * */
+         */
         void onScriptSelected(Bundle bundle);
     }
 
     public interface OnAddScriptListener {
         /**
          * Listener method for when the Add Script button is clicked
-         * */
+         */
         void onAddScriptButtonSelected();
     }
 
@@ -85,14 +94,30 @@ public class ScriptListFragment extends Fragment {
                 new LinearLayoutManager(getActivity(), RecyclerView.VERTICAL, false);
         mScriptRecyclerView.setLayoutManager(layoutManager);
 
-        fetchDataFromFirebase();
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        mIsTwoPane = prefs.getBoolean(Constants.IS_TWO_PANE, false);
+        if (mIsTwoPane) {
+            if (savedInstanceState != null) {
+                String key = savedInstanceState.getString(Constants.SELECTED_KEY);
+                if (!TextUtils.isEmpty(key)) {
+                    mSelectedItemKey = key;
+                }
+            }
+        }
 
+        fetchDataFromFirebase();
         return rootView;
+    }
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
     }
 
     /**
      * Fetches the data from Firebase Realtime Daatabase and serves it to the RecyclerView
-     * */
+     */
     private void fetchDataFromFirebase() {
         FirebaseDatabase database = Utils.getFirebaseDatabase();
         Query query = database.getReference().child(Constants.PATH_USERS +
@@ -101,7 +126,8 @@ public class ScriptListFragment extends Fragment {
         FirebaseRecyclerOptions<Script> options = new FirebaseRecyclerOptions.Builder<Script>()
                 .setQuery(query, snapshot ->
                         new Script(snapshot.child(Constants.KEY_TITLE).getValue().toString(),
-                        snapshot.child(Constants.KEY_CONTENT).getValue().toString())).build();
+                                snapshot.child(Constants.KEY_CONTENT)
+                                        .getValue().toString())).build();
 
         mAdapter = new FirebaseRecyclerAdapter<Script, ScriptViewHolder>(options) {
             @Override
@@ -110,8 +136,21 @@ public class ScriptListFragment extends Fragment {
                 scriptViewHolder.mTitle.setText(script.getTitle());
                 scriptViewHolder.mContent.setText(script.getContent());
                 scriptViewHolder.mDatabaseReference = getRef(position);
+
+                if (mIsTwoPane) {
+                    if (mSelectedItemKey.equals(scriptViewHolder.mDatabaseReference.getKey())) {
+                        scriptViewHolder.mBackground.setSelected(true);
+                    } else {
+                        scriptViewHolder.mBackground.setSelected(false);
+                    }
+                }
+
                 scriptViewHolder.itemView.setOnClickListener(v -> {
-                    v.setSelected(true);
+                    if (mIsTwoPane) {
+                        mSelectedItemKey = scriptViewHolder.mDatabaseReference.getKey();
+                        notifyDataSetChanged();
+                    }
+
                     Bundle bundle = new Bundle();
                     bundle.putString(KEY_TITLE, scriptViewHolder.mTitle.getText().toString());
                     bundle.putString(KEY_CONTENT, scriptViewHolder.mContent.getText().toString());
@@ -156,6 +195,14 @@ public class ScriptListFragment extends Fragment {
         mAdapter.stopListening();
     }
 
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        if (mIsTwoPane)
+            outState.putString(Constants.SELECTED_KEY, mSelectedItemKey);
+
+        super.onSaveInstanceState(outState);
+    }
+
     @OnClick(R.id.add_script_fab)
     public void addScript(View view) {
         mAddScriptListener.onAddScriptButtonSelected();
@@ -175,12 +222,14 @@ public class ScriptListFragment extends Fragment {
 
     /**
      * ViewHolder class for the script list item
-     * */
+     */
     static class ScriptViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.script_title)
         TextView mTitle;
         @BindView(R.id.script_content)
         TextView mContent;
+        @BindView(R.id.ll_script_list_item)
+        LinearLayout mBackground;
 
         DatabaseReference mDatabaseReference;
 

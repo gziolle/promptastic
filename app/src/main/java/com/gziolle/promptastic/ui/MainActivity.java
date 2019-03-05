@@ -18,7 +18,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
@@ -30,6 +32,7 @@ import com.google.android.material.snackbar.Snackbar;
 import com.gziolle.promptastic.R;
 import com.gziolle.promptastic.data.model.Script;
 import com.gziolle.promptastic.firebase.FirebaseAuthManager;
+import com.gziolle.promptastic.util.Constants;
 
 /*
  * Handles Fragments transactions, callbacks and activity routes
@@ -110,9 +113,13 @@ public class MainActivity extends AppCompatActivity implements
         } else {
             //Two Pane mode
             mTwoPane = true;
+            SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(this).edit();
+            editor.putBoolean(Constants.IS_TWO_PANE, mTwoPane);
+            editor.commit();
             if (savedInstanceState == null) {
                 fragmentManager.beginTransaction()
-                        .add(R.id.script_detail_container, new EmptyViewFragment()).commit();
+                        .replace(R.id.fragment_script_list, new ScriptListFragment())
+                        .replace(R.id.script_detail_container, new EmptyViewFragment()).commit();
             }
         }
 
@@ -204,7 +211,6 @@ public class MainActivity extends AppCompatActivity implements
             transaction.addToBackStack(null);
         } else {
             transaction.replace(R.id.script_detail_container, fragment, DETAILS_FRAGMENT_TAG);
-            transaction.addToBackStack(null);
         }
         transaction.commit();
     }
@@ -289,5 +295,9 @@ public class MainActivity extends AppCompatActivity implements
             mToolbar.setNavigationIcon(R.drawable.ic_arrow_back_black);
             mToolbar.setNavigationOnClickListener(clickListener);
         }
+    }
+
+    public boolean isTwoPane() {
+        return mTwoPane;
     }
 }
