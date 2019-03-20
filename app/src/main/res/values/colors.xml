@@ -27,6 +27,7 @@
     <color name="widget_background_color">#ffffff</color>
 
     <color name="list_item_background_color_normal">#ffffff</color>
-    <color name="list_item_background_color_pressed">#777777</color>
+    <color name="list_item_background_color_pressed">#999999</color>
+    <color name="list_item_background_color_selected">#777777</color>
 
 </resources>
