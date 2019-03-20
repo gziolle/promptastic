@@ -25,7 +25,7 @@
     <string name="signup_password_hint">Finally, a password</string>
     <string name="signup_button_text">Sign Up</string>
     <string name="signup_fail">Sign Up Failure. Please, try again</string>
-    <string name="signup_good">Good!!!</string>
+    <string name="signup_good">Welcome!!!</string>
     <string name="signup_description">To sign up, follow the instructions below</string>
     <string name="signup_dialog_title">Success!!!!</string>
     <string name="signup_dialog_message">Your account has been created. Please, login to continue</string>
