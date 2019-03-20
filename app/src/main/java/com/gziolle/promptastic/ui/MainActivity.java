@@ -74,6 +74,7 @@ public class MainActivity extends AppCompatActivity implements
         setSupportActionBar(mToolbar);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setTitle("");
         }
 
         mDrawerToggle = new ActionBarDrawerToggle(this,

@@ -59,4 +59,7 @@
 
     <dimen name="empty_view_icon_width">180dp</dimen>
 
+    <dimen name="app_bar_image_width">130dp</dimen>
+    <dimen name="app_bar_title_height">56dp</dimen>
+
 </resources>
