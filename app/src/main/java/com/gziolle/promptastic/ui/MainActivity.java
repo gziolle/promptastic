@@ -291,6 +291,15 @@ public class MainActivity extends AppCompatActivity implements
         snackbar.show();
     }
 
+    @Override
+    public void onBackPressed() {
+        if (mDrawerLayout.isDrawerOpen(mDrawerList)) {
+            mDrawerLayout.closeDrawer(GravityCompat.START, true);
+        }else{
+            super.onBackPressed();
+        }
+    }
+
     /**
      * Sets the toolbar left button as a "back" button
      * */

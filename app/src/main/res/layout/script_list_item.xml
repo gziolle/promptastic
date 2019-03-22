@@ -1,32 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/ll_script_list_item"
-    android:background="@drawable/list_item_background"
-    android:orientation="vertical"
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cv_script_list_item"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="90dp"
     android:minHeight="?android:attr/listPreferredItemHeight"
+    android:layout_marginTop="4dp"
+    android:layout_marginBottom="4dp"
+    android:layout_marginStart="16dp"
+    android:layout_marginEnd="16dp"
     android:clickable="true"
     android:focusable="true"
-    android:foreground="?attr/selectableItemBackground"
-    android:paddingTop="@dimen/script_item_padding_top"
-    android:paddingStart="@dimen/list_item_margin_start"
-    android:paddingEnd="@dimen/list_item_margin_end">
+    app:cardCornerRadius="2dp"
+    app:cardElevation="1dp">
 
-    <TextView
-        android:id="@+id/script_title"
+    <LinearLayout
+        android:id="@+id/ll_script_list_item"
+        android:background="@drawable/list_item_background"
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/list_item_title_margin_top"
-        android:textColor="@color/list_item_title_color"
-        android:textSize="@dimen/list_item_title_text_size"/>
+        android:layout_height="match_parent"
+        android:foreground="?attr/selectableItemBackground"
+        android:paddingTop="@dimen/script_item_padding_top"
+        android:paddingStart="@dimen/list_item_margin_start"
+        android:paddingEnd="@dimen/list_item_margin_end"
+        android:paddingBottom="@dimen/script_item_padding_top">
 
-    <TextView
-        android:id="@+id/script_content"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:maxLines="1"
-        android:ellipsize="end"
-        android:textColor="@color/list_item_content_color"
-        android:textSize="@dimen/list_item_content_text_size" />
-</LinearLayout>
+        <TextView
+            android:id="@+id/script_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxLines="2"
+            android:ellipsize="end"
+            android:layout_marginBottom="@dimen/list_item_title_margin_top"
+            android:textColor="@color/list_item_title_color"
+            android:textSize="@dimen/list_item_title_text_size"/>
+
+        <TextView
+            android:id="@+id/script_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxLines="2"
+            android:ellipsize="end"
+            android:textColor="@color/list_item_content_color"
+            android:textSize="@dimen/list_item_content_text_size" />
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

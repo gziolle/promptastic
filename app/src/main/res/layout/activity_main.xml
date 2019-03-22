@@ -46,7 +46,6 @@
             android:layout_gravity="start"
             app:headerLayout="@layout/navigation_header"
             app:menu="@menu/navigation_menu">
-
         </com.google.android.material.navigation.NavigationView>
     </androidx.drawerlayout.widget.DrawerLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

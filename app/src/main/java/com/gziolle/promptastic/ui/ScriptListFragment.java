@@ -4,10 +4,12 @@
 
 package com.gziolle.promptastic.ui;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.text.TextUtils;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,7 +33,9 @@ import java.util.Objects;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
@@ -42,7 +46,7 @@ import static com.gziolle.promptastic.util.Constants.KEY_CONTENT;
 import static com.gziolle.promptastic.util.Constants.KEY_DATABASE_REF;
 import static com.gziolle.promptastic.util.Constants.KEY_TITLE;
 
-/*
+/**
  * Displays a list of scripts added by the user
  */
 
@@ -90,6 +94,10 @@ public class ScriptListFragment extends Fragment {
                 R.layout.fragment_script_list, container, false);
         ButterKnife.bind(this, rootView);
 
+//        GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(),
+//                calculateSpanCount(getActivity()),
+//                RecyclerView.VERTICAL,
+//                false);
         LinearLayoutManager layoutManager =
                 new LinearLayoutManager(getActivity(), RecyclerView.VERTICAL, false);
         mScriptRecyclerView.setLayoutManager(layoutManager);
@@ -221,6 +229,15 @@ public class ScriptListFragment extends Fragment {
     }
 
     /**
+     * Determines how many columns will be displayed in the RecycleView.
+     * */
+    public static int calculateSpanCount(Context context) {
+        DisplayMetrics metrics = context.getResources().getDisplayMetrics();
+        float dpWidth = metrics.widthPixels / metrics.density;
+        return (int) (dpWidth / 145);
+    }
+
+    /**
      * ViewHolder class for the script list item
      */
     static class ScriptViewHolder extends RecyclerView.ViewHolder {
@@ -228,8 +245,8 @@ public class ScriptListFragment extends Fragment {
         TextView mTitle;
         @BindView(R.id.script_content)
         TextView mContent;
-        @BindView(R.id.ll_script_list_item)
-        LinearLayout mBackground;
+        @BindView(R.id.cv_script_list_item)
+        CardView mBackground;
 
         DatabaseReference mDatabaseReference;
 
