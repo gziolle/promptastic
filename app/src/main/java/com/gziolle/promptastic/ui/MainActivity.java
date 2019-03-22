@@ -206,7 +206,8 @@ public class MainActivity extends AppCompatActivity implements
         fragment.setArguments(bundle);
 
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+        transaction.setCustomAnimations(R.anim.enter_from_right_transition, R.anim.exit_to_left_transition,
+                R.anim.enter_from_left_transition, R.anim.exit_to_right_transition);
         if (!mTwoPane) {
             transaction.replace(R.id.view_container, fragment, DETAILS_FRAGMENT_TAG);
             transaction.addToBackStack(null);
@@ -221,7 +222,8 @@ public class MainActivity extends AppCompatActivity implements
         ScriptEditFragment fragment = new ScriptEditFragment();
 
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+        transaction.setCustomAnimations(R.anim.enter_from_bottom_transition, R.anim.exit_to_top_transition,
+                R.anim.enter_from_top_transition, R.anim.exit_to_bottom_transition);
         if (!mTwoPane) {
             transaction.replace(R.id.view_container, fragment);
             transaction.addToBackStack(null);
@@ -237,7 +239,8 @@ public class MainActivity extends AppCompatActivity implements
         fragment.setArguments(bundle);
 
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+        transaction.setCustomAnimations(R.anim.enter_from_bottom_transition, R.anim.exit_to_top_transition,
+                R.anim.enter_from_top_transition, R.anim.exit_to_bottom_transition);
         if (!mTwoPane) {
             transaction.replace(R.id.view_container, fragment);
             transaction.addToBackStack(null);
