@@ -61,4 +61,10 @@
     <dimen name="app_bar_image_width">130dp</dimen>
     <dimen name="app_bar_title_height">56dp</dimen>
 
+    <dimen name="card_height">90dp</dimen>
+    <dimen name="card_margin_top_bottom">4dp</dimen>
+    <dimen name="card_margin_side">16dp</dimen>
+    <dimen name="card_elevation">1dp</dimen>
+    <dimen name="card_corner_radius">2dp</dimen>
+
 </resources>
