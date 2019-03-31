@@ -93,11 +93,6 @@ public class ScriptListFragment extends Fragment {
         View rootView = inflater.inflate(
                 R.layout.fragment_script_list, container, false);
         ButterKnife.bind(this, rootView);
-
-//        GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(),
-//                calculateSpanCount(getActivity()),
-//                RecyclerView.VERTICAL,
-//                false);
         LinearLayoutManager layoutManager =
                 new LinearLayoutManager(getActivity(), RecyclerView.VERTICAL, false);
         mScriptRecyclerView.setLayoutManager(layoutManager);

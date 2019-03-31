@@ -44,7 +44,9 @@
         android:layout_marginEnd="@dimen/fab_margin_end"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:fabSize="normal"/>
+        app:fabSize="normal"
+        app:tint="@color/fab_icon_white"
+        style="@style/fab_style"/>
 
     <FrameLayout
         android:id="@+id/fl_progress_holder"

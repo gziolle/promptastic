@@ -28,6 +28,7 @@
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/add_script_fab"
+        style="@style/fab_style"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
         android:layout_marginBottom="@dimen/fab_margin_bottom"
@@ -35,6 +36,7 @@
         android:layout_gravity="bottom|end"
         android:contentDescription="@string/create_script"
         app:fabSize="normal"
+        app:tint="@color/fab_icon_white"
         android:src="@drawable/ic_note_white"/>
 
 </FrameLayout>

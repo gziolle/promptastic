@@ -47,13 +47,15 @@
         <receiver android:name=".widget.ScriptWidget">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-                <action android:name="com.gziolle.promptastic.UPDATE_WIDGET"/>
+                <action android:name="com.gziolle.promptastic.UPDATE_WIDGET" />
             </intent-filter>
 
             <meta-data
                 android:name="android.appwidget.provider"
                 android:resource="@xml/script_widget_info" />
         </receiver>
+
+        <activity android:name=".ui.IntroActivity"></activity>
     </application>
 
 </manifest>

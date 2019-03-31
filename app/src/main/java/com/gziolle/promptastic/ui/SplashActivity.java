@@ -7,12 +7,15 @@ package com.gziolle.promptastic.ui;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
+import android.preference.PreferenceManager;
 
 import com.gziolle.promptastic.firebase.FirebaseAuthManager;
+import com.gziolle.promptastic.util.Constants;
 
-/*
+/**
  * Displays an intro image to the user
  */
 
@@ -28,7 +31,7 @@ public class SplashActivity extends AppCompatActivity {
         new Handler().postDelayed(() -> {
             routeToActivity();
             finish();
-        }, 1500);
+        }, 500);
     }
 
     private void routeToActivity() {
@@ -36,7 +39,17 @@ public class SplashActivity extends AppCompatActivity {
         if (FirebaseAuthManager.getInstance().isUserLoggedIn()) {
             intent = new Intent(this, MainActivity.class);
         } else {
-            intent = new Intent(this, LoginActivity.class);
+            SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+            Boolean isFirstUse = preferences.getBoolean(Constants.FIRST_USE_KEY, true);
+
+            if(isFirstUse){
+               intent = new Intent(this, IntroActivity.class);
+               SharedPreferences.Editor editor = preferences.edit();
+               editor.putBoolean(Constants.FIRST_USE_KEY, false);
+               editor.apply();
+            } else{
+                intent = new Intent(this, LoginActivity.class);
+            }
         }
         startActivity(intent);
     }
