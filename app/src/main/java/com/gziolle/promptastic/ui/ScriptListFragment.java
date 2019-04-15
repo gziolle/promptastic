@@ -4,17 +4,14 @@
 
 package com.gziolle.promptastic.ui;
 
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.text.TextUtils;
-import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -29,13 +26,10 @@ import com.gziolle.promptastic.firebase.FirebaseAuthManager;
 import com.gziolle.promptastic.util.Constants;
 import com.gziolle.promptastic.util.Utils;
 
-import java.util.Objects;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
@@ -221,15 +215,6 @@ public class ScriptListFragment extends Fragment {
         if (listener != null) {
             mAddScriptListener = listener;
         }
-    }
-
-    /**
-     * Determines how many columns will be displayed in the RecycleView.
-     * */
-    public static int calculateSpanCount(Context context) {
-        DisplayMetrics metrics = context.getResources().getDisplayMetrics();
-        float dpWidth = metrics.widthPixels / metrics.density;
-        return (int) (dpWidth / 145);
     }
 
     /**

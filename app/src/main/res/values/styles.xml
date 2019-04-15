@@ -17,6 +17,11 @@
         <item name="backgroundTint">@color/colorAccent</item>
     </style>
 
+    <style name="intro_button_style" parent="Widget.MaterialComponents.Button.TextButton">
+        <item name="backgroundTint">@color/fab_icon_white</item>
+        <item name="android:textColor">@color/colorAccent</item>
+    </style>
+
     <style name="AppTheme.PlayScript" parent="@style/AppTheme">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>

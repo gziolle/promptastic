@@ -39,4 +39,6 @@ public class Constants {
     public static final String SELECTED_ITEM = "selectedItem";
     public static final String IS_TWO_PANE = "isTwoPane";
     public static final String SELECTED_KEY = "mSelectedKey";
+
+    public static final String FIRST_USE_KEY = "first_key";
 }

@@ -116,4 +116,8 @@
     <string name="widget_no_script">Your last played script will be displayed here.</string>
     <string name="widget_last_played_script">Your last played script was:</string>
     <string name="empty_frag_text">Please, select a script at the left</string>
+
+    <string name="intro_slide_1">Have an awesome idea for a video?</string>
+    <string name="intro_slide_2">Use Promptastic to write you idea down as a script</string>
+    <string name="intro_slide_3">Play your scripts with Promptastic and be the next video star!</string>
 </resources>
