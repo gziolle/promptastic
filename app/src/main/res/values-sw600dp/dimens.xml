@@ -3,4 +3,7 @@
 
     <dimen name="login_margin_start">64dp</dimen>
     <dimen name="login_margin_end">64dp</dimen>
+    <dimen name="card_elevation">0dp</dimen>
+
+    <dimen name="card_margin_side">16dp</dimen>
 </resources>

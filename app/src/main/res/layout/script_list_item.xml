@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
+<com.gziolle.promptastic.ui.ScriptCardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/cv_script_list_item"
@@ -7,21 +7,23 @@
     android:layout_height="wrap_content"
     android:minHeight="@dimen/card_height"
     android:layout_marginTop="@dimen/card_margin_top_bottom"
-    android:layout_marginBottom="@dimen/card_margin_top_bottom"
     android:layout_marginStart="@dimen/card_margin_side"
     android:layout_marginEnd="@dimen/card_margin_side"
+    android:layout_marginBottom="@dimen/card_margin_top_bottom"
+    android:paddingTop="@dimen/card_margin_top_bottom"
+    android:paddingStart="@dimen/card_margin_side"
+    android:paddingEnd="@dimen/card_margin_side"
     android:clickable="true"
     android:focusable="true"
     app:cardCornerRadius="@dimen/card_corner_radius"
-    app:cardElevation="@dimen/card_elevation">
+    app:cardElevation="@dimen/card_elevation"
+    android:foreground="@drawable/script_list_item_background">
 
     <LinearLayout
         android:id="@+id/ll_script_list_item"
-        android:background="@drawable/list_item_background"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:foreground="?attr/selectableItemBackground"
         android:paddingTop="@dimen/script_item_padding_top"
         android:paddingStart="@dimen/list_item_margin_start"
         android:paddingEnd="@dimen/list_item_margin_end"
@@ -46,4 +48,4 @@
             android:textColor="@color/list_item_content_color"
             android:textSize="@dimen/list_item_content_text_size" />
     </LinearLayout>
-</androidx.cardview.widget.CardView>
+</com.gziolle.promptastic.ui.ScriptCardView>
