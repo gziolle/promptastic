@@ -6,8 +6,8 @@
 
     <ImageView
         android:id="@+id/iv_slide_phone"
-        android:layout_width="350dp"
-        android:layout_height="200dp"
+        android:layout_width="@dimen/intro_image_horizontal_width"
+        android:layout_height="@dimen/intro_image_horizontal_height"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -22,9 +22,9 @@
         android:gravity="center"
         android:layout_marginStart="@dimen/activity_default_margin"
         android:layout_marginEnd="@dimen/activity_default_margin"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="@dimen/intro_text_horizontal_margin_top"
         android:fontFamily="@font/cabin_sketch"
-        android:textSize="18sp"
+        android:textSize="@dimen/intro_text_size"
         android:text="@string/intro_slide_3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

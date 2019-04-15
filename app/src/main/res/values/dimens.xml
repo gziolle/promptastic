@@ -67,4 +67,12 @@
     <dimen name="card_elevation">1dp</dimen>
     <dimen name="card_corner_radius">2dp</dimen>
 
+    <dimen name="intro_image_width">250dp</dimen>
+    <dimen name="intro_image_height">350dp</dimen>
+    <dimen name="intro_image_horizontal_width">350dp</dimen>
+    <dimen name="intro_image_horizontal_height">200dp</dimen>
+    <dimen name="intro_text_margin_top">8dp</dimen>
+    <dimen name="intro_text_horizontal_margin_top">8dp</dimen>
+    <dimen name="intro_text_size">18sp</dimen>
+
 </resources>
