@@ -3,4 +3,9 @@
     <style name="fab_style" parent="Widget.MaterialComponents.FloatingActionButton">
         <item name="backgroundTint">@color/colorAccent</item>
     </style>
+
+    <style name="intro_button_style" parent="Widget.MaterialComponents.Button.TextButton">
+        <item name="backgroundTint">@color/fab_icon_white</item>
+        <item name="android:textColor">@color/colorAccent</item>
+    </style>
 </resources>

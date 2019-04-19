@@ -91,15 +91,13 @@
 
         <Button
             android:id="@+id/bt_signup"
+            style="@style/login_signup_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/login_button_top_margin"
-            android:background="@drawable/button_background"
-            android:fontFamily="@font/cabin_sketch"
             android:text="@string/signup_button_text"
             android:layout_marginStart="@dimen/login_margin_start"
             android:layout_marginEnd="@dimen/login_margin_end"
-            android:textColor="@color/button_text_color"
             android:contentDescription="@string/signup_button_text"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
