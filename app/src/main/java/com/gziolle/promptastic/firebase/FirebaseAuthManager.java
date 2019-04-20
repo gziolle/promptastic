@@ -6,6 +6,7 @@ package com.gziolle.promptastic.firebase;
 
 import android.app.Activity;
 import android.content.Context;
+import android.net.Uri;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -80,5 +81,19 @@ public class FirebaseAuthManager {
 
     public void signOut() {
         mFirebaseAuth.signOut();
+    }
+
+    public Uri getUserPhotoUrl(){
+        return mFirebaseAuth.getCurrentUser().getPhotoUrl();
+    }
+
+    public void setUserPhotoUri(Uri photoUri) {
+        FirebaseUser user = mFirebaseAuth.getCurrentUser();
+        if (user != null) {
+            UserProfileChangeRequest profileUpdates =
+                    new UserProfileChangeRequest.Builder()
+                            .setPhotoUri(photoUri).build();
+            user.updateProfile(profileUpdates);
+        }
     }
 }

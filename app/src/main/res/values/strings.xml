@@ -120,4 +120,8 @@
     <string name="intro_slide_1">Have an awesome idea for a video?</string>
     <string name="intro_slide_2">Use Promptastic to write you idea down as a script</string>
     <string name="intro_slide_3">Play your scripts with Promptastic and be the next video star!</string>
+
+    <string name="permission_denied">Permission Denied!</string>
+    <string name="profile_photo_added">Profile Photo added</string>
+    <string name="profile_photo_soon">Your photo will be loaded soon</string>
 </resources>

@@ -41,4 +41,13 @@ public class Constants {
     public static final String SELECTED_KEY = "mSelectedKey";
 
     public static final String FIRST_USE_KEY = "first_key";
+
+    public static final String STORAGE_BASE_URL = "gs://promptastic-88819.appspot.com";
+
+    public static final int CAMERA_PERMISSION_REQUEST_CODE = 102;
+    public static final int CAMERA_REQUEST_CODE = 12;
+
+    public static final String PLEASE_TRY_AGAIN_LATER = "Please, try again later";
+    public static final String PROFILE_PHOTO_ADDED = "Profile Photo added!";
+    public static final String FILE_PROVIDER_AUTHORITY = "com.gziolle.promptastic.fileprovider";
 }

@@ -5,10 +5,13 @@
 package com.gziolle.promptastic.ui;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.FileProvider;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
@@ -17,22 +20,35 @@ import androidx.fragment.app.FragmentTransaction;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import android.Manifest;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
 import com.gziolle.promptastic.R;
 import com.gziolle.promptastic.data.model.Script;
 import com.gziolle.promptastic.firebase.FirebaseAuthManager;
+import com.gziolle.promptastic.firebase.FirebaseStorageManager;
+import com.gziolle.promptastic.interfaces.FirebaseStorageResultInterface;
 import com.gziolle.promptastic.util.Constants;
+import com.gziolle.promptastic.util.Utils;
+import com.yalantis.ucrop.UCrop;
+
+import java.io.File;
+import java.io.IOException;
 
 /*
  * Handles Fragments transactions, callbacks and activity routes
@@ -40,7 +56,8 @@ import com.gziolle.promptastic.util.Constants;
 
 public class MainActivity extends AppCompatActivity implements
         ScriptListFragment.OnScriptSelectedListener, ScriptListFragment.OnAddScriptListener,
-        ScriptDetailsFragment.OnScriptListener, ScriptEditFragment.OnScriptSavedListener {
+        ScriptDetailsFragment.OnScriptListener, ScriptEditFragment.OnScriptSavedListener,
+        FirebaseStorageResultInterface {
 
     @BindView(R.id.drawer_layout)
     DrawerLayout mDrawerLayout;
@@ -57,12 +74,14 @@ public class MainActivity extends AppCompatActivity implements
     @BindView(R.id.coordinator_layout)
     CoordinatorLayout mCoordinatorLayout;
 
-    ActionBarDrawerToggle mDrawerToggle;
-    TextView mDisplayNameTextView;
+    private ActionBarDrawerToggle mDrawerToggle;
+    private TextView mDisplayNameTextView;
+    private ImageView mHeaderPhoto;
 
     private static final String DETAILS_FRAGMENT_TAG = "details";
 
     private boolean mTwoPane;
+    private Uri mPhotoUri;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -155,6 +174,24 @@ public class MainActivity extends AppCompatActivity implements
             if (!TextUtils.isEmpty(displayName)) {
                 mDisplayNameTextView.setText(displayName);
             }
+        }
+
+        mHeaderPhoto = headerLayout.findViewById(R.id.iv_header_photo);
+        if(mHeaderPhoto != null){
+            Uri photoUri = FirebaseAuthManager.getInstance().getUserPhotoUrl();
+            if(photoUri != null){
+                Glide.with(this).load(photoUri).into(mHeaderPhoto);
+            }
+            mHeaderPhoto.setOnClickListener(v -> {
+                if(ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
+                        != PackageManager.PERMISSION_GRANTED){
+                    ActivityCompat.requestPermissions(this,
+                            new String[]{Manifest.permission.CAMERA},
+                            Constants.CAMERA_PERMISSION_REQUEST_CODE);
+                } else {
+                    pickPhotoFromDevice();
+                }
+            });
         }
     }
 
@@ -300,6 +337,43 @@ public class MainActivity extends AppCompatActivity implements
         }
     }
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        switch(requestCode){
+            case Constants.CAMERA_PERMISSION_REQUEST_CODE:
+                if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                    pickPhotoFromDevice();
+                } else{
+                    Snackbar.make(mCoordinatorLayout, getString(R.string.permission_denied), Snackbar.LENGTH_SHORT).show();;
+                }
+                return;
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        switch (requestCode){
+            case Constants.CAMERA_REQUEST_CODE:
+                String destinationFileName = "cropped_profile";
+                UCrop uCrop = UCrop.of(mPhotoUri, Uri.fromFile(new File(getCacheDir(), destinationFileName)));
+                uCrop.start(MainActivity.this);
+                break;
+            case UCrop.REQUEST_CROP:
+
+                if(resultCode == RESULT_OK){
+                    final Uri croppedPhotoUri = UCrop.getOutput(data);
+                    FirebaseStorageManager manager = new FirebaseStorageManager(this);
+                    manager.saveUserPhotoToFirebase(
+                            FirebaseAuthManager.getInstance().getFirebaseUserId(),
+                            croppedPhotoUri,
+                            this);
+                    Snackbar.make(mCoordinatorLayout, getString(R.string.profile_photo_soon), Snackbar.LENGTH_SHORT).show();
+                } else {
+                    Snackbar.make(mCoordinatorLayout, Constants.PLEASE_TRY_AGAIN_LATER, Snackbar.LENGTH_SHORT).show();
+                }
+        }
+    }
+
     /**
      * Sets the toolbar left button as a "back" button
      * */
@@ -312,5 +386,32 @@ public class MainActivity extends AppCompatActivity implements
 
     public boolean isTwoPane() {
         return mTwoPane;
+    }
+
+    private void pickPhotoFromDevice(){
+        Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        if(cameraIntent.resolveActivity(getPackageManager()) != null){
+            File profilePhotoFile = null;
+
+            try{
+                profilePhotoFile = Utils.createImageFile(this);
+            } catch(IOException ex){
+                Snackbar.make(mCoordinatorLayout, ex.getMessage(), Snackbar.LENGTH_SHORT).show();
+            }
+
+            if(profilePhotoFile != null){
+                mPhotoUri = FileProvider.getUriForFile(this, Constants.FILE_PROVIDER_AUTHORITY,
+                        profilePhotoFile);
+                cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, mPhotoUri);
+                startActivityForResult(cameraIntent, Constants.CAMERA_REQUEST_CODE);
+            }
+        }
+    }
+
+    @Override
+    public void onFirebaseStorageResult(Uri downloadUri) {
+        FirebaseAuthManager.getInstance().setUserPhotoUri(downloadUri);
+        Glide.with(this).load(downloadUri).into(mHeaderPhoto);
+        Snackbar.make(mCoordinatorLayout, getString(R.string.profile_photo_added), Snackbar.LENGTH_SHORT).show();
     }
 }

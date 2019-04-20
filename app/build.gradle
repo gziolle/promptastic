@@ -48,11 +48,17 @@ dependencies {
     implementation 'androidx.preference:preference:1.0.0'
     implementation 'com.github.timrijckaert:FloatingMusicActionButton:v2.0.4'
     implementation 'com.google.android.gms:play-services-oss-licenses:16.0.2'
+
+    implementation 'com.github.yalantis:ucrop:2.2.3'
+
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 
     implementation 'com.jakewharton:butterknife:10.0.0'
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.0.0'
+
+    implementation 'com.github.bumptech.glide:glide:4.9.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.9.0'
 }
 apply plugin: 'com.google.gms.google-services'
